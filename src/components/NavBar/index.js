@@ -38,7 +38,7 @@ const Navbar = ({toggle}) => {
             <Bars onClick={toggle} />
             <NavMenu>
                 <NavLink to="/explore">Explore Investments</NavLink>
-                <NavLink to="/signInContractor">Get Funding</NavLink>
+                <NavLink to="/signUpContractor">Get Funding</NavLink>
                 <NavLink to="/blog">Blog</NavLink>
                 <NavLink to="/signInCoach">Join Team</NavLink>
                 <NavLink to="/event">Explore Event</NavLink>

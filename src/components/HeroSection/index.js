@@ -20,7 +20,7 @@ const HeroSection = () => {
             <HeroP>On FireUp , discover different investment opportunities and build your portfolio. It’s your turn to be the shark. </HeroP>
         </HeroContent>
         <HeroBtnWrapper>
-            <Button to="signIn" onMouseEnter={onHover}>
+            <Button to="signIn" onMouseEnter={onHover} onMouseLeave={onHover} primary='true' dark='true'>
                 Get started {hover ? <ArrowForward /> : <ArrowRight />}
             </Button>
         </HeroBtnWrapper>    
