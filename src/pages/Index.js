@@ -10,8 +10,11 @@ import Event from "../pages/Event";
 import Blog from "../pages/Blog";
 import NotFoundPage from "../pages/NotFoundPage";
 import { Route, Routes } from 'react-router-dom';
-import ContractorDashboard from './ContractorDashboard';
+// import ContractorDashboard from './ContractorDashboard';
 import SignUpContractor from '../pages/SignUpContractor';
+import Login from '../pages/Login';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Index = () => {
@@ -32,9 +35,10 @@ const Index = () => {
         <Route path="/event" element={<Event />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/signUpContractor" element={<SignUpContractor />} />
-        <Route path="/signInContractor" element={<ContractorDashboard />} />
+        <Route path="/signInContractor" element={<Login />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <ToastContainer />
     </>
   )
 }
