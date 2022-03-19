@@ -12,7 +12,10 @@ import NotFoundPage from "../pages/NotFoundPage";
 import { Route, Routes } from 'react-router-dom';
 import ContractorDashboard from './ContractorDashboard';
 import SignUpContractor from '../pages/SignUpContractor';
-
+import RegisterInvestisor from '../components/InvestorForm/RegisterInvestor';
+import InvestisorDashbord from '../pages/InvestisorDashbord'; 
+import InvestorLogin from '../components/InvestorForm/InvestorLogin'
+import InvestementForm from '../components/investment/InvestementForm'
 
 const Index = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +36,13 @@ const Index = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/signUpContractor" element={<SignUpContractor />} />
         <Route path="/signInContractor" element={<ContractorDashboard />} />
+        <Route path="/RegestrationInvestor" element={<RegisterInvestisor/>}/>
+        <Route path="/InvestisorDashbord" element={<InvestisorDashbord/>}/>
+        <Route path="/LoginInvestor" element={<InvestorLogin/>}/>
+        <Route path="/InvestementProject" element={<InvestementForm/>}/>
+
+
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
