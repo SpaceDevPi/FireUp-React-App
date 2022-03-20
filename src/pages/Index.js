@@ -10,9 +10,10 @@ import Event from "../pages/Event";
 import Blog from "../pages/Blog";
 import NotFoundPage from "../pages/NotFoundPage";
 import { Route, Routes } from 'react-router-dom';
-// import ContractorDashboard from './ContractorDashboard';
+import ContractorDashboard from './ContractorDashboard';
 import SignUpContractor from '../pages/SignUpContractor';
 import Login from '../pages/Login';
+import Profile from '../components/ContractorDashboard/Profile';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -36,6 +37,8 @@ const Index = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/signUpContractor" element={<SignUpContractor />} />
         <Route path="/signInContractor" element={<Login />} />
+        <Route path="/dashboard" element={<ContractorDashboard />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <ToastContainer />

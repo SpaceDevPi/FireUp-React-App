@@ -48,6 +48,8 @@ const Navbar = ({toggle}) => {
       
         <NavMenu>
           <NavLink to="/dashboard">Dashboard</NavLink>
+          <NavLink to="/profile">Profile</NavLink>
+          <NavLink to="/projects">Projects</NavLink>
           <button onClick={onLogout}>Logout</button>
           
         </NavMenu>
