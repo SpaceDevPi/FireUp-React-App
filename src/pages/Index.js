@@ -16,6 +16,11 @@ import RegisterInvestisor from '../components/InvestorForm/RegisterInvestor';
 import InvestisorDashbord from '../pages/InvestisorDashbord'; 
 import InvestorLogin from '../components/InvestorForm/InvestorLogin'
 import InvestementForm from '../components/investment/InvestementForm'
+import Login from '../pages/Login';
+import Profile from '../components/ContractorDashboard/Profile';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Index = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,16 +40,16 @@ const Index = () => {
         <Route path="/event" element={<Event />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/signUpContractor" element={<SignUpContractor />} />
-        <Route path="/signInContractor" element={<ContractorDashboard />} />
+        <Route path="/signInContractor" element={<Login />} />
         <Route path="/RegestrationInvestor" element={<RegisterInvestisor/>}/>
         <Route path="/InvestisorDashbord" element={<InvestisorDashbord/>}/>
         <Route path="/LoginInvestor" element={<InvestorLogin/>}/>
         <Route path="/InvestementProject" element={<InvestementForm/>}/>
-
-
-
+        <Route path="/dashboard" element={<ContractorDashboard />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <ToastContainer />
     </>
   )
 }

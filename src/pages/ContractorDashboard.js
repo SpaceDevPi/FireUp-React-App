@@ -2,8 +2,21 @@ import React from 'react';
 import styled from "styled-components";
 import Sidebar from '../components/ContractorDashboard/Sidebar';
 import MainContent from '../components/ContractorDashboard/MainContent';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const ContractorDashboard = () => {
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/signInContractor');
+    }
+  }, [user, navigate]);
+
   return (
     <div>
         <Container>

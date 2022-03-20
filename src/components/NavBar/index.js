@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useState } from 'react';
 // import AppBar from '@mui/material/AppBar';
 // import Box from '@mui/material/Box';
 // import Toolbar from '@mui/material/Toolbar';
@@ -13,6 +13,9 @@ import React from 'react';
 // import { flexbox } from '@material-ui/system';
 // import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout, reset} from '../../services/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 //const pages = ['Explore Investments', 'Get Funding', 'Blog'];
@@ -28,6 +31,45 @@ import {
   } from './NavbarElements';
 
 const Navbar = ({toggle}) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {user} = useSelector((state) => state.auth);
+  // const {user, setUser} = useState(false);
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate('/');
+  }
+
+  const renderMenu = () => {
+    if (user) {
+      return (
+      
+        <NavMenu>
+          <NavLink to="/dashboard">Dashboard</NavLink>
+          <NavLink to="/profile">Profile</NavLink>
+          <NavLink to="/projects">Projects</NavLink>
+          <button onClick={onLogout}>Logout</button>
+          
+        </NavMenu>
+      );
+    }else {
+      return (
+        <><NavMenu>
+          <NavLink to="/explore">Explore Investments</NavLink>
+          <NavLink to="/signUpContractor">Get Funding</NavLink>
+          <NavLink to="/blog">Blog</NavLink>
+          <NavLink to="/signInCoach">Join Team</NavLink>
+          <NavLink to="/event">Explore Event</NavLink>
+          <NavLink to="/about">About Us</NavLink>
+        </NavMenu><NavBtn>
+            <NavBtnLink to="/signInContractor">Sign In</NavBtnLink>
+          </NavBtn></>
+      );
+    }
+  }
+  
   return (
     <>
         <Nav>
@@ -35,19 +77,9 @@ const Navbar = ({toggle}) => {
             <img src={logo} alt="Logo" idth={182} height={64} />
             </NavLink>
             
-            <Bars onClick={toggle} />
-            <NavMenu>
-                <NavLink to="/explore">Explore Investments</NavLink>
-                <NavLink to="/signUpContractor">Get Funding</NavLink>
-                <NavLink to="/blog">Blog</NavLink>
-                <NavLink to="/signInCoach">Join Team</NavLink>
-                <NavLink to="/event">Explore Event</NavLink>
-                <NavLink to="/about">About Us</NavLink>
-            </NavMenu>
+              <Bars onClick={toggle} />
+              {renderMenu()}
             
-            <NavBtn>
-                <NavBtnLink to="/signInContractor">Sign In</NavBtnLink>
-            </NavBtn>
         </Nav>
     </>
   );
