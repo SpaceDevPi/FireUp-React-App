@@ -42,7 +42,7 @@ function FormFirstStep({ formData, setFormData }) {
         
       </div>
       <input type="date" date='yyyy-dd-MM'  onChange={(e) => {
-          setFormData({ ...formData, DateOfBirth: e.target.value });
+          setFormData({ ...formData, datOfBirth: e.target.value });
         }} />
     </div>
   );

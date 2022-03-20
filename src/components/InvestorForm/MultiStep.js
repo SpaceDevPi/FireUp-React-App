@@ -6,9 +6,14 @@ import  FormThirdStep  from "./FormThirdStep";
 import FormFour from "./FormFour"; 
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { queryApi } from "../utils/queryApi";
+import { useNavigate  } from "react-router-dom";
 import { sizeWidth } from '@mui/system';
 
+
  function MultiStep () {
+  const history = useNavigate ();
+
   const [page, setPage] = useState(0);
   const [formData, setFormData] = useState({
     username:"",
@@ -18,14 +23,16 @@ import { sizeWidth } from '@mui/system';
     password: "",
     phoneNumber:"", 
     sexe: "",
-    DateOfBirth : "",
+    datOfBirth : "",
     adress: "",
     status:"", 
-    accreditationform:"",
+    accreditationForm:"",
     centerOfInterest :"" ,
     accountType :""
   });
   const FormTitles = ["Personal", "Professionnel ", "Investement" , "Center Of Interest"];
+  const [errors,setErrors] = useState({visbile:false,message:""});
+  const {username,firstName , lastName , email , password , phoneNumber , sexe ,datOfBirth , adress ,status ,accreditationForm ,centerOfInterest ,accountType} = formData; 
 
   const PageDisplay = () => {
     if (page === 0) {
@@ -65,10 +72,17 @@ import { sizeWidth } from '@mui/system';
           Prev
         </button>
         <button
-          onClick={() => {
+          onClick={async() => {
             if (page === FormTitles.length - 1) {
-              alert("FORM SUBMITTED");
+            //  alert("FORM SUBMITTED");
               console.log(formData);
+              const [res , err ] = await queryApi('investors/newInvestor', formData , 'POST' , false );
+              if(err){
+                setErrors({
+                    visbile: true,
+                    message: JSON.stringify(err.errors,null,2)
+                });
+            }else history("/");    
             } else {
               setPage((currPage) => currPage + 1);
             }
@@ -90,178 +104,5 @@ import { sizeWidth } from '@mui/system';
 
 
 
-// import React, { useState } from "react";
-// import { useForm } from "hooks/hooks";
-// import { useStep } from "hooks/hooks";
-// import { FormFirstStep } from "./FormFirstStep";
-// import {FormSecondStep} from "./FormSecondStep"; 
-
-
-
-// import { FormThirdStep } from "./FormThirdStep";
-// import { Review } from "./Review";
-// import { Submit } from "./Submit";
-
-// const defaultData = {
-  
-//   username : "",
-//   email : "", 
-//   firstName :"",
-//   lastName : "",
-//   password : "", 
-//   sexe : "", 
-//   datOfBirth : "" , 
-//   adress : "" , 
-//   phoneNumber : "" ,
-//   accreditationStatus : "" , 
-//   centerOfInterest : "" ,  
-//   image : ""
-
-// }
-
-// const steps = [
-//   { id: "FormFirstStep" },
-//   { id: "FormSecondStep" },
-//   { id: "FormThirdStep" },
-//   { id: "review" },
-//   { id: "submit" },
-// ];
-
-
-
-// const MultiStep =() =>{
-//   const [formData, setForm] = useForm(defaultData);
-//   const { step, navigation } = useStep({
-//     steps,
-//     initialStep: 0,
-//   });
-//   const props = { formData, setForm, navigation };
-
-//   switch (step.id) {
-//     case "FormFirstStep":
-//       return <FormFirstStep {...props} />;
-//     case "FormSecondStep":
-//       return <FormSecondStep {...props} />;
-//     case "FormThirdStep":
-//       return <FormThirdStep {...props} />;
-//     case "review":
-//       return <Review {...props} />;
-//     case "submit":
-//       return <Submit {...props} />;
-//   }
-
-
-
-
-// }
-
-// import React, { useState } from "react";
-// import { Formik, Form } from "formik";
-// import { FormFirstStep } from "./FormFirstStep";
-// import {FormSecondStep} from "./FormSecondStep"; 
-// import { FormThirdStep } from "./FormThirdStep";
-// import { StepButton } from "./StepButton";
-// import { makeStyles } from "@material-ui/core/styles";
-// import { FormSuccess } from "./FormSuccess";
-// const useStyles = makeStyles(theme => ({
-//     form: {
-//       display: "flex",
-//       flexDirection: "column",
-//       justifyContent: "center",
-//       alignItems: "center"
-//     }
-//   }));
-  
-//   const renderStep = (step, values, errors, touched) => {
-//     switch (step) {
-//       case 1:
-//         return <FormFirstStep errors={errors} touched={touched} />;
-//       case 2: 
-//         return <FormSecondStep errors={errors} touched={touched} />;    
-//       case 3:
-//         return <FormThirdStep values={values} />;
-//         case 4:
-//             return <FormSuccess values={values} />;
-//       default:
-//         return <FormFirstStep errors={errors} touched={touched} />;
-//     }
-//   };
-  
-// const MultiStep = () => {
-//     const [step, setStep] = useState(1);
-//     const classes = useStyles();
-//     const investor = {
-//       username:"",
-//       firstName: "",
-//       lastName: "",
-//       email: "",
-//       password: "",
-//       phoneNumber:"", 
-//       sexe: "",
-//       DateOfBirth : "",
-//       adress: "",
-//       status:"", 
-//       accreditationform:"",
-//       centerOfInterest :"" ,
-//       accountType :""
-//     };
-//     const handleSubmit = () => setStep(step => step + 1);
-
-  
-//     const validate = values => {
-//       const errors = {};
-//       if (!values.username) {
-//         errors.firstName = "Required";
-//       }
-//       if (!values.firstName) {
-//         errors.firstName = "Required";
-//       }
-  
-//       if (!values.lastName) {
-//         errors.lastName = "Required";
-//       }
-
-//       if (!values.DateOfBirth) {
-//         errors.DateOfBirth = "Required";
-//       }
-//       if (!values.email) {
-//         errors.email = "Required";
-//       }
-
-//       if (!values.city) {
-//         errors.city = "Required";
-//       }
-  
-
-      
-//       if (!values.state) {
-//         errors.state = "Required";
-//       }
-
-
-//       return errors;
-//     };
-//     return (
-//       <>
-//         <Formik
-//           enableReinitialize
-//           initialValues={{ ...investor }}
-//           onSubmit={handleSubmit}
-//           validate={validate}
-//         >
-//           {({ values, errors, touched }) => (
-
-
-//             <Form className={classes.form}>
-//               {renderStep(step, values, errors, touched)}
-//               <StepButton step={step} />
-
-
-//             </Form>
-//           )}
-//         </Formik>
-//       </>
-//     );
-//   };
 
     export default MultiStep ; 

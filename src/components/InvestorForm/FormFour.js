@@ -7,19 +7,19 @@ function FormFour({ formData, setFormData }) {
         setFormData({ ...formData, centerOfInterest: e.target.value });
       }} >
      <div>
-    <input type="checkbox"  name="formData.accreditationform" value="Technologie"/>
+    <input type="checkbox"  name="formData.centerOfInterest" value="Technologie"/>
     <label >Technologie</label>
   </div>
   <div>
-    <input type="checkbox"  name="formData.accreditationform" value="Agriculture"/>
+    <input type="checkbox"  name="formData.centerOfInterest" value="Agriculture"/>
     <label >Agriculture</label>
   </div>
   <div>
-    <input type="checkbox"  name="formData.accreditationform" value="Service"/>
+    <input type="checkbox"  name="formData.centerOfInterest" value="Service"/>
     <label >Service</label>
   </div>
   <div>
-    <input type="checkbox"  name="formData.accreditationform" value="health"/>
+    <input type="checkbox"  name="formData.centerOfInterest" value="health"/>
     <label >health</label>
   </div>
   

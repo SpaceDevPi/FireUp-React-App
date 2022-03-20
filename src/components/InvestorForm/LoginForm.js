@@ -3,40 +3,25 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
+import { queryApi } from "../utils/queryApi";
+
  
 function LoginForm() {
 
-    const [email , setEmail] = useState("")
-    const [password , setPassword] = useState("")
+  const [formData, setFormData] = useState({
+    
+    email: "",
+    password: "",
+    
+  });
+    const { email , password } = formData 
     const [error , setError] = useState(false)
     const [loading , setLoading] = useState(false)
 
     const submitHandler= async (e) => {
     e.preventDefault(); 
-    try {
-         const config ={
-             headers : {
-                 "content-type" : "application/json",
-             },
-         };
-         setLoading(true); 
-         const {data} = await axios.post(
-             "http://localhost:5000/api/investors/loginInvestor",
-             {
-                 email, 
-                 password, 
-                 
-             }, 
-             config
-         )
-         localStorage.setItem('userInfo', JSON.stringify(data))  
-         console.log(data)
-        }
-       
-    catch (error) {
-        setError(error.response.data.message); 
-        
-    }
+    console.log(formData)
+    const [res , err ] = await queryApi('investors/newInvestor', formData , 'POST' , false );  
         
     }
 
@@ -61,8 +46,10 @@ function LoginForm() {
     <Form.Control 
     type="email" 
     placeholder="Enter email"
-    value={email}
-    onChange={(e)=> setEmail(e.target.value)}
+    value={formData.email}
+    onChange={(event) =>
+      setFormData({ ...formData, email: event.target.value })
+    }
     />
     
   </Form.Group>
@@ -73,8 +60,10 @@ function LoginForm() {
     <Form.Control 
     type="password" 
     placeholder="Password"
-    value={password}
-    onChange={(e)=> setPassword(e.target.value)}
+    value={formData.password}
+    onChange={(event) =>
+      setFormData({ ...formData, password: event.target.value })
+    }
     />
   </Form.Group>
   

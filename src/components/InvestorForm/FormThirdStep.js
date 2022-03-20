@@ -36,9 +36,9 @@ function FormThirdStep({ formData, setFormData }) {
 
     
 <div onChange={(e) => {
-          setFormData({ ...formData, accreditationform: e.target.value });
+          setFormData({ ...formData, accreditationForm: e.target.value });
         }}>
-     <select value={formData.accreditationform} id="accreditationform"  onChange={ShowAccreditForm(this) } > 
+     <select value={formData.accreditationForm} id="accreditationform"  onChange={ShowAccreditForm(this) } > 
     <option >Accreditation Form</option>
     <option value="1"> I invest on behalf of a trust with at least $5 million in assets </option>
     <option value="2">I have individual net worth, that exceeds $1 million</option>
