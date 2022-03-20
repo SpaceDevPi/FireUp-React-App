@@ -6,6 +6,7 @@ function FormFour({ formData, setFormData }) {
     <div className="personal-info-container" onChange={(e) => {
         setFormData({ ...formData, centerOfInterest: e.target.value });
       }} >
+        <div className="centreOfInterest">
      <div>
     <input type="checkbox"  name="formData.centerOfInterest" value="Technologie"/>
     <label >Technologie</label>
@@ -21,6 +22,7 @@ function FormFour({ formData, setFormData }) {
   <div>
     <input type="checkbox"  name="formData.centerOfInterest" value="health"/>
     <label >health</label>
+  </div>
   </div>
   
   

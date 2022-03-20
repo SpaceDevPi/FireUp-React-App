@@ -5,6 +5,7 @@ function FormSecondStep ({ formData, setFormData }) {
   return (
     <div className="sign-up-container">
       <input
+      className="input"
         type="text"
         placeholder="Email..."
         value={formData.email}
@@ -13,6 +14,8 @@ function FormSecondStep ({ formData, setFormData }) {
         }
       />
       <input
+            className="input"
+
         type="password"
         placeholder="Password..."
         value={formData.password}
@@ -22,6 +25,8 @@ function FormSecondStep ({ formData, setFormData }) {
       />
       <input
         type="text"
+        className="input"
+
         placeholder="Phone Number..."
         value={formData.phoneNumber}
         onChange={(event) =>
@@ -30,6 +35,8 @@ function FormSecondStep ({ formData, setFormData }) {
       />
       <input
         type="text"
+        className="input"
+
         placeholder="Adress..."
         value={formData.adress}
         onChange={(event) =>

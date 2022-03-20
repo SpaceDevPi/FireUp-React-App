@@ -6,7 +6,8 @@ function FormFirstStep({ formData, setFormData }) {
     <div className="personal-info-container">
       <input
         type="text"
-        className="InputText"
+        className="input"
+
         placeholder="Username..."
         value={formData.username}
         onChange={(e) => {
@@ -14,7 +15,7 @@ function FormFirstStep({ formData, setFormData }) {
         }}
       />
       <input
-      className="InputText"
+        className="input"
         type="text"
         placeholder="First Name..."
         value={formData.firstName}
@@ -24,7 +25,7 @@ function FormFirstStep({ formData, setFormData }) {
       />
       <input
         type="text"
-        className="InputText"
+        className="input"
         placeholder="Last Name..."
         value={formData.lastName}
         onChange={(e) => {
@@ -41,7 +42,8 @@ function FormFirstStep({ formData, setFormData }) {
         }} /> Female
         
       </div>
-      <input type="date" date='yyyy-dd-MM'  onChange={(e) => {
+      <input type="date" date='yyyy-dd-MM'         className="input"
+  onChange={(e) => {
           setFormData({ ...formData, datOfBirth: e.target.value });
         }} />
     </div>

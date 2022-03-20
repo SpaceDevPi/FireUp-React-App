@@ -44,6 +44,7 @@ function LoginForm() {
     <Form.Label>Email address</Form.Label>
     <br></br>
     <Form.Control 
+    className="input"
     type="email" 
     placeholder="Enter email"
     value={formData.email}
@@ -59,6 +60,8 @@ function LoginForm() {
     <br></br>
     <Form.Control 
     type="password" 
+    className="input"
+
     placeholder="Password"
     value={formData.password}
     onChange={(event) =>

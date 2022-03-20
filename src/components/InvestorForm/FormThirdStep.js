@@ -18,7 +18,7 @@ function FormThirdStep({ formData, setFormData }) {
   return (
     <div className="other-info-container">
 
-<select value={formData.accountType} onChange={(e) => {
+<select className="select input"  value={formData.accountType} onChange={(e) => {
           setFormData({ ...formData, accountType: e.target.value });
         }}>
      <option >account Type</option>
@@ -26,7 +26,7 @@ function FormThirdStep({ formData, setFormData }) {
     <option value="Company">Company</option>
      </select>
 
-     <select value={formData.status}  onChange={(e) => {
+     <select className="select input" value={formData.status}  onChange={(e) => {
           setFormData({ ...formData, status: e.target.value });
         }}>
      <option value="1" >Accreditation Status</option>
@@ -38,7 +38,8 @@ function FormThirdStep({ formData, setFormData }) {
 <div onChange={(e) => {
           setFormData({ ...formData, accreditationForm: e.target.value });
         }}>
-     <select value={formData.accreditationForm} id="accreditationform"  onChange={ShowAccreditForm(this) } > 
+     <select value={formData.accreditationForm} id="accreditationform"       className="select input"
+ onChange={ShowAccreditForm(this) } > 
     <option >Accreditation Form</option>
     <option value="1"> I invest on behalf of a trust with at least $5 million in assets </option>
     <option value="2">I have individual net worth, that exceeds $1 million</option>

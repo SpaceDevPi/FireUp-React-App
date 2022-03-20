@@ -5,9 +5,13 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { sizeWidth } from '@mui/system';
 
+import { queryApi } from "../utils/queryApi";
 
 
 export function FormInvestir () {
+
+ 
+
 const ShowInvestement=async(e)=>{
     e.preventDefault(); 
     try {
@@ -16,6 +20,7 @@ const ShowInvestement=async(e)=>{
          
          localStorage.setItem('userInfo', JSON.stringify(formData))  
          console.log(formData)
+        const [res , err ] = await queryApi('investement/newInvestment', formData , 'POST' , false );
         }
        
     catch (error) {
@@ -34,7 +39,10 @@ const ShowInvestement=async(e)=>{
         MethodeInvestissement: ""
         
       });
-
+      formData.dateFin="10-10-2015"; 
+      formData.monatantTotal=1000; 
+      formData.idInvestisseur="test2"; 
+      formData.idProject= "project"; 
   return (
     <div className="form-Login" >
 
@@ -47,15 +55,16 @@ const ShowInvestement=async(e)=>{
           <div className="personal-info-container">
           
             <label><h1>Investir</h1></label>
+         
         <Form className="personal-info-container"  >
         <label><h3>Monatant</h3> </label>
         
-            <input type="number" min="0" max="100"  onChange={(e) => {
+            <input type="number" min="0" max="100" className='input' onChange={(e) => {
           setFormData({ ...formData, montantInvesti: e.target.value });
         }}/>
         <label><h3>Methode d'investissement</h3></label>
      
-        <select value={formData.MethodeInvestissement} className='input'  onChange={(e) => {
+        <select className="select input" value={formData.MethodeInvestissement}   onChange={(e) => {
           setFormData({ ...formData, MethodeInvestissement: e.target.value });
         }}>
         
@@ -77,6 +86,7 @@ const ShowInvestement=async(e)=>{
         Submit
       </Button>
     </Form> 
+  
     </div>
     
     </div>

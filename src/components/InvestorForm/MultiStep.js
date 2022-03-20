@@ -63,7 +63,7 @@ import { sizeWidth } from '@mui/system';
       </div>
       <div className="body">{PageDisplay()}</div>
       <div className="footer">
-        <button
+        <button className='button'
           disabled={page == 0}
           onClick={() => {
             setPage((currPage) => currPage - 1);
@@ -72,6 +72,7 @@ import { sizeWidth } from '@mui/system';
           Prev
         </button>
         <button
+        className='button'
           onClick={async() => {
             if (page === FormTitles.length - 1) {
             //  alert("FORM SUBMITTED");
