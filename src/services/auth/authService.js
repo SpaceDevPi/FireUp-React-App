@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const API_URL = '/api/users/';
+const API_URL = '/api/';
 
 // register user
 const register = async (userData) => {
-    const response = await axios.post(API_URL, userData);
+    const response = await axios.post(API_URL+'users', userData);
     
     if(response.data){
         localStorage.setItem('user', JSON.stringify(response.data));
@@ -15,7 +15,7 @@ const register = async (userData) => {
 
 // login user
 const login = async (userData) => {
-    const response = await axios.post(API_URL+'login', userData);
+    const response = await axios.post(API_URL+'users/login', userData);
     
     if(response.data){
         localStorage.setItem('user', JSON.stringify(response.data));
@@ -23,6 +23,8 @@ const login = async (userData) => {
 
     return response.data;
 }
+
+
 
 // logout user
 const logout = () => {

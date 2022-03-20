@@ -5,7 +5,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { sizeWidth } from '@mui/system';
 
-import { queryApi } from "../utils/queryApi";
+import { queryApi } from "../../utils/queryApi";
 
 
 export function FormInvestir () {

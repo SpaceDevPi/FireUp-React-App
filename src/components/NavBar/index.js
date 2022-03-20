@@ -64,6 +64,7 @@ const Navbar = ({toggle}) => {
           <NavLink to="/event">Explore Event</NavLink>
           <NavLink to="/about">About Us</NavLink>
         </NavMenu><NavBtn>
+          <NavBtnLink to="/RegestrationInvestor">Start Investing</NavBtnLink>
             <NavBtnLink to="/signInContractor">Sign In</NavBtnLink>
           </NavBtn></>
       );

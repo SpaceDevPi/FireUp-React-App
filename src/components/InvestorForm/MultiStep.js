@@ -6,7 +6,7 @@ import  FormThirdStep  from "./FormThirdStep";
 import FormFour from "./FormFour"; 
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { queryApi } from "../utils/queryApi";
+import { queryApi } from "../../utils/queryApi";
 import { useNavigate  } from "react-router-dom";
 import { sizeWidth } from '@mui/system';
 
