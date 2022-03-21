@@ -2,14 +2,26 @@ import React from 'react';
 import styled from "styled-components";
 import Sidebar from '../components/InvestossorDashbord/Sidebar';
 import MainContent from '../components/InvestossorDashbord/MainContent';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const InvestisorDashbord = () => {
+  const navigate = useNavigate();
+
+  const { investor } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!investor) {
+      navigate('/signInContractor');
+    }
+  }, [investor, navigate]);
+
   return (
     <div>
         <Container>
-           
+            <Sidebar />
             <MainContent />
-            
         </Container>
     </div>
   )
@@ -25,4 +37,5 @@ const Container = styled.div`
   }
 `;
 
-export default InvestisorDashbord; 
+export default InvestisorDashbord
+

@@ -83,7 +83,7 @@ import { sizeWidth } from '@mui/system';
                     visbile: true,
                     message: JSON.stringify(err.errors,null,2)
                 });
-            }else history("/");    
+            }else history("/LoginInvestor");    
             } else {
               setPage((currPage) => currPage + 1);
             }

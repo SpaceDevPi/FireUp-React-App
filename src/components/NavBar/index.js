@@ -14,7 +14,7 @@ import { useState } from 'react';
 // import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, reset} from '../../services/auth/authSlice';
+import { logout, logoutInvestor , reset} from '../../services/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -34,10 +34,17 @@ const Navbar = ({toggle}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {user} = useSelector((state) => state.auth);
+  const {investor} = useSelector((state) => state.auth);
+
   // const {user, setUser} = useState(false);
 
   const onLogout = () => {
     dispatch(logout());
+    dispatch(reset());
+    navigate('/');
+  }
+  const onLogoutInvestor = () => {
+    dispatch(logoutInvestor());
     dispatch(reset());
     navigate('/');
   }
@@ -54,6 +61,23 @@ const Navbar = ({toggle}) => {
           
         </NavMenu>
       );
+      
+
+      
+    }if (investor) {
+      return (
+      
+        <NavMenu>
+          <NavLink to="/dashboardInvestor">Dashboard</NavLink>
+          <NavLink to="/profileInvestor">3asba1</NavLink>
+          <NavLink to="/projects">3asba2</NavLink>
+          <button onClick={onLogoutInvestor}>Logout</button>
+          
+        </NavMenu>
+      );
+      
+
+      
     }else {
       return (
         <><NavMenu>

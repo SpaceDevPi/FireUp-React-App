@@ -18,6 +18,7 @@ import InvestorLogin from '../components/InvestorForm/InvestorLogin'
 import InvestementForm from '../components/investment/InvestementForm'
 import Login from '../pages/Login';
 import Profile from '../components/ContractorDashboard/Profile';
+import ProfileInvestor from '../components/InvestossorDashbord/ProfileInvestor' 
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -46,7 +47,10 @@ const Index = () => {
         <Route path="/LoginInvestor" element={<InvestorLogin/>}/>
         <Route path="/InvestementProject" element={<InvestementForm/>}/>
         <Route path="/dashboard" element={<ContractorDashboard />} />
+        <Route path='/investorDashbord' element={<InvestisorDashbord></InvestisorDashbord>}></Route>
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profileInvestor" element={<ProfileInvestor />} />
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <ToastContainer />

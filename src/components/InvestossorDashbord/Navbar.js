@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
         <NavbarContainer>
             <Text>
-                Welcome To <span>Investisseur Dashboard</span>
+                Welcome To <span>Investor Dashboard</span>
             </Text>
             <InputContainer>
                 <Icon>
