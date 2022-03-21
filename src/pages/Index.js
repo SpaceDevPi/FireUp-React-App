@@ -12,7 +12,8 @@ import NotFoundPage from "../pages/NotFoundPage";
 import { Route, Routes } from 'react-router-dom';
 import ContractorDashboard from './ContractorDashboard';
 import SignUpContractor from '../pages/SignUpContractor';
-
+import ProjectDetailPage from '../components/Projects/ProjectDetailPage';
+import CreateProject from '../components/Projects/ManageProjectContractor/CreateProject';
 
 const Index = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +34,9 @@ const Index = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/signUpContractor" element={<SignUpContractor />} />
         <Route path="/signInContractor" element={<ContractorDashboard />} />
+        <Route path="/explore/projectdetail/:id" element={<ProjectDetailPage />} />
+        <Route path="/addproject" element={<CreateProject />} />
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
