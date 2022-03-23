@@ -18,7 +18,7 @@ const Comment = ({comment,replies,currentUserId,parentId ="null",addComment,upda
 
     const fiveMinutes = 300000;
     const timePassed = new Date() - new Date(comment.date) > fiveMinutes;
-    const canReply = Boolean(currentUserId);
+    const canReply = Boolean(currentUserId) && comment.parentId==="null";
 
     let canEdit = false
     let canDelete = false
@@ -94,10 +94,11 @@ const Comment = ({comment,replies,currentUserId,parentId ="null",addComment,upda
             submitLabel="Reply"  parentIdd={replyId} handleSubmit={(text) => addComment(text,currentUserId, comment._id)}
           />
         )}
+      
                         <Col>
                                     {replies.length > 0 && (
                    <div className="replies">
-                       <h5>Réponse</h5>
+                       <h5  style={{ color: '#F57C00' }}>Réponse</h5>
                                     {replies.map((reply) => (
                                         
                                         <Comment
@@ -112,7 +113,8 @@ const Comment = ({comment,replies,currentUserId,parentId ="null",addComment,upda
                 replies={[]}
                 currentUserId={currentUserId}
                                            />
-                                    ))}           </div>  )}
+                                    ))}        
+                                       </div>  )}
 
                             </Col>
                                 
