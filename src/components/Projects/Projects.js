@@ -8,7 +8,7 @@ import { category } from './Section/Datas';
 // const Project = React.lazy(() => import("./Project"));
 
 export default function Projects() {
-    const [Projects, setProjects] = useState([])
+    
 
     const [projects,err,reload] = useApi('project');
     const deleteProject= async (id)=>{

@@ -1,6 +1,9 @@
 import React, {useState } from 'react';
 import '../styles/home.css';
 // import Rocket from '../assets/images/rocket.svg';
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+
 import Sidebar from '../components/SideBar';
 import Navbar from '../components/NavBar';
 import Home from '../pages/Home';
@@ -14,6 +17,8 @@ import ContractorDashboard from './ContractorDashboard';
 import SignUpContractor from '../pages/SignUpContractor';
 import ProjectDetailPage from '../components/Projects/ProjectDetailPage';
 import CreateProject from '../components/Projects/ManageProjectContractor/CreateProject';
+import ManageMyProjects from '../components/Projects/ManageProjectContractor/ManageMyProjects';
+import EditProject from '../components/Projects/ManageProjectContractor/EditProject';
 
 const Index = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +41,8 @@ const Index = () => {
         <Route path="/signInContractor" element={<ContractorDashboard />} />
         <Route path="/explore/projectdetail/:id" element={<ProjectDetailPage />} />
         <Route path="/addproject" element={<CreateProject />} />
+        <Route path="/managemyprojects" element={<ManageMyProjects />} />
+        <Route path="/editproject/:id" element={<EditProject />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

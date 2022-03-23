@@ -9,6 +9,7 @@ import CheckBox from '../Section/CheckBox';
 import { Category } from '../Section/Datas';  
 import { queryApi } from '../../../utils/queryApi';
 import { useNavigate } from "react-router-dom";
+import { NavLink, useParams } from 'react-router-dom'
 
 
 const { Title } = Typography;
@@ -38,21 +39,26 @@ export default function CreateProject(props) {
     category: "",
     price_per_share: "0",
     place:""
-
   });
   const { title, description, email,end_date,amount_to_collect,images, offering_type,category,price_per_share,place} = formData;
 
 
   const onChangeFile = (e) =>
-  setFormData({ ...formData, images: e.target.File[0] });
+  setFormData({ ...formData, images: e.target.files[0].name });
 
 const onChange = (e) =>
   setFormData({ ...formData, [e.target.name]: e.target.value });
+
+
+  const [Images, setImages] = useState([])
+
 
 const onSubmit = async (e) => {
   e.preventDefault();
   setShowLoader(true);
   const [, err] = await queryApi("project/newproject", formData, "POST", false);
+
+
   if (err) {
     setShowLoader(false);
     setError({
@@ -77,126 +83,104 @@ const [showAlert,SetShowAlert]= useState(false)
 //   },2000);
 // }
 
-const [Images, setImages] = useState([])
+
+
+
 
 const updateImages = (newImages) => {
   setImages(newImages)
 }
-    return (
-        <Container>
-          {/* <Alert type="error" message="error" description="erreur ya 5raa" /> */}
-    <div className="newUser">
-    <h1 className="newUserTitle"> Add New Project</h1>
-
-        <form className="newUserForm"  onSubmit={onSubmit}>
-
-          <div className="newUserItem">
-            <label>Title</label>
-            <input type="text" name="title" value={title}  onChange={(e) => onChange(e)} placeholder="Name of your project " />
+    return (<> 
+      <Container>
+      <div className="container">
+  
+      <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center',color:'#F57C00'}}>Edit Project</h1>
+  
+              {/* <NavLink to="/">home2</NavLink> */}
+  
+              <form className="mt-5"  onSubmit={onSubmit}>
+                  <div className="row">
+  
+                      <div class="row" >
+                      {error.visible && <FormError>{error.message}</FormError>}
+  
+                      </div>
+                      <div class="mb-3 col-lg-6 col-md-6 col-12">
+                          <label for="exampleInputEmail1" class="form-label">Title</label>
+                          <input type="text"  name="title"value={title}  onChange={(e) => onChange(e)} placeholder="Name of your project " class="form-control"   />
+                      </div>
+                      <div class="mb-3 col-lg-6 col-md-6 col-12">
+                          <label for="exampleInputPassword1" class="form-label">Email</label>
+                          <input type="email" placeholder="john@gmail.com" name="email" value={email}  onChange={(e) => onChange(e)}class="form-control" />
+                      </div>
+                      <div class="mb-3 col-lg-6 col-md-6 col-12">
+                          <label for="exampleInputPassword1" class="form-label">Date of end</label>
+                          <input type="date" value={end_date} name="end_date" onChange={(e) => onChange(e)}  placeholder="date of end" class="form-control" />
+                      </div>
+                      <div class="mb-3 col-lg-6 col-md-6 col-12">
+                          <label for="exampleInputPassword1" class="form-label">Amount to collect</label>
+                          <input type="number" name="amount_to_collect" value={amount_to_collect}  onChange={(e) => onChange(e)} placeholder="How much money you need to raise "class="form-control"  />
+                      </div>
+                      <div class="mb-3 col-lg-6 col-md-6 col-12">
+                          <label for="exampleInputPassword1" class="form-label">Offering type</label>
+                          <div className="newUserGender">
+                          <input type="radio" name="offering_type" onChange={(e) => onChange(e)}  id="equity" value="equity" />
+                          <label for="equity">Equity</label>
+                          <input type="radio" name="offering_type"  onChange={(e) => onChange(e)}  id="rewards" value="rewards" />
+                          <label for="rewards">Rewards</label>
+                          <input type="radio" name="offering_type"   onChange={(e) => onChange(e)} id="donation" value="donation" />
+                          <label for="donation">Donation</label>
+                          </div>
+                      </div>
+                      <div class="mb-3 col-lg-6 col-md-6 col-12">
+                          <label for="exampleInputPassword1" class="form-label">Category</label>
+                          <div className="newUserGender">
+  
+                          <input type="radio" name="category"  onChange={(e) => onChange(e)}  id="art" value="art" />
+                          <label for="equity">art</label>
+                          <input type="radio" name="category" onChange={(e) => onChange(e)} id="agriculture" value="agriculture" />
+                          <label for="rewards">agriculture</label>
+                          <input type="radio" name="category" onChange={(e) => onChange(e)}  id="design" value="design" />
+                          <label for="donation">design</label> 
+                                </div>
+                    </div>
+                      <div class="mb-3 col-lg-6 col-md-6 col-12">
+                          <label for="exampleInputPassword1" class="form-label">Price per share
+  </label>
+                          <input type="text"  name="price_per_share" value={price_per_share}  onChange={(e) => onChange(e)} placeholder="price per share" class="form-control" />
+                      </div>
+                      <div class="mb-3 col-lg-6 col-md-6 col-12">
+                          <label for="exampleInputPassword1" class="form-label">Place</label>
+                          <input type="text" name="place" value={place}  onChange={(e) => onChange(e)} placeholder="Place"  class="form-control" />
+                      </div>
+                      <div class="mb-3 col-lg-12 col-md-12 col-12">
+                          <label for="exampleInputPassword1" class="form-label">Description</label>
+                          <textarea  name="description" value={description}  onChange={(e) => onChange(e)} placeholder="Describe your project"className="form-control" id="" cols="30" rows="5"></textarea>
+                      </div>
+                      <div class="mb-3 col-lg-6 col-md-6 col-12">
+                          <label for="exampleInputPassword1" class="form-label">Image</label>
+                          {/* <input type="file"  name="images" 
+            onChange={(e) => onChangeFile(e)} placeholder="Image" className="form-control"/> */}
+                      <FileUpload name="images" 
+            onChange={(e) => onChangeFile(e)}  refreshFunction={updateImages} />
+                      </div>
+                      <button type="submit"  disabled={showLoader} class="newUserButton">Create </button>
+                      <br></br>
+                  </div>
+              </form>
           </div>
+          </Container>
+           </>
+ )
 
-         
-
-          <div className="newUserItem">
-            <label>Email</label>
-            <input type="email" placeholder="john@gmail.com" name="email" value={email}  onChange={(e) => onChange(e)}/>
-          </div>
-
-
-          <div className="newUserItem">
-            <label>Date of end </label>
-            <input type="date" name="end_date" value={end_date}  onChange={(e) => onChange(e)}  placeholder="date of end" />
-          </div>
-
-
-          <div className="newUserItem">
-            <label>Amount to collect</label>
-            <input type="text"   name="amount_to_collect" value={amount_to_collect}  onChange={(e) => onChange(e)} placeholder="How much money you need to raise " />
-          </div>
-
-
-          <div className="newUserItem">
-            <label>Offering type </label>
-            <div className="newUserGender">
-            <input type="radio" name="offering_type" onChange={(e) => onChange(e)} id="equity" value="equity" />
-              <label for="equity">Equity</label>
-              <input type="radio" name="offering_type" onChange={(e) => onChange(e)} id="rewards" value="rewards" />
-              <label for="rewards">Rewards</label>
-              <input type="radio" name="offering_type" onChange={(e) => onChange(e)} id="donation" value="donation" />
-              <label for="donation">Donation</label>
-            </div>
-
-            
-          </div>
-          <div className="newUserItem">
-            <label>Category</label>
-            {/*<select className="newUserSelect" onChange={(e) => onChange(e)} name="category" >
-                    {Category ? Category.map(item => (
-                
-                        <option name="category"  id={item.name} value={item.name}>{item.name} </option>
-                         ))
-                   
-                     : <p>err</p>}
-                </select> */}
-                            <div className="newUserGender">
-
-               <input type="radio" name="category" onChange={(e) => onChange(e)} id="art" value="art" />
-              <label for="equity">art</label>
-              <input type="radio" name="category" onChange={(e) => onChange(e)} id="agriculture" value="Agriculture" />
-              <label for="rewards">agriculture</label>
-              <input type="radio" name="category" onChange={(e) => onChange(e)} id="design" value="Design" />
-              <label for="donation">design</label> 
-</div>
-          </div>
-
-          
-     
-
-          <div className="newUserItem">
-            <label>Price per share</label>
-            <input type="number"  name="price_per_share" value={price_per_share}  onChange={(e) => onChange(e)} placeholder="price per share" />
-          </div>
-
-          <div className="newUserItem">
-            <label>Place</label>
-            <input type="text" name="place" value={place}  onChange={(e) => onChange(e)} placeholder="Place" />
-          </div>
-
-       
-
-          <div className="DescriptionItem">
-            <label>Description</label>
-            <textarea type="TextArea" name="description" value={description}  onChange={(e) => onChange(e)} placeholder="Describe your project" />
-          </div>
-
-          <div className="newUserItem">
-            <label>Image</label>
-            <input type="file"  name="images"
-            onChange={(e) => onChangeFile(e)} placeholder="Image" />
-
-          </div>
-          <div className="newUserItem">
-            <label>Image</label>
-            
-            {/* <FileUpload name="images"
-            onChange={(e) => onChangeFile(e)} refreshFunction={updateImages} /> */}
-          </div>
-         {/* <ButtonInvest>Create</ButtonInvest>*/}
-         <div>
-          <button className="newUserButton" disabled={showLoader}> Create </button>
-          </div>
-        </form>
-      </div>
-      </Container>    )
 }
 
 const Container = styled.div`
     padding:20px;
-    padding-left : 200px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    box-shadow: 0 0 15px #F57C00;
+    box-shadow: 0 0 15px #ddd;
     background-color : #E5E5E5;
 
 `;
@@ -217,3 +201,7 @@ export const ButtonInvest = styled(LinkS)`
     justify-content: center;
 
 `
+
+const FormError = styled.p`
+  color: #f74b1b;
+`;

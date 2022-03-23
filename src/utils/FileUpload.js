@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import Dropzone from 'react-dropzone';
-import { SmileOutlined } from '@ant-design/icons';
 import Axios from 'axios';
 function FileUpload(props) {
 
-    const [Images, setImages] = useState()
+    const [Images, setImages] = useState([])
 
     const onDrop = (files) => {
 
@@ -15,11 +14,11 @@ function FileUpload(props) {
         formData.append("file", files[0])
         //save the Image we chose inside the Node Server 
         Axios.post('http://localhost:5000/api/project/uploadImage', formData, config)
-            .then(response => {
+        .then(response => {
                 if (response.data.success) {
 
-                    setImages(Images, response.data.image)
-                    props.refreshFunction(Images, response.data.image)
+                    setImages([...Images, response.data.image])
+                    props.refreshFunction([...Images, response.data.image])
 
                 } else {
                     alert('Failed to save the Image in Server')
@@ -37,7 +36,7 @@ function FileUpload(props) {
         setImages(newImages)
         props.refreshFunction(newImages)
     }
-
+console.log("images names : " + Images[0])
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Dropzone
@@ -55,7 +54,8 @@ function FileUpload(props) {
                         {console.log('getRootProps', { ...getRootProps() })}
                         {console.log('getInputProps', { ...getInputProps() })}
                         <input {...getInputProps()} />
-                        <a  type="plus" style={{ fontSize: '3rem' }} >add pic</a>
+                        <p type="plus" style={{ fontSize: '3rem' }} >
+                            add pic</p>
 
                     </div>
                 )}
@@ -63,11 +63,11 @@ function FileUpload(props) {
 
             <div style={{ display: 'flex', width: '350px', height: '240px', overflowX: 'scroll' }}>
 
-
-                    <div onClick={() => onDelete(Images)}>
-                        <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`http://localhost:5000/${Images}`} alt={`productImg-${Images}`} />
+                {Images.map((image, index) => (
+                    <div onClick={() => onDelete(image)}>
+                        <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`http://localhost:5000/uploads/${image}`} alt={`productImg-${index}`} />
                     </div>
-     
+                ))}
 
 
             </div>

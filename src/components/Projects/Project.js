@@ -5,16 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {Link as LinkS} from 'react-scroll'
 import './Project.css';
 export default function Project(props) {
-  /*See that we divided our state to two parts, one for the product and one for the updated value, in our old 
-component both of these variables were stored in a single state value. 
-What this will help us do is, greatly improve performance especially in bigger components. Remember 
-that React uses a virtual DOM and every time we change something in the state, it calculates the 
-differences and re-renders. Now we can split those calculates to a case specific approach. 
-As we notice useState must: 
- Be declared with a const 
- Is deconstructed into a value and a setter for said value 
- Takes the default value as an argument 
-*/
+
 const navigate = useNavigate();
   const [project, setProject] = useState(props.project);
   const [updated, setUpdated] = useState(0);
@@ -24,6 +15,7 @@ component renders.
 The return function is the “cleaner” which will behave like “componentWillUnmount” in this specific 
 case. 
 */
+console.log("utilisation use state " +project)
 console.log("aaaaaa : "+ project.title)
   useEffect(() => {
     console.log(
@@ -43,13 +35,18 @@ console.log("aaaaaa : "+ project.title)
     });
     setUpdated((u) => u + 1);
   };
+
+
+  console.log("utilisation use state apres add like " +project)
+
   /*This hook will trigger each time “updated” value mutates. [updated] this is called dependency array, 
 it’s the array where our hook will “listen” to any changes on variables we include in the array and will 
 trigger the hook. */
   useEffect(() => {
-    console.log(updated);
+    console.log("apres use effect"+updated);
   }, [updated]);
 
+  console.log("utilisation use state apres use effect" +project)
 
   const routeChange = () =>{ 
     let path = `projectdetail/`+project._id; 
@@ -60,7 +57,7 @@ trigger the hook. */
       
 <ProductFrameBest>
       <ProductImageWrapperBest>
-        <ProductImageBest src={project.images}></ProductImageBest>
+        <ProductImageBest src={"../images/yoga.jpg"}></ProductImageBest>
       </ProductImageWrapperBest>
       <ProductInfoWrapperBest>
       <span>Best Project</span>
@@ -84,7 +81,7 @@ trigger the hook. */
       <h3>{project.title} </h3>
       <Container  onClick={routeChange}> 
      
-      <img src={project.images} />     
+      <img src={`${process.env.REACT_APP_API_URL_UPLOADS}/${project.images}`}/>     
 
       <Info>
      

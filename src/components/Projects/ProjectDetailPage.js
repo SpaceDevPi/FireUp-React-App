@@ -2,15 +2,19 @@ import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components";
 import { useApi } from "../../hooks/useApi";
 
-import Comment from "./Comment";
+import Comment from "./Comments/Comment";
 import {Link as LinkS} from 'react-scroll'
 import MoreDetailPage from "./MoreDetailPage";
 import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import Comments from "./Comments/Comments";
 
 
 export default function ProjectDetailPage(props)  {
   const { id } = useParams();
-console.log('id : ' +id);
+const a = ""
+let date
+let date_modifier
    const [toRender,err,reload] = useApi('project/project/'+id);
   // const date = new Date(toRender.end_date).toLocaleDateString();
   // console.log(toRender.map(title => {toRender[title]}))
@@ -25,11 +29,14 @@ console.log('id : ' +id);
   //   }
   //   return resultat;
   // }
-
-
-  const a = toRender
-
-console.log(toRender)
+let projectid
+if( toRender != null)
+{
+date= toRender.end_date
+projectid = toRender._id
+console.log("images "+ toRender.images)
+}
+date_modifier = new Date(date).toLocaleDateString()
 
   return (
     
@@ -40,7 +47,7 @@ console.log(toRender)
 
       <Wrapper>
         <ImgContainer>
-          <Image src={toRender.images} />
+          <Image src={"../../images/"+toRender.images} />
         </ImgContainer>
         <InfoContainer>
           <Title>{toRender.title} </Title>
@@ -61,7 +68,7 @@ console.log(toRender)
 
           <h3>Offering Type :  {toRender.offering_type}</h3>
           <h3>Price per share :  {toRender.price_per_share}</h3>
-          <h3 >End of collect : {toRender.end_date}</h3>
+          <h3 name="end_date" >End of collect : {date_modifier}</h3>
 
           
           </RowStat>
@@ -79,7 +86,7 @@ console.log(toRender)
 )}
     </Container>
     <MoreDetailPage/>
-    <Comment/>
+    <Comments currentUserId="1" projectid={projectid} />
     
     </div>
   );
