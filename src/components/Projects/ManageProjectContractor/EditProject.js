@@ -5,6 +5,7 @@ import styled from "styled-components";
 import "./CreateProject.css";
 import { queryApi } from '../../../utils/queryApi';
 import { useNavigate } from "react-router-dom";
+import { Category } from "../Section/Datas";
 
 export default function EditProject() {
 
@@ -64,10 +65,7 @@ const onSubmit = async (e) => {
     console.log(formData)
     console.log(err)
   } else    { console.log(formData);
-    setTimeout(()=>{
-     alert('your project has been edited succesfully')
-
-    });
+    navigate('/managemyprojects')
 }
 };
 let date_modified
@@ -110,26 +108,37 @@ console.log("modifie "+date_modified)
                     </div>
                     <div class="mb-3 col-lg-6 col-md-6 col-12">
                         <label for="exampleInputPassword1" class="form-label">Offering type</label>
-                        <div className="newUserGender">
-                        <input type="radio" name="offering_type" id="equity" value={offering_type} />
-                        <label for="equity">Equity</label>
-                        <input type="radio" name="offering_type"  id="rewards" value={offering_type} />
-                        <label for="rewards">Rewards</label>
-                        <input type="radio" name="offering_type"  id="donation" value={offering_type} />
-                        <label for="donation">Donation</label>
-                        </div>
+                      
+                      
+                        <select class="form-select" aria-label="Default select example" 
+                   value={offering_type}  name="offering_type"
+                   onChange={(e) => onChange(e)} >
+     <option >{offering_type}</option>
+    <option value="rewards">Rewards</option>
+    <option value="donation">Donation</option>
+    <option value="equity">Equity</option>
+
+     </select>
+
+
+
                     </div>
                     <div class="mb-3 col-lg-6 col-md-6 col-12">
                         <label for="exampleInputPassword1" class="form-label">Category</label>
-                        <div className="newUserGender">
 
-                        <input type="radio" name="category" id="art" value={category} />
-                        <label for="equity">art</label>
-                        <input type="radio" name="category" id="agriculture" value={category} />
-                        <label for="rewards">agriculture</label>
-                        <input type="radio" name="category" id="design" value={category} />
-                        <label for="donation">design</label> 
-                              </div>
+
+                        <select class="form-select" aria-label="Default select example" 
+                   value={category}  name="category"
+                   onChange={(e) => onChange(e)} >
+     <option selected >{category}</option>
+     {Category ? Category.map((Category) => (
+    <option value={Category.name}>{Category.name}</option>
+
+     )) :    ( <option value="art">art</option>)}
+
+     </select>
+
+                             
                   </div>
                     <div class="mb-3 col-lg-6 col-md-6 col-12">
                         <label for="exampleInputPassword1" class="form-label">Price per share

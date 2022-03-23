@@ -134,15 +134,16 @@ const updateImages = (newImages) => {
                       </div>
                       <div class="mb-3 col-lg-6 col-md-6 col-12">
                           <label for="exampleInputPassword1" class="form-label">Category</label>
-                          <div className="newUserGender">
-  
-                          <input type="radio" name="category"  onChange={(e) => onChange(e)}  id="art" value="art" />
-                          <label for="equity">art</label>
-                          <input type="radio" name="category" onChange={(e) => onChange(e)} id="agriculture" value="agriculture" />
-                          <label for="rewards">agriculture</label>
-                          <input type="radio" name="category" onChange={(e) => onChange(e)}  id="design" value="design" />
-                          <label for="donation">design</label> 
-                                </div>
+                          <select class="form-select" aria-label="Default select example" 
+                   value={category}  name="category"
+                   onChange={(e) => onChange(e)} >
+     <option selected>Choose Category</option>
+     {Category ? Category.map((Category) => (
+    <option value={Category.name}>{Category.name}</option>
+
+     )) :    ( <option value="art">art</option>)}
+
+     </select>
                     </div>
                       <div class="mb-3 col-lg-6 col-md-6 col-12">
                           <label for="exampleInputPassword1" class="form-label">Price per share

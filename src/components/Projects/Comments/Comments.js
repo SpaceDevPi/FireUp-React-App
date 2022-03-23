@@ -18,7 +18,7 @@ export default function Comments({currentUserId,projectid}) {
     const [test,setTest]= useState(false)
     const [num,setNum]= useState(0)
     const [activeComment, setActiveComment] = useState(null);
-
+    const[nbComment,setnbComment]=useState(0)
     const [comments,setComments]= useState(null)
     async function fetchData() {
       console.log("aaaaaaa")
@@ -26,7 +26,7 @@ export default function Comments({currentUserId,projectid}) {
       const [res, err] = await queryApi("comments/" + projectid);
       console.log(res)
       setComments(res);
-
+        setnbComment(res.length)
         setNum(num+1)
 
       if(comments !=null)
@@ -37,10 +37,9 @@ export default function Comments({currentUserId,projectid}) {
     useEffect( () => {
       fetchData()
          }, [projectid,test]);
-
          console.log("comments: "+comments)
 
-
+  
 
 
         let rootComments
@@ -104,6 +103,8 @@ const [error, setError] = useState({ visible: false, message: "" });
           } 
           else    { 
             setComments([res,...comments]);
+            setnbComment(nbComment+1);
+
             setActiveComment(null);
        
         }
@@ -145,7 +146,7 @@ const [error, setError] = useState({ visible: false, message: "" });
     
 
   return (
-    <>                <CommentHeading>Comment / 2</CommentHeading>
+    <>                <CommentHeading>Comment Section ({nbComment} total)</CommentHeading>
     <div className="comments">
     <CommentForm  activeComment={activeComment}
             setActiveComment={setActiveComment}  currentUserId={currentUserId} submitLabel="Write" updateComment={updateComment} handleSubmit={addComment} projectid={projectid} />

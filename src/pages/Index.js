@@ -19,6 +19,7 @@ import ProjectDetailPage from '../components/Projects/ProjectDetailPage';
 import CreateProject from '../components/Projects/ManageProjectContractor/CreateProject';
 import ManageMyProjects from '../components/Projects/ManageProjectContractor/ManageMyProjects';
 import EditProject from '../components/Projects/ManageProjectContractor/EditProject';
+import CreatePost from '../components/Projects/ManageUpdatesPost/CreatePost';
 
 const Index = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,6 +44,7 @@ const Index = () => {
         <Route path="/addproject" element={<CreateProject />} />
         <Route path="/managemyprojects" element={<ManageMyProjects />} />
         <Route path="/editproject/:id" element={<EditProject />} />
+        <Route path="/managemyprojects/createpost/:idprojet" element={<CreatePost />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
