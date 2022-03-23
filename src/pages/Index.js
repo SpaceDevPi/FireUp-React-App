@@ -43,11 +43,10 @@ const Index = () => {
         <Route path="/signUpContractor" element={<SignUpContractor />} />
         <Route path="/signInContractor" element={<Login />} />
         <Route path="/RegestrationInvestor" element={<RegisterInvestisor/>}/>
-        <Route path="/InvestisorDashbord" element={<InvestisorDashbord/>}/>
+        <Route path="/dashboardInvestor" element={<InvestisorDashbord/>}/>
         <Route path="/LoginInvestor" element={<InvestorLogin/>}/>
         <Route path="/InvestementProject" element={<InvestementForm/>}/>
         <Route path="/dashboard" element={<ContractorDashboard />} />
-        <Route path='/investorDashbord' element={<InvestisorDashbord></InvestisorDashbord>}></Route>
         <Route path="/profile" element={<Profile />} />
         <Route path="/profileInvestor" element={<ProfileInvestor />} />
 

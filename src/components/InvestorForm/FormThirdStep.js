@@ -30,7 +30,7 @@ function FormThirdStep({ formData, setFormData }) {
           setFormData({ ...formData, status: e.target.value });
         }}>
      <option value="1" >Accreditation Status</option>
-    <option value="0">Accredit Ivestor</option>
+    <option value="0">Accredit Investor</option>
     <option value="1">Non Accredit Investor</option>
      </select>
 

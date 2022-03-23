@@ -69,9 +69,9 @@ const Navbar = ({toggle}) => {
       
         <NavMenu>
           <NavLink to="/dashboardInvestor">Dashboard</NavLink>
-          <NavLink to="/profileInvestor">3asba1</NavLink>
-          <NavLink to="/projects">3asba2</NavLink>
-          <button onClick={onLogoutInvestor}>Logout</button>
+          <NavLink to="/profileInvestor">Profile</NavLink>
+          <NavLink to="/projects">Projects</NavLink>
+          <button className='button' onClick={onLogoutInvestor}>Logout</button>
           
         </NavMenu>
       );

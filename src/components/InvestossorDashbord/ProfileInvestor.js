@@ -10,25 +10,127 @@ import {
   import "../../styles/profile.css";
   import { useDispatch, useSelector } from 'react-redux';
   import { useNavigate } from 'react-router-dom';
-  import { useEffect } from 'react';
+  import { useEffect, useState } from 'react';
+  import axios from 'axios';
+  import {useApi} from '../../hooks/useApi'
+  import {queryApi} from '../../utils/queryApi'
+
   
   
   export default function Profile() {
+    
+
     const navigate = useNavigate();
-  
     const { investor } = useSelector((state) => state.auth);
-  
+    const [errors, setErrors] = useState({ visbile: false, message: "" });
+
     useEffect(() => {
       if (!investor) {
-        navigate('/signInContractor');
+        navigate('/LoginInvestor');
       }
     }, [investor, navigate]);
+   const [toRender,err,reload] = useApi('investors/investorId/'+investor._id);
+//const a = InvestorProfile;
+const id = investor._id;
+const [formData, setFormData] = useState({
+  username:"",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    phoneNumber:"", 
+    sexe: "",
+    datOfBirth : "",
+    adress: "",
+    status:"", 
+    accreditationForm:"",
+    centerOfInterest :"" ,
+    accountType :""
+});
+
+          console.log(id)
+          useEffect(() => {
+            fetchData();
+          }, [id]);
+
+function status() {
+       
+          if (toRender.status ==0){
+              return "Accredit Investor"; 
+          }if (toRender.status ==1) {
+            return "Non Accredit Investor";
+          }
+
+}
+function AccreditationForm() {
+       
+  if (toRender.accreditationForm ==1){
+      return "I invest on behalf of a trust with at least $5 million in assets."; 
+  }if (toRender.accreditationForm ==2){
+    return "I have individual net worth, that exceeds $1 million."; 
+}if (toRender.accreditationForm ==3){
+  return "I had income exceeding $200,000 in each year."; 
+}if(toRender.accreditationForm ==4) {
+    return "I have individual net worth $200,000 and I have sufficient knowledge to evaluate the merits and risks of startup investing..";
+  }
+
+}
+function ShowAccreditForm() {
+   var accreditForm = document.getElementById('accreditationform'); 
+   var status =document.getElementById('status');
+  if(status=="0"){
+    accreditForm.style.visibility ='visible' ; 
+  }
+  if(status=="1"){
+    accreditForm.style.visibility ='hidden' ; 
+  }
   
+}
+async function fetchData() {
+  const [res, err] = await queryApi("investors/investorId/" + id);
+  setFormData({
+    username: toRender.username,
+    firstName: toRender.firstName,
+    lastName: toRender.lastName ,
+    email: toRender.email,
+    password: toRender.password,
+    phoneNumber: toRender.phoneNumber, 
+    sexe: toRender.sexe,
+    datOfBirth : toRender.datOfBirth ,
+    adress: toRender.adress,
+    status: toRender.status, 
+    accreditationForm: toRender.accreditationForm,
+    centerOfInterest : toRender.centerOfInterest,
+    accountType : toRender.accountType
+  });
+}
+const { username, firstName, lastName,email ,password,phoneNumber,sexe,datOfBirth,adress,accreditationForm,centerOfInterest,accountType} = formData;
+
+
+
+const history = useNavigate ();
+
+const onSubmit = async (e) => {
+  e.preventDefault();
+  //console.log(formData);
+  const [, err] = await queryApi("investors/ubdateInvestor/" + id, formData, "PUT", false);
+  if (err) {
+    setErrors({
+      visbile: true,
+      message: JSON.stringify(err.errors, null, 2),
+    });
+    
+  } else navigate("/dashboardInvestor");
+};
+
   
     return (
+      <div>
+        
+      { toRender ? (
       <div className="user">
         <div className="userTitleContainer">
-          <h1 className="userTitle">My Profile adem</h1>
+          <h1 className="userTitle">My Profile </h1>
           
         </div>
         <div className="userContainer">
@@ -36,85 +138,167 @@ import {
             <div className="userShowTop">
               
               <div className="userShowTopTitle">
-                <span className="userShowUsername">{investor.username}</span>
-                <span className="userShowUserTitle">Software Engineer</span>
+                <span className="userShowUserTitle">Investor <b className="fireUp">FireUp</b></span>
+               <span className ="userShowUserTitle">Welcome to our plateform <b className="fireUp">{toRender.firstName} {toRender.lastName} </b></span>
+
               </div>
             </div>
             <div className="userShowBottom">
               <span className="userShowTitle">Account Details</span>
               <div className="userShowInfo">
                 <PermIdentity className="userShowIcon" />
-                <span className="userShowInfoTitle">annabeck99</span>
+                <span className="userShowInfoTitle">{toRender.username}</span>
               </div>
               <div className="userShowInfo">
                 <CalendarToday className="userShowIcon" />
-                <span className="userShowInfoTitle">10.12.1999</span>
+                <span className="userShowInfoTitle">{toRender.datOfBirth}</span>
+              </div>
+              <div className="userShowInfo">
+                
+                <p>Gender : </p><span className="userShowInfoTitle">{toRender.sexe}</span>
               </div>
               <span className="userShowTitle">Contact Details</span>
               <div className="userShowInfo">
                 <PhoneAndroid className="userShowIcon" />
-                <span className="userShowInfoTitle">+1 123 456 67</span>
+                <span className="userShowInfoTitle">{toRender.phoneNumber}</span>
               </div>
               <div className="userShowInfo">
                 <MailOutline className="userShowIcon" />
-                <span className="userShowInfoTitle">{investor.email}</span>
+                <span className="userShowInfoTitle">{toRender.email}</span>
               </div>
               <div className="userShowInfo">
                 <LocationSearching className="userShowIcon" />
-                <span className="userShowInfoTitle">New York | USA</span>
+                <span className="userShowInfoTitle">{toRender.adress}</span>
               </div>
+              
             </div>
+            <div className="userShowBottom">
+              <span className="userShowTitle">Investement Information</span>
+              <div className="userShowInfo">
+                <p>Avount type </p><span className="userShowInfoTitle">: {toRender.accountType}</span>
+              </div>
+              <div className="userShowInfo">
+              <p>Status </p><span className="userShowInfoTitle">: {status()} </span>
+              </div>
+              <div className="userShowInfo">
+              <p>Accreditation Form  </p><span className="userShowInfoTitle">: {AccreditationForm()} </span>
+              </div>
+              <div className="userShowInfo">
+              <p>Center of interest  </p><span className="userShowInfoTitle">: {toRender.centerOfInterest} </span>
+              </div>
+              </div>
           </div>
           <div className="userUpdate">
             <span className="userUpdateTitle">Edit</span>
-            <form className="userUpdateForm">
+
+
+            <form onSubmit={onSubmit} className="userUpdateForm">
               <div className="userUpdateLeft">
                 <div className="userUpdateItem">
                   <label>Username</label>
                   <input
                     type="text"
-                    placeholder="annabeck99"
+                    placeholder={toRender.username}
                     className="userUpdateInput"
+                    value={formData.username}
+                    onChange={(e) => {
+                      setFormData({ ...formData, username: e.target.value });
+                    }}
                   />
                 </div>
                 <div className="userUpdateItem">
-                  <label>Full Name</label>
+                  <label>First Name</label>
                   <input
                     type="text"
-                    placeholder="Anna Becker"
+                    placeholder={toRender.firstName}
                     className="userUpdateInput"
-                  />
+                    value={formData.firstName}
+                    onChange={(e) => {
+                      setFormData({ ...formData, firstName: e.target.value });
+                    }}                  />
                 </div>
                 <div className="userUpdateItem">
-                  <label>Email</label>
+                  <label>Last Name</label>
                   <input
                     type="text"
-                    placeholder="annabeck99@gmail.com"
+                    placeholder={toRender.lastName}
                     className="userUpdateInput"
+                    value={formData.lastName}
+                    onChange={(e) => {
+                      setFormData({ ...formData, lastName: e.target.value });
+                    }}
                   />
                 </div>
                 <div className="userUpdateItem">
                   <label>Phone</label>
                   <input
                     type="text"
-                    placeholder="+1 123 456 67"
+                    placeholder={toRender.phoneNumber}
                     className="userUpdateInput"
+                    value={formData.phoneNumber}
+                    onChange={(e) => {
+                      setFormData({ ...formData, phoneNumber: e.target.value });
+                    }}
+                  />
+                </div>
+                <div className="userUpdateItem">
+                  <label>Date Of birth</label>
+                  <input
+                    type="date"
+                    className="userUpdateInput"
+                    value={formData.datOfBirth}
+                    onChange={(e) => {
+                      setFormData({ ...formData, datOfBirth: e.target.value });
+                    }}
                   />
                 </div>
                 <div className="userUpdateItem">
                   <label>Address</label>
                   <input
                     type="text"
-                    placeholder="New York | USA"
+                    placeholder={toRender.adress}
                     className="userUpdateInput"
+                    value={formData.adress}
+                    onChange={(e) => {
+                      setFormData({ ...formData, adress: e.target.value });
+                    }}
                   />
+                </div>
+                <div className="userUpdateItem">
+                  <label>Status </label>
+                   <select className="userUpdateInput" id="status" 
+                   value={formData.status}
+                    onChange={(e) => { setFormData({ ...formData, status: e.target.value });  }} >
+     <option >{status()}</option>
+    <option value="0">Accredit Investor</option>
+    <option value="1">Non Accredit Investor</option>
+     </select>
+                
+                </div>
+                <div className="userUpdateItem">
+                  <label>Acredit Status </label>
+                  <div >
+     <select id="accreditationform"   value={formData.accreditationForm}
+                    onChange={(e) => {
+                      setFormData({ ...formData, accreditationForm: e.target.value });
+                    }}    className="userUpdateInput"
+       > 
+    <option >{AccreditationForm()}</option>
+    <option value="1"> I invest on behalf of a trust with at least $5 million in assets </option>
+    <option value="2">I have individual net worth, that exceeds $1 million</option>
+    <option value="3">I had income exceeding $200,000 in each year</option>
+    <option value="4">I have individual net worth $200,000 and I have sufficient knowledge to evaluate the merits and risks of startup investing.</option>
+
+     </select>
+     </div>
+                
                 </div>
               </div>
               <div className="userUpdateRight">
                 <div className="userUpdateUpload">
                   <img
                     className="userUpdateImg"
-                    src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                    src={toRender.image}
                     alt=""
                   />
                   <label htmlFor="file">
@@ -122,11 +306,12 @@ import {
                   </label>
                   <input type="file" id="file" style={{ display: "none" }} />
                 </div>
-                <button className="userUpdateButton">Update</button>
+                <button className="button" >Update</button>
               </div>
             </form>
           </div>
         </div>
       </div>
-    );
+     ) : (<p></p>) }
+     </div> );
   }
