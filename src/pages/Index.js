@@ -21,6 +21,8 @@ import Profile from '../components/ContractorDashboard/Profile';
 import ProfileInvestor from '../components/InvestossorDashbord/ProfileInvestor' 
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { InvestorProject } from '../components/ListeProjectInvestor/InvestorProject';
+import { AllProjectInvestor } from '../components/ListeProjectInvestor/AllProjectInvestor';
 
 
 const Index = () => {
@@ -49,6 +51,8 @@ const Index = () => {
         <Route path="/dashboard" element={<ContractorDashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profileInvestor" element={<ProfileInvestor />} />
+        <Route path="/projectsInvestor" element={<InvestorProject/>}/>
+        <Route path="/AllProjectInvestor" element={<AllProjectInvestor/>}/>
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

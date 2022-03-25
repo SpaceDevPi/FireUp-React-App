@@ -14,6 +14,7 @@ import { login, loginInvestor, reset } from '../../services/auth/authSlice';
 import Spinner from '../../components/Spinner';
  
 function LoginForm() {
+
  // eslint-disable-next-line react-hooks/rules-of-hooks
  const [formData, setFormData] = React.useState({
   email: '',
@@ -28,11 +29,17 @@ const navigate = useNavigate()
 const {investor, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth)
 
 useEffect(() => {
+  if (investor) {
+    navigate('/dashboardInvestor');
+  }
+}, [investor, navigate]);
+
+useEffect(() => {
   if (isError) {
       toast.error(message)
   }
   if (isSuccess || investor) {
-      navigate('/investorDashbord')
+      navigate('/dashboardInvestor')
   }
 
   dispatch(reset())

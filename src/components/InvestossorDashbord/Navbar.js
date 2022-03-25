@@ -1,20 +1,47 @@
 import React from 'react';
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import {useApi} from '../../hooks/useApi'
+import {queryApi} from '../../utils/queryApi'
+export default function Navbar  () {
+  const navigate = useNavigate();
 
-const Navbar = () => {
+  const { investor } = useSelector((state) => state.auth);
+  const [toRender,err,reload] = useApi('investors/investorId/'+investor._id);
+  const [errors, setErrors] = useState({ visbile: false, message: "" });
+
+    useEffect(() => {
+      if (!investor) {
+        navigate('/LoginInvestor');
+      }
+    }, [investor, navigate]);
+
+
   return (
+    <div>
+      { toRender ? (
+        <div>
         <NavbarContainer>
             <Text>
-                Welcome To <span>Investor Dashboard</span>
+            <p>Welcome to FireUp </p><span className ="userShowUserTitle"><b className="fireUp">{toRender.firstName} {toRender.lastName} </b></span>
+
             </Text>
-            <InputContainer>
-                <Icon>
-                    <FiSearch />
-                </Icon>
-                <Input type="text" placeholder="Search for projects" />
-            </InputContainer>
+            <img src={toRender.image} className="image" />
+          
         </NavbarContainer>
+            <InputContainer className='inputContainer'>
+            <Icon>
+                <FiSearch />
+            </Icon>
+            <Input type="text" placeholder="How can we help you!" />
+        </InputContainer>
+        </div>
+          ) : (<p></p>) }
+
+        </div>
   )
 }
 
@@ -23,11 +50,12 @@ const NavbarContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   height: 10%;
+  margin-left : 3% ; 
   @media screen and (min-width: 320px) and (max-width: 1080px) {
     flex-direction: column;
     margin-bottom: 1rem;
   }
-`;
+`; 
 
 const Text = styled.h1`
   span {
@@ -69,4 +97,3 @@ const Input = styled.input`
 `;
 
 
-export default Navbar;

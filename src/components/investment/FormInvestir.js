@@ -1,7 +1,7 @@
 import React from 'react'; 
 import  { useState } from "react";
 
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { sizeWidth } from '@mui/system';
 
@@ -9,7 +9,6 @@ import { queryApi } from "../../utils/queryApi";
 
 
 export function FormInvestir () {
-
  
 
 const ShowInvestement=async(e)=>{
@@ -57,6 +56,7 @@ const ShowInvestement=async(e)=>{
             <label><h1>Investir</h1></label>
          
         <Form className="personal-info-container"  >
+          <div className='personal-info-container'>
         <label><h3>Monatant</h3> </label>
         
             <input type="number" min="0" max="100" className='input' onChange={(e) => {
@@ -82,9 +82,10 @@ const ShowInvestement=async(e)=>{
 
 
       
-      <Button  className="button" type="submit" onClick={ShowInvestement}>
+      <button  className="button" type="submit" onClick={ShowInvestement}>
         Submit
-      </Button>
+      </button>
+      </div>
     </Form> 
   
     </div>

@@ -43,6 +43,7 @@ const Navbar = ({toggle}) => {
     dispatch(reset());
     navigate('/');
   }
+  
   const onLogoutInvestor = () => {
     dispatch(logoutInvestor());
     dispatch(reset());
@@ -70,7 +71,11 @@ const Navbar = ({toggle}) => {
         <NavMenu>
           <NavLink to="/dashboardInvestor">Dashboard</NavLink>
           <NavLink to="/profileInvestor">Profile</NavLink>
-          <NavLink to="/projects">Projects</NavLink>
+          <NavLink to="/AllProjectInvestor">Projects</NavLink>
+          <NavLink to="/Coachs">Coachs</NavLink>
+          <NavLink to="/Events">Events</NavLink>
+
+
           <button className='button' onClick={onLogoutInvestor}>Logout</button>
           
         </NavMenu>

@@ -175,7 +175,7 @@ const onSubmit = async (e) => {
             <div className="userShowBottom">
               <span className="userShowTitle">Investement Information</span>
               <div className="userShowInfo">
-                <p>Avount type </p><span className="userShowInfoTitle">: {toRender.accountType}</span>
+                <p>Account type </p><span className="userShowInfoTitle">: {toRender.accountType}</span>
               </div>
               <div className="userShowInfo">
               <p>Status </p><span className="userShowInfoTitle">: {status()} </span>
