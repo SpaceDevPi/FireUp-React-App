@@ -47,7 +47,7 @@ date_modifier = new Date(date).toLocaleDateString()
 
       <Wrapper>
         <ImgContainer>
-          <Image src={"../../images/"+toRender.images} />
+          <Image src={`http://localhost:5000/uploads/${toRender.images}`} />
         </ImgContainer>
         <InfoContainer>
           <Title>{toRender.title} </Title>

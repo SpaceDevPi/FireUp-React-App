@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Dropzone from 'react-dropzone';
 import Axios from 'axios';
+import AddIcon from '@mui/icons-material/Add';
 function FileUpload(props) {
 
     const [Images, setImages] = useState([])
@@ -14,7 +15,7 @@ function FileUpload(props) {
         formData.append("file", files[0])
         //save the Image we chose inside the Node Server 
         Axios.post('http://localhost:5000/api/project/uploadImage', formData, config)
-        .then(response => {
+            .then(response => {
                 if (response.data.success) {
 
                     setImages([...Images, response.data.image])
@@ -36,7 +37,7 @@ function FileUpload(props) {
         setImages(newImages)
         props.refreshFunction(newImages)
     }
-console.log("images names : " + Images[0])
+
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Dropzone
@@ -54,8 +55,7 @@ console.log("images names : " + Images[0])
                         {console.log('getRootProps', { ...getRootProps() })}
                         {console.log('getInputProps', { ...getInputProps() })}
                         <input {...getInputProps()} />
-                        <p type="plus" style={{ fontSize: '3rem' }} >
-                            add pic</p>
+                        <AddIcon type="plus" style={{ fontSize: '3rem' }} />
 
                     </div>
                 )}
@@ -64,6 +64,7 @@ console.log("images names : " + Images[0])
             <div style={{ display: 'flex', width: '350px', height: '240px', overflowX: 'scroll' }}>
 
                 {Images.map((image, index) => (
+                    
                     <div onClick={() => onDelete(image)}>
                         <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`http://localhost:5000/uploads/${image}`} alt={`productImg-${index}`} />
                     </div>

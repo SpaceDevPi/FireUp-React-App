@@ -6,7 +6,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { NavLink, useParams } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
-
+import PostAddIcon from '@mui/icons-material/PostAdd';
 export default function ManageMyProjects() {
     const navigate = useNavigate();
 
@@ -71,6 +71,10 @@ export default function ManageMyProjects() {
                                           <button className="btn btn-success"  onClick={()=>navigate('/explore/projectdetail/'+element._id)}><RemoveRedEyeIcon /></button>
                                                      <button className="btn btn-primary" onClick={()=>navigate('/editproject/'+element._id)}><CreateIcon /></button>
                                                     <button className="btn btn-danger"   onClick={() => deleteProject(element._id)}><DeleteOutlineIcon /></button>
+                                                    {/* <button className="btn btn-primary"  onClick={()=>navigate('/managemyprojects/createpost/'+element.title +'/'+element._id)}><PostAddIcon /></button> */}
+                                                    <button className="btn btn-primary"  onClick={()=>navigate('/managemyprojects/managemyposts/'+element.title +'/'+element._id)}><PostAddIcon /></button>
+
+                                                    
                                                 </td>
                                             </tr>
                                         </>

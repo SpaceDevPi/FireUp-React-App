@@ -6,8 +6,8 @@ import "./CreateProject.css";
 import { queryApi } from '../../../utils/queryApi';
 import { useNavigate } from "react-router-dom";
 import { Category } from "../Section/Datas";
-
-export default function EditProject() {
+import Axios from 'axios';
+export default function EditProject(props) {
 
     const navigate = useNavigate();
     const {id} = useParams();
@@ -27,25 +27,25 @@ export default function EditProject() {
     place:""
 
   });
-
-  useEffect(()=>{
-    async function fetchProject() {
-      const [res,err] = await queryApi('project/project/'+id);
-      if(res){
-        setFormData({title:res.title, description:res.description, email:res.email,end_date:res.end_date,amount_to_collect:res.amount_to_collect,images:res.images, offering_type:res.offering_type,category:res.category,price_per_share:res.price_per_share,place:res.place})
-      }
-      else console.log(err)
+  async function fetchProject() {
+    const [res,err] = await queryApi('project/project/'+id);
+    if(res){
+      setFormData({title:res.title, description:res.description, email:res.email,end_date:res.end_date,amount_to_collect:res.amount_to_collect,images:res.images, offering_type:res.offering_type,category:res.category,price_per_share:res.price_per_share,place:res.place})
     }
+    else console.log(err)
+  }
+  useEffect(()=>{
+  
     fetchProject();
   },[id])
 
 
 
-  const { title , description, email,end_date,amount_to_collect, offering_type,category,price_per_share,place} = formData;
+  const { title , images,description, email,end_date,amount_to_collect, offering_type,category,price_per_share,place} = formData;
 
 
-  const onChangeFile = (e) =>
-  setFormData({ ...formData, images: e.target.File[0] });
+  // const onChangeFile = (e) =>{
+  //   setFormData({ ...formData, images: e.target.files[0].name });}
 
 const onChange = (e) =>
   setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -74,6 +74,13 @@ if(end_date!=null)
 
 // const date_modified = end_date.toISOString().split('T')[0]
 console.log("modifie "+date_modified)
+
+
+
+
+
+
+
   return (
   <>
     <Container>
@@ -153,8 +160,17 @@ console.log("modifie "+date_modified)
                         <label for="exampleInputPassword1" class="form-label">Description</label>
                         <textarea  name="description" value={description}  onChange={(e) => onChange(e)} placeholder="Describe your project"className="form-control" id="" cols="30" rows="5"></textarea>
                     </div>
+                    <label for="exampleInputPassword1" class="form-label">Image</label>
+                              <div style={{ display: 'flex', width: '350px', height: '240px' }}>
 
-                    <button type="submit"  disabled={showLoader} class="newUserButton">Edit </button>
+    
+<div >
+    <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`http://localhost:5000/uploads/${images}`} />
+</div>
+
+
+</div>                <div>
+                    <button type="submit"  disabled={showLoader} class="newUserButton">Edit </button></div>
                     <br></br>
                 </div>
             </form>

@@ -1,0 +1,92 @@
+/* .ftco-animate {
+    opacity: 5;
+    visibility: hidden; }
+ */
+
+    
+.block-20 {
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+    height: 250px;
+    width: 100%;
+    position: relative;
+    display: block;
+    margin-bottom: 20px; }
+  
+  @media (min-width: 768px) {
+    .blog-entry {
+      margin-bottom: 60px; } }
+  
+  @media (max-width: 767.98px) {
+    .blog-entry {
+      margin-bottom: 30px; } }
+  
+  .blog-entry .text {
+    position: relative;
+    border-top: 0;
+    border-radius: 2px;
+    width: 100%; }
+    .blog-entry .text .tag {
+      color: #b3b3b3; }
+    .blog-entry .text .heading {
+      font-size: 22px;
+      margin-bottom: 16px; }
+      .blog-entry .text .heading a {
+        color: #000000; }
+        .blog-entry .text .heading a:hover, .blog-entry .text .heading a:focus, .blog-entry .text .heading a:active {
+          color: #207dff; }
+    .blog-entry .text .meta-chat {
+      color: #fe5f55; }
+    .blog-entry .text .read {
+      color: #000000;
+      font-size: 14px; }
+  
+  .blog-entry .meta > div {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px; }
+    .blog-entry .meta > div a {
+      color: #fe5f55;
+      font-size: 12px; }
+      .blog-entry .meta > div a:hover {
+        color: black; }
+  
+
+        
+.heading-section .subheading {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.3);
+    color: #207dff;
+    letter-spacing: 2px;
+    font-weight: 600; }
+  
+  .heading-section h2 {
+    line-height: 1.2;
+    font-size: 44px;
+    font-weight: 700; }
+    .heading-section h2 span {
+      color: #207dff; }
+    .heading-section h2 span.number {
+      color: #207dff; }
+    @media (max-width: 767.98px) {
+      .heading-section h2 {
+        font-size: 28px; } }
+  
+  .heading-section.heading-section-white .subheading {
+    color: rgba(255, 255, 255, 0.9) !important; }
+  
+  .heading-section.heading-section-white h2 {
+    color: #fff; }
+  
+  .heading-section.heading-section-white p {
+    color: rgba(255, 255, 255, 0.9); }
+  

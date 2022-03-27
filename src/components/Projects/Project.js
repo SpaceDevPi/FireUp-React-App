@@ -81,7 +81,7 @@ trigger the hook. */
       <h3>{project.title} </h3>
       <Container  onClick={routeChange}> 
      
-      <img src={`${process.env.REACT_APP_API_URL_UPLOADS}/${project.images}`}/>     
+      <img src={`http://localhost:5000/uploads/${project.images}`}/>     
 
       <Info>
      
