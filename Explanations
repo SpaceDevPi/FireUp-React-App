@@ -1,0 +1,10 @@
+STEPS :
+step 1 = npm install react-icons
+step 2 = npm install react-router-dom
+step 3 = npm start 
+step 4 = adding the adequate css content "App.css" 
+step 5 = addin the "redirects" file that will help later on with the hosting specially on netlify
+step 6 = adding the "images" folder 
+step 7 = adding the "data" json file 
+step 8 =  we will e creating a bunch of functional componenets only the single event componenet will be a class based componenet 
+
