@@ -1,7 +1,9 @@
 import { radioClasses } from "@mui/material";
 import React from "react";
+import styled from "styled-components";
 
-function FormSecondStep ({ formData, setFormData }) {
+
+function FormSecondStep ({ formData, setFormData , formErrors }) {
   return (
     <div className="sign-up-container">
       <input
@@ -13,6 +15,8 @@ function FormSecondStep ({ formData, setFormData }) {
           setFormData({ ...formData, email: event.target.value })
         }
       />
+            <FormErrors>{formErrors.email}</FormErrors>
+
       <input
             className="input"
 
@@ -23,6 +27,8 @@ function FormSecondStep ({ formData, setFormData }) {
           setFormData({ ...formData, password: event.target.value })
         }
       />
+            <FormErrors>{formErrors.password}</FormErrors>
+
       <input
         type="text"
         className="input"
@@ -33,6 +39,8 @@ function FormSecondStep ({ formData, setFormData }) {
           setFormData({ ...formData, phoneNumber: event.target.value })
         }
       />
+            <FormErrors>{formErrors.phoneNumber}</FormErrors>
+
       <input
         type="text"
         className="input"
@@ -43,11 +51,18 @@ function FormSecondStep ({ formData, setFormData }) {
           setFormData({ ...formData, adress: event.target.value })
         }
       />
+            <FormErrors>{formErrors.adress}</FormErrors>
+
     </div>
   );
 }
 
 export default FormSecondStep;
+
+const FormErrors= styled.div`
+color : #f74b1b;
+`;
+
 
 // import React from "react";
 // import { Field } from "formik";

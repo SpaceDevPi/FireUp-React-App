@@ -12,8 +12,11 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { login, loginInvestor, reset } from '../../services/auth/authSlice';
 import Spinner from '../../components/Spinner';
+import { GoogleLogin } from 'react-google-login';
+
  
 function LoginForm() {
+ 
 
  // eslint-disable-next-line react-hooks/rules-of-hooks
  const [formData, setFormData] = React.useState({
@@ -83,8 +86,9 @@ const onSubmit = (e) => {
   // } 
         
   //   }
-
-
+  const responseGoogle = async (response)=> {
+    console.log(response)
+  }
 
   return (
 
@@ -157,7 +161,16 @@ const onSubmit = (e) => {
     Submit
   </button>
 </Form> 
+<div className="social">
+                <GoogleLogin
+                    clientId="1038694018186-j755gahor1ug0frbtpm8i9ljp9h7jn5n.apps.googleusercontent.com"
+                    buttonText="Login with google"
+                    onSuccess={responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                />
 </div>
+</div>
+
 <Col>
 New Investor? <Link to="/RegestrationInvestor">Register Here</Link>
 </Col>

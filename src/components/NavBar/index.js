@@ -16,6 +16,8 @@ import logo from '../../assets/images/logo.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, logoutInvestor , reset} from '../../services/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import {useApi} from '../../hooks/useApi'
+import {queryApi} from '../../utils/queryApi'
 
 
 //const pages = ['Explore Investments', 'Get Funding', 'Blog'];
@@ -30,11 +32,56 @@ import {
     NavBtnLink,
   } from './NavbarElements';
 
-const Navbar = ({toggle}) => {
+
+
+function Navbar  ({toggle})  {
+  const { investor } = useSelector((state) => state.auth);
+  if (investor){
+   var  id= investor._id
+  }else {
+    var id = ""
+  }
+
+  const [toRender,err,reload] = useApi('investors/investorId/'+id);
+  const [formData, setFormData] = useState({
+    username:"",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      phoneNumber:"", 
+      sexe: "",
+      datOfBirth : "",
+      adress: "",
+      status:"", 
+      accreditationForm:"",
+      centerOfInterest :"" ,
+      accountType :""
+  });
+  async function fetchData() {
+    const [res, err] = await queryApi("investors/investorId/" + investor._id);
+    setFormData({
+      username: toRender.username,
+      firstName: toRender.firstName,
+      lastName: toRender.lastName ,
+      email: toRender.email,
+      password: toRender.password,
+      phoneNumber: toRender.phoneNumber, 
+      sexe: toRender.sexe,
+      datOfBirth : toRender.datOfBirth ,
+      adress: toRender.adress,
+      status: toRender.status, 
+      accreditationForm: toRender.accreditationForm,
+      centerOfInterest : toRender.centerOfInterest,
+      accountType : toRender.accountType
+    });
+  }
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {user} = useSelector((state) => state.auth);
-  const {investor} = useSelector((state) => state.auth);
+
+  
 
   // const {user, setUser} = useState(false);
 
@@ -43,19 +90,23 @@ const Navbar = ({toggle}) => {
     dispatch(reset());
     navigate('/');
   }
-  
   const onLogoutInvestor = () => {
     dispatch(logoutInvestor());
     dispatch(reset());
     navigate('/');
   }
+//console.log(investor)
+const test=()=>{
 
+}
   const renderMenu = () => {
     if (user) {
       return (
       
         <NavMenu>
-          <NavLink to="/dashboard">Dashboard</NavLink>
+
+          <NavLink to="/dashboard">
+            Dashboard</NavLink>
           <NavLink to="/profile">Profile</NavLink>
           <NavLink to="/projects">Projects</NavLink>
           <button onClick={onLogout}>Logout</button>
@@ -66,10 +117,21 @@ const Navbar = ({toggle}) => {
 
       
     }if (investor) {
+
+       if(toRender){
+        console.log(toRender)
       return (
       
         <NavMenu>
-          <NavLink to="/dashboardInvestor">Dashboard</NavLink>
+          <NavLink to="/dashboardInvestor">
+            <div>
+            <div className='dashbordNav' onClick={test}>
+             <img src={toRender.image} className='imageNavBar'/> 
+
+            Dashboard  {investor.name}
+
+            </div>
+            </div></NavLink>
           <NavLink to="/profileInvestor">Profile</NavLink>
           <NavLink to="/AllProjectInvestor">Projects</NavLink>
           <NavLink to="/Coachs">Coachs</NavLink>
@@ -79,11 +141,12 @@ const Navbar = ({toggle}) => {
           <button className='button' onClick={onLogoutInvestor}>Logout</button>
           
         </NavMenu>
-      );
+      );}}
       
 
       
-    }else {
+    //}
+    else {
       return (
         <><NavMenu>
           <NavLink to="/explore">Explore Investments</NavLink>

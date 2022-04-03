@@ -1,7 +1,8 @@
 import { radioClasses } from "@mui/material";
 import React from "react";
+import styled from "styled-components";
 
-function FormFirstStep({ formData, setFormData }) {
+function FormFirstStep({ formData, setFormData,formErrors }) {
   return (
     <div className="personal-info-container">
       <input
@@ -14,6 +15,7 @@ function FormFirstStep({ formData, setFormData }) {
           setFormData({ ...formData, username: e.target.value });
         }}
       />
+      <FormErrors>{formErrors.username}</FormErrors>
       <input
         className="input"
         type="text"
@@ -23,6 +25,8 @@ function FormFirstStep({ formData, setFormData }) {
           setFormData({ ...formData, firstName: e.target.value });
         }}
       />
+            <FormErrors>{formErrors.firstName}</FormErrors>
+
       <input
         type="text"
         className="input"
@@ -32,6 +36,8 @@ function FormFirstStep({ formData, setFormData }) {
           setFormData({ ...formData, lastName: e.target.value });
         }}
       />
+            <FormErrors>{formErrors.lastName}</FormErrors>
+
       <label>Gender</label>
       <div>
         <input type="radio" value="Male" name="formData.sexe" onChange={(e) => {
@@ -42,18 +48,26 @@ function FormFirstStep({ formData, setFormData }) {
         }} /> Female
         
       </div>
+      <FormErrors>{formErrors.sexe}</FormErrors>
+
       <input type="date" date='yyyy-dd-MM'         className="input"
   onChange={(e) => {
           setFormData({ ...formData, datOfBirth: e.target.value });
         }} />
+              <FormErrors>{formErrors.datOfBirth}</FormErrors>
+
     </div>
+    
   );
 }
+
 
 export default FormFirstStep;
 
 
-
+const FormErrors= styled.div`
+color : #f74b1b;
+`;
 
 // import React from "react";
 // import { Field } from "formik";

@@ -1,15 +1,170 @@
 import React from 'react'
 import styled from "styled-components";
-import { FormInvestir } from './FormInvestir';
+import  { useState } from "react";
+import { Form, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { sizeWidth } from '@mui/system';
+import { queryApi } from "../../utils/queryApi";
+import { useApi } from "../../hooks/useApi";
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
  function InvestementForm ()  {
+  const { investor } = useSelector((state) => state.auth);
+  const { id } = useParams();
+  const [project,err,reload] = useApi('project/project/'+id);
+  if( project != null)
+  {
+
+const title = project.title;
+  }
+
+
+      const notify = () => toast("thanks For Your Investement!");
+
+
+  
+const ShowInvestement=async(e)=>{
+  e.preventDefault(); 
+  try {
+      
+      // setLoading(true); 
+       
+       localStorage.setItem('userInfo', JSON.stringify(formData))  
+     //  console.log(formData)
+      const [res , err ] = await queryApi('investement/newInvestment', formData , 'POST' , false );
+      // alert("check your mail");
+      toast.success("thanks for your investment")
+
+      }
+     
+  catch (error) {
+      //setError(error.response.data.message); 
+      
+  }
+
+      
+}
+const [formProject, setFormProject] = useState({
+  title:"", 
+  montantTotal : "",
+  montantRestant : ""
+});
+
+  const [formData, setFormData] = useState({
+      idProject:"",
+      idInvestisseur: "",
+      monatantTotal: "",
+      montantInvesti: "",
+      dateInvestissement: "",
+      dateFin:"", 
+      MethodeInvestissement: "",
+      
+    });
+    if( project != null){
+
+    formData.dateFin=project.end_date; 
+    formData.monatantTotal=project.amount_to_collect; 
+    formData.idInvestisseur=investor._id; 
+    formData.idProject= project._id; 
+    formProject.title= project.title ;
+    formProject.monatantTotal=project.amount_to_collect; 
+    if(project.montantRestant == -1){
+      formProject.montantRestant= project.amount_to_collect; 
+    }
+    else{formProject.montantRestant = project.montantRestant;}
+    
+
+    }
+    if(formProject.monatantRestant==-1) {
+      formProject.monatantRest= formProject.monatantTotal
+
+    }
+  //  console.log(formData);
+    
+const Investement = ()=>{
+if(document.getElementById('InvestementForm') != null){
+const investement_Form = document.getElementById('InvestementForm').value;
+if (investement_Form=="crowdlending"){
+  return `Thanks for your investement you will be able to receive ${formData.montantInvesti *1.05}$ after 2 years`
+}
+if (investement_Form=="crowdequity"){
+  return `Thanks for your investement you have ${(formData.montantInvesti / formData.monatantTotal)*100}% of the profit`
+
+}  if (investement_Form=="donation"){
+
+  return 'thanks for your donation 🙏! '
+}}
+
+
+
+}
+
+
+
   return (
     <Container>
             
-    <img src="project.png" />
+    <img src="/project.png" />
     <div class="MultiStep">
-        <FormInvestir/>
-   
+    <div className="form-Login" >
+
+<div className="progressbar">
+      <div
+        style={{ width: "100%" }}
+      ></div>
+    </div>
+    <div className="FormINvestementCOntainer">
+      <div className="personal-info-container">
+      
+        <label><h1>Investir</h1></label>
+        <div>
+     <h3>Project Title : {formProject.title}</h3> 
+     <h3>Total amount  : {formProject.monatantTotal} </h3>
+     <h3>Remaining amount : {formProject.montantRestant - formData.montantInvesti} </h3>
+     <h3>End Of Investement : {new Date (formData.dateFin).toLocaleDateString()} </h3>
+     </div>
+    <Form className="personal-info-container"  >
+      <div className='personal-info-container'>
+    <label><h3>Monatant</h3> </label>
+
+        <input type="number" min="0" max= {formProject.montantRestant} className='input' onChange={(e) => {
+      setFormData({ ...formData, montantInvesti: e.target.value });
+    }}/>
+    <label><h3>Methode d'investissement</h3></label>
+ 
+    <select className="select input" value={formData.MethodeInvestissement} id="InvestementForm"   onChange={(e) => {
+      setFormData({ ...formData, MethodeInvestissement: e.target.value });
+    }}>
+    
+<option value="" >Options</option>
+ <option value="donation" >donation</option>
+<option value="crowdlending">crowdlending </option>
+<option value="crowdequity">crowdequity</option>
+ </select>
+
+ <div className='Gain' >
+    <div>{Investement()}</div>
+
+ </div>
+
+
+
+  
+  <button  className="button" type="submit" onClick={ShowInvestement}>
+    Submit
+  </button>
+  </div>
+</Form> 
+
+</div>
+
+</div>
+</div>
+
     </div>
 </Container>
   )

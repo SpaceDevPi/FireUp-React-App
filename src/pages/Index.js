@@ -25,6 +25,14 @@ import { InvestorProject } from '../components/ListeProjectInvestor/InvestorProj
 import { AllProjectInvestor } from '../components/ListeProjectInvestor/AllProjectInvestor';
 
 
+
+import ProjectDetailPage from '../components/Projects/ProjectDetailPage'
+import CreateProject from '../components/Projects/ManageProjectContractor/CreateProject';
+import ManageMyProjects from '../components/Projects/ManageProjectContractor/ManageMyProjects';
+import EditProject from '../components/Projects/ManageProjectContractor/EditProject';
+import CreatePost from '../components/Projects/ManageUpdatesPost/CreatePost';
+
+
 const Index = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -47,12 +55,18 @@ const Index = () => {
         <Route path="/RegestrationInvestor" element={<RegisterInvestisor/>}/>
         <Route path="/dashboardInvestor" element={<InvestisorDashbord/>}/>
         <Route path="/LoginInvestor" element={<InvestorLogin/>}/>
-        <Route path="/InvestementProject" element={<InvestementForm/>}/>
+        <Route path="/InvestementProject/:id" element={<InvestementForm/>}/>
         <Route path="/dashboard" element={<ContractorDashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profileInvestor" element={<ProfileInvestor />} />
         <Route path="/projectsInvestor" element={<InvestorProject/>}/>
         <Route path="/AllProjectInvestor" element={<AllProjectInvestor/>}/>
+        <Route path="/AllProjectInvestor/projectdetail/:id" element={<ProjectDetailPage />} />
+        <Route path="/addproject" element={<CreateProject />} />
+        <Route path="/managemyprojects" element={<ManageMyProjects />} />
+        <Route path="/editproject/:id" element={<EditProject />} />
+        <Route path="/managemyprojects/createpost/:idprojet" element={<CreatePost />} />
+        
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

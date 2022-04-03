@@ -14,6 +14,9 @@ import { sizeWidth } from '@mui/system';
  function MultiStep () {
   const history = useNavigate ();
 
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
   const [page, setPage] = useState(0);
   const [formData, setFormData] = useState({
     username:"",
@@ -30,20 +33,76 @@ import { sizeWidth } from '@mui/system';
     centerOfInterest :"" ,
     accountType :""
   });
+
+
+  
+
+
+
+
+
   const FormTitles = ["Personal", "Professionnel ", "Investement" , "Center Of Interest"];
   const [errors,setErrors] = useState({visbile:false,message:""});
   const {username,firstName , lastName , email , password , phoneNumber , sexe ,datOfBirth , adress ,status ,accreditationForm ,centerOfInterest ,accountType} = formData; 
 
+
+  const validate = values => {
+    const errors = {};
+    if (!username) {
+        errors.username = "User name is required ";
+    }
+    if (!firstName) {
+      errors.firstName = "First name is required";
+  }
+    if (!lastName) {
+        errors.lastName = "Last name is required";
+    }
+    if (!email) {
+        errors.email = "Email is required";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+        errors.email = "Invalid email address";
+    }
+    if (!phoneNumber) {
+        errors.phoneNumber = "Phone number is required";
+    }else if ((phoneNumber.length<8 && ![0-9])){
+      errors.phoneNumber="Phone number should have 8 number"
+    }
+    if (!password) {
+        errors.password = "passeword is required";
+    }
+    if (!adress) {
+        errors.adress = "adresse is required";
+    }
+    if (!status) {
+        errors.status = "status is required";
+    }
+    if (!accreditationForm) {
+        errors.accreditationForm = "Required";
+    }
+    if (!centerOfInterest) {
+        errors.centerOfInterest = "Required";
+    }
+    
+    
+
+    return errors;
+};
+
+
+
+
   const PageDisplay = () => {
+    
+
     if (page === 0) {
-      return <FormFirstStep formData={formData} setFormData={setFormData} />;
+      return <FormFirstStep formData={formData} setFormData={setFormData} formErrors={formErrors} />;
     } else if (page === 1) {
-      return <FormSecondStep formData={formData} setFormData={setFormData} />;
+      return <FormSecondStep formData={formData} setFormData={setFormData} formErrors={formErrors} />;
     }else if (page === 2) {
-      return <FormThirdStep formData={formData} setFormData={setFormData} />
+      return <FormThirdStep formData={formData} setFormData={setFormData} formErrors={formErrors} />
       ;
     } else {
-      return <FormFour formData={formData} setFormData={setFormData} /> ;
+      return <FormFour formData={formData} setFormData={setFormData} formErrors={formErrors} /> ;
     }
   };
 
@@ -74,7 +133,11 @@ import { sizeWidth } from '@mui/system';
         <button
         className='button'
           onClick={async() => {
-            if (page === FormTitles.length - 1) {
+            setIsSubmit(true)
+            console.log("is submit " +isSubmit )
+            setFormErrors(validate());
+            console.log("(Object.keys(formErrors).length : " +Object.keys(formErrors).length )
+            if (page === FormTitles.length - 1 ) {
             //  alert("FORM SUBMITTED");
               console.log(formData);
               const [res , err ] = await queryApi('investors/newInvestor', formData , 'POST' , false );

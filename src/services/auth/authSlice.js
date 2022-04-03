@@ -44,8 +44,8 @@ export const loginInvestor = createAsyncThunk('authInvestor/loginInvestor', asyn
     }
 })
 
-export const logoutInvestor = createAsyncThunk('authInvestor/logout', async() => {
-    await authService.logout();
+export const logoutInvestor = createAsyncThunk('authInvestor/logoutInvestor', async() => {
+    await authService.logoutInvestor();
 })
 
 

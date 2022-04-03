@@ -14,7 +14,7 @@ import {
   import axios from 'axios';
   import {useApi} from '../../hooks/useApi'
   import {queryApi} from '../../utils/queryApi'
-
+  import Axios from 'axios';
   
   
   export default function Profile() {
@@ -33,7 +33,7 @@ import {
 //const a = InvestorProfile;
 const id = investor._id;
 const [formData, setFormData] = useState({
-  username:"",
+    username:"",
     firstName: "",
     lastName: "",
     email: "",
@@ -45,7 +45,8 @@ const [formData, setFormData] = useState({
     status:"", 
     accreditationForm:"",
     centerOfInterest :"" ,
-    accountType :""
+    accountType :"", 
+    image : ""
 });
 
           console.log(id)
@@ -101,10 +102,12 @@ async function fetchData() {
     status: toRender.status, 
     accreditationForm: toRender.accreditationForm,
     centerOfInterest : toRender.centerOfInterest,
-    accountType : toRender.accountType
+    accountType : toRender.accountType,
+    image : toRender.image
+    
   });
 }
-const { username, firstName, lastName,email ,password,phoneNumber,sexe,datOfBirth,adress,accreditationForm,centerOfInterest,accountType} = formData;
+const { username, firstName, lastName,email ,password,phoneNumber,sexe,datOfBirth,adress,accreditationForm,centerOfInterest,accountType, image} = formData;
 
 
 
@@ -122,6 +125,32 @@ const onSubmit = async (e) => {
     
   } else navigate("/dashboardInvestor");
 };
+const [Images, setImages] = useState('')
+  const onChangeFile = (e) =>{
+  onDrop(e.target.files)
+    setFormData({ ...formData, images: e.target.files[0].name });
+
+}
+
+const onDrop = (files) => {
+
+  let formData = new FormData();
+  const config = {
+      header: { 'content-type': 'multipart/form-data' }
+  }
+  formData.append("file", files[0])
+  //save the Image we chose inside the Node Server 
+  Axios.post('http://localhost:5000/api/investors/uploadImage', formData, config)
+      .then(response => {
+          if (response.data.success) {
+
+              setImages(files[0].name)
+
+          } else {
+              alert('Failed to save the Image in Server')
+          }
+      })
+}
 
   
     return (
@@ -298,13 +327,17 @@ const onSubmit = async (e) => {
                 <div className="userUpdateUpload">
                   <img
                     className="userUpdateImg"
-                    src={toRender.image}
+                    src={`http://localhost:5000/uploads/investor/${Images}`}
                     alt=""
                   />
-                  <label htmlFor="file">
+                  {/* <label htmlFor="file">
                     <Publish className="userUpdateIcon" />
-                  </label>
-                  <input type="file" id="file" style={{ display: "none" }} />
+                  </label> */}
+
+                  <input type="file"  name="image"  
+                  onChange={(e) => {onChangeFile(e); setFormData({ ...formData, image: e.target.value });}} placeholder="Image" className="form-control"/>
+             
+                  {/* <input type="file" id="file" style={{ display: "none" }} /> */}
                 </div>
                 <button className="button" >Update</button>
               </div>

@@ -6,7 +6,7 @@ import WelcomeWidget from './widgets/WelcomeWidget';
 import AchievementWidget from './widgets/AchibvementWidget';
 import Link from 'react-scroll/modules/components/Link';
 import { NavLink } from 'react-router-dom';
-
+import ProjectDashbord from  "../Projects/ProjectDashbord";
 import { FiSearch } from "react-icons/fi";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +15,7 @@ import {useApi} from '../../hooks/useApi'
 import {queryApi} from '../../utils/queryApi'
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import PrivacyTipOutlinedIcon from '@mui/icons-material/PrivacyTipOutlined';
+import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
 
 
 export default function MainContent  () {
@@ -50,6 +51,16 @@ return "I have individual net worth $200,000 and I have sufficient knowledge to 
   const [toRender,err,reload] = useApi('investors/investorId/'+investor._id);
   const [errors, setErrors] = useState({ visbile: false, message: "" });
 
+
+  const [projects,errr,reloadd] = useApi('investement/getInvestmentsByInvestor/'+investor._id );
+  const deleteProject= async (id)=>{
+      // const[,err] = await queryApi('project/'+id,{},'DELETE',false);
+      if(errr){
+          console.log(errr);
+      } else await reloadd();
+  }
+  const [Skip, setSkip] = useState(0)
+
   
 
   return (
@@ -73,7 +84,25 @@ return "I have individual net worth $200,000 and I have sufficient knowledge to 
     <Container>
     <span className ="userShowUserTitle">My Projects : </span>
     <NavLink to='/projectsInvestor'>
+      <div>
+            {/* <FilterContainer>
+              <Filter>
+        <CheckBox  list={category}
+                        handleFilters={filters => handleFilters(filters, "category")}/>
+
+        </Filter>
+        </FilterContainer> */}
+        <Containerr> {
+          projects ? projects.map((project, index) => (
+                <ProjectDashbord deleteProject={deleteProject} project={project}
+                    key={index}></ProjectDashbord>
+            )): <h1>Products not found</h1>
+        } </Containerr>
+      </div>
+
+
     <button className='button dashbordBotton' > My Projects </button>
+
     </NavLink>
     </Container>
     <Container>
@@ -114,9 +143,8 @@ const Container = styled.div`
 `;
 
 const SubContainer = styled.div`
-  margin: 0.5rem 0;
-  height: 100%;
-  width: 100%;
+  height: 10%;
+  width: 65%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -124,16 +152,13 @@ const SubContainer = styled.div`
     height: 100%;
   }
 `;
-const SectionOne = styled.div`
-  display: flex;
-  justify-content: space-between;
-  height: 40%;
-  gap: 5rem;
-  width: 100%;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
-    flex-direction: column;
-    align-items: center;
-    height: max-content;
-  }
+
+
+const Containerr = styled.div`
+    padding: 10px;
+    display: flex;
+    flex-wrap: column;
+    justify-content: space-between;
+    
 `;
 
