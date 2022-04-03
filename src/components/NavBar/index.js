@@ -135,7 +135,7 @@ const test=()=>{
           <NavLink to="/profileInvestor">Profile</NavLink>
           <NavLink to="/AllProjectInvestor">Projects</NavLink>
           <NavLink to="/Coachs">Coachs</NavLink>
-          <NavLink to="/Events">Events</NavLink>
+          <NavLink to="/HomeEvent">Events</NavLink>
 
 
           <button className='button' onClick={onLogoutInvestor}>Logout</button>

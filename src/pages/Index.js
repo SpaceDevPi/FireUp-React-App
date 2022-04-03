@@ -23,14 +23,18 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { InvestorProject } from '../components/ListeProjectInvestor/InvestorProject';
 import { AllProjectInvestor } from '../components/ListeProjectInvestor/AllProjectInvestor';
-
-
-
+import HomeEvent from '../components/events/pages/HomeEvent';
 import ProjectDetailPage from '../components/Projects/ProjectDetailPage'
 import CreateProject from '../components/Projects/ManageProjectContractor/CreateProject';
 import ManageMyProjects from '../components/Projects/ManageProjectContractor/ManageMyProjects';
 import EditProject from '../components/Projects/ManageProjectContractor/EditProject';
 import CreatePost from '../components/Projects/ManageUpdatesPost/CreatePost';
+
+
+import Events from "../components/events/pages/AllEvents";
+import SingleEvent from "../components/events/pages/SingleEvent";
+import BookNow from "../components/events/pages/BookNow";
+import TicketBooking from "../components/events/pages/TicketBooking";
 
 
 const Index = () => {
@@ -66,6 +70,12 @@ const Index = () => {
         <Route path="/managemyprojects" element={<ManageMyProjects />} />
         <Route path="/editproject/:id" element={<EditProject />} />
         <Route path="/managemyprojects/createpost/:idprojet" element={<CreatePost />} />
+        <Route path="/HomeEvent" element={<HomeEvent></HomeEvent>} />
+        <Route exact path="/events" element={<Events/>} />
+        <Route exact path="/events/:slug" element={<SingleEvent />} />
+        <Route exact path="/BookNow/:slug" element={<BookNow/>} />
+        <Route exact path="/TicketBooking" element={<TicketBooking/>} />
+        
         
 
         <Route path="*" element={<NotFoundPage />} />

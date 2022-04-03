@@ -1,0 +1,18 @@
+.container {
+  width: 60%;
+  margin-left:20% ; 
+  display: grid;
+  padding-bottom: 2%;
+  justify-content: center;
+  align-content: center; 
+  display: flex;
+  grid-template-columns: 40% 60%;
+  grid-template-areas: "cover content";
+  box-shadow: -2px 0px 33px 0px rgba(0, 0, 0, 0.75);
+}
+
+.img-fluid{
+  width: 100%;
+  margin-top:10%; 
+  margin-bottom:5%; 
+}

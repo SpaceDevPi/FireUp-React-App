@@ -18,55 +18,11 @@ export default function Projects() {
         } else await reload();
     }
     const [Skip, setSkip] = useState(0)
-    // const [Limit, setLimit] = useState(8)
-
-    // const [Filters, setFilters] = useState({
-    //     category: []
-       
-    // })
-
     
-
-
-    
-    
-    
-    // const showFilteredResults = (filters) => {
-    
-    //   const variables = {
-    //       skip: 0,
-    //       limit: Limit,
-    //       filters: filters
-    
-    //   }
-      
-    //   setSkip(0)
-    
-    // }
-    
-    // const handleFilters = (filters, category) => {
-    
-    //   const newFilters = { ...Filters }
-    
-    //   newFilters[category] = filters
-    
-    
-    
-    //   console.log(newFilters)
-    
-    //   showFilteredResults(newFilters)
-    //   setFilters(newFilters)
-    // }
 
     return (
         <div>
-            {/* <FilterContainer>
-              <Filter>
-        <CheckBox  list={category}
-                        handleFilters={filters => handleFilters(filters, "category")}/>
-
-        </Filter>
-        </FilterContainer> */}
+           
         <Container> {
           projects ? projects.map((project, index) => (
                 <Project deleteProject={deleteProject} project={project}

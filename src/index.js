@@ -5,13 +5,19 @@ import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
+import { EventProvider } from "../src/components/events/context";
 
 ReactDOM.render(
+  
   <React.StrictMode>
+        <EventProvider>
+
     <Provider store={store}>
+
       <App />
     </Provider>
-  
+    </EventProvider>
+
   </React.StrictMode>,
   document.getElementById('root')
 );
