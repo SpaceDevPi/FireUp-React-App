@@ -1,80 +1,125 @@
-import React from 'react';
-import { Field } from "formik";
-import TextField from "@material-ui/core/TextField";
+import React from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/bootstrap.css'
 
-export const FormStepOne = formikProps => {
-    const { errors, touched } = formikProps;
 
-    return (
-        <>
-            <Field 
-                name="firstName"
-                label="First Name *"
-                as = {TextField}
-                error = {touched.firstName && errors.firstName}
-                helperText = {touched.firstName && errors.firstName}
-            />
-            <Field
-                name="lastName"
-                label="Last Name *"
-                as = {TextField}
-                error = {touched.lastName && errors.lastName}
-                helperText = {touched.lastName && errors.lastName}
-            />
-            <Field
-                name="email"
-                label="Email *"
-                as = {TextField}
-                error = {touched.email && errors.email}
-                helperText = {touched.email && errors.email}
-            />
-            <Field
-                name="phone"
-                label="Phone number *"
-                as = {TextField}
-                error = {touched.phone && errors.phone}
-                helperText = {touched.phone && errors.phone}
-            />
-            <Field
-                name="adresse"
-                label="Adresse *"
-                as = {TextField}
-                error = {touched.adresse && errors.adresse}
-                helperText = {touched.adresse && errors.adresse}
-            />
-            <Field
-                name="city"
-                label="City *"
-                as = {TextField}
-                error = {touched.city && errors.city}
-                helperText = {touched.city && errors.city}
-            />
-            <Field
-                name="state"
-                label="State *"
-                as = {TextField}
-                error = {touched.state && errors.state}
-                helperText = {touched.state && errors.state}
-            />
-            <Field
-                name="zip"
-                label="Zip *"
-                as = {TextField}
-                error = {touched.zip && errors.zip}
-                helperText = {touched.zip && errors.zip}
-            />
-            
-            <Field
-                name="country"
-                label="Country *"
-                as = {TextField}
-                error = {touched.country && errors.country}
-                helperText = {touched.country && errors.country}
-            />
-            
+function FormStepOne({ formData, setFormData }) {
+  return (
+    <div className="Personal-info-container">
         
-        </>
-    )
+        <input
+            type="text"
+            className="input"
+            placeholder="Email..."
+            value={formData.email}
+            onChange={(e) => {
+            setFormData({ ...formData, email: e.target.value });
+            }}
+        />
+        <input
+            type="password"
+            className="input"
+            placeholder="Password..."
+            value={formData.password}
+            onChange={(e) => {
+            setFormData({ ...formData, password: e.target.value });
+            }}
+        />
+        <input
+            type="password"
+            className="input"
+            placeholder="Confirm Password..."
+            value={formData.confirmPassword}
+            onChange={(e) => {
+            setFormData({ ...formData, confirmPassword: e.target.value });
+            }}
+        />
+        <input
+                className="input"
+                type="text"
+                placeholder="First Name..."
+                value={formData.firstname}
+                onChange={(e) => {
+                setFormData({ ...formData, firstname: e.target.value });
+                }}
+            />
+            <input
+                type="text"
+                className="input"
+                placeholder="Last Name..."
+                value={formData.lastname}
+                onChange={(e) => {
+                setFormData({ ...formData, lastname: e.target.value });
+                }}
+            />
+            <DatePicker 
+                className="input"
+                placeholderText="Date of Birth"
+                selected={formData.birthday}
+                onChange={(date) => {
+                setFormData({ ...formData, birthday: date });
+                }}
+            />
+            <input
+                type="text"
+                className="input"
+                placeholder="Birthplace"
+                value={formData.villenaissance}
+                onChange={(e) => {
+                setFormData({ ...formData, villenaissance: e.target.value });
+                }}
+            />
+
+            
+            <PhoneInput
+                
+                country={'tn'}
+                value={formData.phone}
+                onChange={(e) => {
+                    setFormData({ ...formData, phone: e });
+                }}
+            />
+
+            <input
+                type="text"
+                className="input"
+                placeholder="Address..."
+                value={formData.address}
+                onChange={(e) => {
+                setFormData({ ...formData, address: e.target.value });
+                }}
+            />
+            <input
+                type="text"
+                className="input"
+                placeholder="City..."
+                value={formData.city}
+                onChange={(e) => {
+                setFormData({ ...formData, city: e.target.value });
+                }}
+            />
+            <input
+                type="text"
+                className="input"
+                placeholder="state..."
+                value={formData.state}
+                onChange={(e) => {
+                setFormData({ ...formData, state: e.target.value });
+                }}
+            />
+            <input
+                type="text"
+                className="input"
+                placeholder="Zip Code..."
+                value={formData.zip}
+                onChange={(e) => {
+                setFormData({ ...formData, zip: e.target.value });
+                }}
+            />
+    </div>
+  );
 };
 
-
+export default FormStepOne;

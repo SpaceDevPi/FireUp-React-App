@@ -106,10 +106,19 @@ const test=()=>{
         <NavMenu>
 
           <NavLink to="/dashboard">
-            Dashboard</NavLink>
+          <div>
+            <div className='dashbordNav' onClick={test}>
+
+            Dashboard  {user.firstname}
+
+            </div>
+            </div>
+          </NavLink>
           <NavLink to="/profile">Profile</NavLink>
-          <NavLink to="/projects">Projects</NavLink>
-          <button onClick={onLogout}>Logout</button>
+          {/* <NavLink to="/AllProjectInvestor">Projects</NavLink> */}
+          <NavLink to="/Coachs">Coachs</NavLink>
+          <NavLink to="/HomeEvent">Events</NavLink>
+          <button className='button' onClick={onLogout}>Logout</button>
           
         </NavMenu>
       );

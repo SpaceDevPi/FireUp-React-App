@@ -1,166 +1,197 @@
 import React, { useState } from 'react';
 import { Formik, Form } from "formik";
 //import Header from './Header';
-import { makeStyles } from "@material-ui/core/styles";
-import {FormStepOne} from './FormStepOne';
-import {FormStepTwo} from './FormStepTwo';
-import {FormStepThree} from './FormStepThree';
+import { Col } from "react-bootstrap";
+import FormStepOne from './FormStepOne';
+import FormStepTwo from './FormStepTwo';
 import FormSuccess from './FormSuccess';
+// import {FormStepThree} from './FormStepThree';
+// import FormSuccess from './FormSuccess';
+import { useNavigate  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import StepButton from './StepButton';
+import { useEffect } from 'react';
+import { FaUser } from 'react-icons/fa';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import './multi.css';
 
 
-const useStyles = makeStyles(theme => ({
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-}));
 
-const renderStep = (step, values, errors, touched) => {
+function MultiStep(){
+    
 
-    switch (step) {
-        case 1:
-            return <FormStepOne errors={errors} touched={touched} />;
-        case 2:
-            return <FormStepTwo errors={errors} touched={touched} />;
-        case 3:
-            return <FormStepThree errors={errors} touched={touched} />;
-        case 4:
-            return <FormSuccess values={values}/>;
-        default:
-            return <FormStepOne errors={errors} touched={touched} />;
-    }
-};
-
-const MultiStep = () => {
-    const [step, setStep] = useState(1);
-    const classes = useStyles();
-    const formData = {
+    const [page, setPage] = useState(0);
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+        confirmPassword: "",
         firstName: "",
         lastName: "",
-        email: "",
-        phone: "",
-        adresse: "",
-        city: "",
-        zip: "",
-        country: "",
+        birthday: "",
+        villenaissance: "",
+        phone:"", 
+        address: "",
         state: "",
-        company: "",
-        companyEmail: "",
-        companyPhone: "",
-        companyAdresse: "",
-        companyCity: "",
-        companyZip: "",
-        companyCountry: "",
-        companyState: "",
-        companyRegion: "",
-        companyType: "",
-        companySize: "",
-        companyDescription: "",
-        companyWebsiteUrl: "",
-        companyLegalDocument: "",
-        companyProofOfAddress: ""
+        companyname: "",
+        companyaddress: "",
+        companyzip: "",
+        companycity: "",
+        codephone: "",
+        companyphone: "",
+        companyemail: "",
+        companywebsite: "",
+        companysector: "",
+        companyservice: "",
+        companysize: "",
+
+    });
+    const FormTitles = ["Personal Details ", "Company Details ", "Confirmation "];
+    const [errors,setErrors] = useState({visbile:false,message:""});
+    const {
+        firstname, 
+        lastname, 
+        email, 
+        password, 
+        confirmPassword, 
+        phone, 
+        address, 
+        city, 
+        state, 
+        zip, 
+        companyName, 
+        companyAddress, 
+        companyZip, 
+        companyCity,
+        companyPhone,
+        companyEmail,
+        companyWebsite,
+        companySector,
+        companySize,
+        companyService,
+        birthday,
+        villenaissance,
+
+    } = formData; 
+
+    const PageDisplay = () => {
+        if (page === 0) {
+        return <FormStepOne formData={formData} setFormData={setFormData} />;
+        } else if (page === 1) {
+        return <FormStepTwo formData={formData} setFormData={setFormData} /> ;
+        }else {
+        return <FormSuccess formData={formData} setFormData={setFormData} />;
+        }
     };
 
-    const handleNext = () => setStep(step => step + 1);
 
-    const validate = values => {
-        const errors = {};
-        if (!values.firstName) {
-            errors.firstName = "Required";
-        }
-        if (!values.lastName) {
-            errors.lastName = "Required";
-        }
-        if (!values.email) {
-            errors.email = "Required";
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-            errors.email = "Invalid email address";
-        }
-        if (!values.phone) {
-            errors.phone = "Required";
-        }
-        if (!values.adresse) {
-            errors.adresse = "Required";
-        }
-        if (!values.city) {
-            errors.city = "Required";
-        }
-        if (!values.zip) {
-            errors.zip = "Required";
-        }
-        if (!values.country) {
-            errors.country = "Required";
-        }
-        if (!values.state) {
-            errors.state = "Required";
-        }
-        if (!values.company) {
-            errors.company = "Required";
-        }
-        if (!values.companyEmail) {
-            errors.companyEmail = "Required";
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.companyEmail)) {
-            errors.companyEmail = "Invalid email address";
-        }
-        if (!values.companyPhone) {
-            errors.companyPhone = "Required";
-        }
-        if (!values.companyAdresse) {
-            errors.companyAdresse = "Required";
-        }
-        if (!values.companyCity) {
-            errors.companyCity = "Required";
-        }
-        if (!values.companyZip) {
-            errors.companyZip = "Required";
-        }
-        if (!values.companyCountry) {
-            errors.companyCountry = "Required";
-        }
-        if (!values.companyState) {
-            errors.companyState = "Required";
-        }
-        if (!values.companyRegion) {
-            errors.companyRegion = "Required";
-        }
-        if (!values.companyType) {
-            errors.companyType = "Required";
-        }
-        if (!values.companySize) {
-            errors.companySize = "Required";
-        }
-        if (!values.companyDescription) {
-            errors.companyDescription = "Required";
-        }
-        if (!values.companyWebsiteUrl) {
-            errors.companyWebsiteUrl = "Required";
-        }
+    const navigate = useNavigate()
+
+
+
+
+    const onSubmit = () => {
         
 
-        return errors;
-    };
+        if(password !== confirmPassword) {
+        toast.error('Passwords do not match')
+        }else if( firstname === "" || lastname === "" || email === "" || password === "" || confirmPassword === "" || phone === "" || address === "" || city === "" || state === "" || zip === "" || companyName === "" || companyAddress === "" || companyZip === "" || companyCity === "" || companyPhone === "" || companyEmail === "" || companyWebsite === "" || companySector === "" || companySize === "" || companyService === "" || birthday === "" || villenaissance === ""){
+            toast.error('Please fill in all fields')
+        }else {
+        const entrepreneurData = {
+            email,
+            password,
+            firstname,
+            lastname,
+            birthday,
+            villenaissance,
+            phone,
+            address,
+            city,
+            state,
+            zip,
+            companyName,
+            companyAddress, 
+            companyZip, 
+            companyCity,
+            companyPhone,
+            companyEmail,
+            companyWebsite,
+            companySector,
+            companySize,
+            companyService
+        }
+        console.log(entrepreneurData);
+        axios.post('http://localhost:5000/api/entrepreneurs', entrepreneurData)
+        .then(res => {
+            console.log(res.data);
+            navigate('/signInContractor');
+        }).catch(err => {
+            console.log(err);
+            toast.error('Login Failed');
+        });
+        }
+    }
 
-  return (
-    <>
-        {/* <Header title="Finding Investors" /> */}
-        <Formik 
-            enableReinitialize
-            initialValues={{ ...formData }}
-            onSubmit={handleNext}
-            validate={validate}
-        >
-            {({ values, errors, touched }) => (
-                <Form className={classes.form}>
-                    {renderStep(step, values, errors, touched)}
-                    <StepButton step={step} />
-                </Form>
-            )}
-        </Formik>
-    </>
-  );
+
+    return (
+        <div className="msform">
+        
+        <ul id="progressbar">
+            <li className={page === 0 ? "active" : ""}> <strong> Personal Details </strong></li>
+            <li className={page === 1 ? "active" : ""}> <strong> Company Details </strong></li>
+            <li className={page === 2 ? "active" : ""}> <strong> Confirmation </strong></li>
+        </ul>
+        <div className="Progressbar">
+            <div
+                style={{ width: page === 0 ? "30%" : page === 1 ? "60%" : page === 2 ? "100%" : "100%" }}
+            ></div>
+        </div>
+        <br/>
+        <div className="Form-container">
+        <div className="header">
+            <h1 className="fs-title">{FormTitles[page]}</h1>
+            <h1 className="steps">Step {page+1} - 3</h1>
+
+        </div>
+        <div className="body">
+            {PageDisplay()}
+        </div>
+        <div className="footer">
+            <button className='button'
+            disabled={page === 0}
+            onClick={() => {
+                setPage((currPage) => currPage - 1);
+                console.log(page);
+            }}
+            >
+            Prev
+            </button>
+            <button
+            className='button'
+            onClick={async() => {
+                if (page === 2) {
+                //  alert("FORM SUBMITTED");
+                
+                onSubmit();
+                } else {
+                setPage((currPage) => currPage + 1);
+                }
+                console.log(page);
+            }}
+            >
+            {page === FormTitles.length - 1 ? "Submit" : "Next"}
+            </button>
+            
+        </div>
+        <Col>
+            You have an account <Link to="/signInContractor">Login Here</Link>
+        </Col>
+        </div>
+        
+    </div>
+    
+    )
 };
 
 export default MultiStep;

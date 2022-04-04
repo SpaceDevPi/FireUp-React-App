@@ -1,70 +1,144 @@
-import React from 'react';
-import { Field } from "formik";
-import TextField from "@material-ui/core/TextField";
+import { handleBreakpoints } from '@mui/system';
+import React, { useMemo } from 'react';
+import Select from 'react-select'
 
-export const FormStepTwo = formikProps => {
-    const { errors, touched } = formikProps;
 
+const options = [
+    { value: 'Art ', label: 'Art ' },
+    { value: 'Education ', label: 'Education ' },
+    { value: 'Finance ', label: 'Finance ' },
+    { value: 'Food ', label: 'Food ' },
+    { value: 'Health ', label: 'Health ' },
+    { value: 'Hospitality ', label: 'Hospitality ' },
+    { value: 'Manufacturing ', label: 'Manufacturing ' },
+    { value: 'Media ', label: 'Media ' },
+    { value: 'Retail ', label: 'Retail ' },
+    { value: 'Technology ', label: 'Technology ' },
+    { value: 'Transportation ', label: 'Transportation ' },
+    { value: 'Other ', label: 'Other ' },
+];
+
+
+
+
+function FormStepTwo({ formData, setFormData }) {
+    
     return (
-        <>
-            <Field
-                name="company"
-                label="Company Name *"
-                as = {TextField}
-                error = {touched.company && errors.company}
-                helperText = {touched.company && errors.company}
+        <div className="Personal-info-container">
+            <input
+                type="text"
+                className="input"
+                placeholder="Company Name..."
+                value={formData.companyName}
+                onChange={(e) => {
+                setFormData({ ...formData, companyName: e.target.value });
+                }}
             />
-            <Field
-                name="companyEmail"
-                label="Company Email *"
-                as = {TextField}
-                error = {touched.companyEmail && errors.companyEmail}
-                helperText = {touched.companyEmail && errors.companyEmail}
+
+            <input
+                type="text"
+                className="input"
+                placeholder="Company Address..."
+                value={formData.companyAddress}
+                onChange={(e) => {
+                setFormData({ ...formData, companyAddress: e.target.value });
+                }}
             />
-            <Field
-                name="companyPhone"
-                label="Company Phone *"
-                as = {TextField}
-                error = {touched.companyPhone && errors.companyPhone}
-                helperText = {touched.companyPhone && errors.companyPhone}
-            />
-            <Field
-                name="companyAdresse"
-                label="Company Adresse *"
-                as = {TextField}
-                error = {touched.companyAdresse && errors.companyAdresse}
-                helperText = {touched.companyAdresse && errors.companyAdresse}
-            />
-            <Field
-                name="companyCity"
-                label="Company City *"
-                as = {TextField}
-                error = {touched.companyCity && errors.companyCity}
-                helperText = {touched.companyCity && errors.companyCity}
-            />
-            <Field
-                name="companyState"
-                label="Company State *"
-                as = {TextField}
-                error = {touched.companyState && errors.companyState}
-                helperText = {touched.companyState && errors.companyState}
-            />
-            <Field
-                name="companyZip"
-                label="Company Zip *"
-                as = {TextField}
-                error = {touched.companyZip && errors.companyZip}
-                helperText = {touched.companyZip && errors.companyZip}
-            />
-            <Field
-                name="companyWebsite"
-                label="Company Website *"
-                as = {TextField}
-                error = {touched.companyWebsite && errors.companyWebsite}
-                helperText = {touched.companyWebsite && errors.companyWebsite}
+
+            <input
+                type="text"
+                className="input"
+                placeholder="Company city..."
+                value={formData.companyCity}
+                onChange={(e) => {
+                setFormData({ ...formData, companyCity: e.target.value });
+                }}
             />
             
-        </>
-    )
+            <input
+                type="text"
+                className="input"
+                placeholder="Company Zip..."
+                value={formData.companyZip}
+                onChange={(e) => {
+                setFormData({ ...formData, companyZip: e.target.value });
+                }}
+            />
+
+            
+
+            <input
+                type="text"
+                className="input"
+                placeholder="Company Phone..."
+                value={formData.companyPhone}
+                onChange={(e) => {
+                setFormData({ ...formData, companyPhone: e.target.value });
+                }}
+            />
+
+            <input
+                type="text"
+                className="input"
+                placeholder="Company Website..."
+                value={formData.companyWebsite}
+                onChange={(e) => {
+                setFormData({ ...formData, companyWebsite: e.target.value });
+                }}
+            />
+
+            <input
+                type="text"
+                className="input"
+                placeholder="Company Email..."
+                value={formData.companyEmail}
+                onChange={(e) => {
+                setFormData({ ...formData, companyEmail: e.target.value });
+                }}
+            />
+            <input
+                type="text"
+                className="input"
+                placeholder="Company sector..."
+                value={formData.companySector}
+                onChange={(e) => {
+                setFormData({ ...formData, companySector: e.target.value });
+                }}
+            />
+{/* 
+            <Select 
+                className="input"
+                placeholder="Company Activity sector..."
+                options={options}
+                onChange={(e) => {
+                setFormData({ ...formData, companySector: e.target.value });
+                }}
+            /> */}
+
+            <input
+                type="text"
+                className="input"
+                placeholder="Company Service..."
+                value={formData.companyService}
+                onChange={(e) => {
+                setFormData({ ...formData, companyService: e.target.value });
+                }}
+            />
+
+            <input
+                type="text"
+                className="input"
+                placeholder="Company Size..."
+                value={formData.companySize}
+                onChange={(e) => {
+                setFormData({ ...formData, companySize: e.target.value });
+                }}
+            />
+
+
+        </div>
+    );
 };
+
+export default FormStepTwo;
 
