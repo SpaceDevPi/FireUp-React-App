@@ -48,10 +48,13 @@ const onSubmit = async (e) => {
   // setActiveComment(null)
  
 };
+const isCurrentUserId = currentUserId===1;
+  const isTextareaDisabled  = content.length === 0 || currentUserId===1;
+//|| currentUserId===1}
 
-
-  const isTextareaDisabled = content.length === 0;
-
+// if(content.length === 0 || currentUserId===1){
+//   setisTextareaDisabled(true)
+// }
   return (
       <div class ="container ">
     <form onSubmit={onSubmit}>
@@ -60,6 +63,8 @@ const onSubmit = async (e) => {
       name="content"value={content} id="content"  onChange={(e) => onChange(e)}   placeholder="Write a comment"
     />
     {/* <input type="hidden"  name="id_project"  value={id_project}  onChange={(e) => onChange(e)}  ></input> */}
+    {isCurrentUserId && <p style={{color:'#D22D2D',fontWeight: 'bold',fontSize:'20px'}}> You must log in to write  a comment</p>}
+
     <button className="comment-form-button" disabled={isTextareaDisabled}>
       {submitLabel}
     </button>

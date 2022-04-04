@@ -13,7 +13,7 @@ export const Explore = () => {
     <Container>
 
 <Title>Explore Projects</Title>
-      <FilterContainer>
+      {/* <FilterContainer>
         <Filter>
           <FilterText>Filter Projects:</FilterText>
           <Select>
@@ -45,7 +45,7 @@ export const Explore = () => {
           </Select>
         </Filter>
       
-      </FilterContainer>
+      </FilterContainer> */}
        <Projects/>
 
     </Container>

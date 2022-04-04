@@ -12,6 +12,8 @@ import { useNavigate  } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 import { FacebookIcon, TwitterIcon } from "react-share";
+import PostsPageByProject from "./PostsPageByProject";
+
 
 
 
@@ -111,7 +113,7 @@ if (investor != null){
           <br/><br/>
           </Row>
           <ButtonInvest onClick={investir}>Invest</ButtonInvest>
-
+          <br/><br/>
           <FacebookShareButton
         url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
         quote={"Investissez dans un projet sur FireUp et garantissez votre avenir"}
@@ -142,6 +144,8 @@ if (investor != null){
 )}
     </Container>
     <MoreDetailPage/>
+    <PostsPageByProject projectid={projectid}/>
+
     <Comments currentUserId={investorId} projectid={projectid} />
     
     </div>
