@@ -4,7 +4,8 @@ import '../styles/home.css';
 import Sidebar from '../components/SideBar';
 import Navbar from '../components/NavBar';
 import Home from '../pages/Home';
-import Explore from "../pages/Explore";
+// import "bootstrap/dist/css/bootstrap.min.css"
+import {Explore} from "../pages/Explore";
 import About from "../pages/About";
 import Event from "../pages/Event";
 import Blog from "../pages/Blog";

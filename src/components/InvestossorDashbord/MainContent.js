@@ -17,7 +17,6 @@ import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import PrivacyTipOutlinedIcon from '@mui/icons-material/PrivacyTipOutlined';
 import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
 
-
 export default function MainContent  () {
 
   function status() {
@@ -81,23 +80,40 @@ return "I have individual net worth $200,000 and I have sufficient knowledge to 
     </Container>
 
     <SubContainer>
-    <Container>
+          <ProjectContainer>
+          <span className ="userShowUserTitle">My Projects : </span>
+          <Project>
+          {
+          projects ? projects.map((project, index) => (
+                <ProjectDashbord deleteProject={deleteProject} project={project}
+                    key={index}></ProjectDashbord>
+            )): <h1>Products not found</h1>
+        } 
+          </Project>
+            
+          </ProjectContainer>
+
+
+    {/* <Container>
+      
     <span className ="userShowUserTitle">My Projects : </span>
     <NavLink to='/projectsInvestor'>
       <div>
-            {/* <FilterContainer>
+            <FilterContainer>
               <Filter>
         <CheckBox  list={category}
                         handleFilters={filters => handleFilters(filters, "category")}/>
 
         </Filter>
-        </FilterContainer> */}
-        <Containerr> {
+        </FilterContainer>
+        <Containerr> 
+          {
           projects ? projects.map((project, index) => (
                 <ProjectDashbord deleteProject={deleteProject} project={project}
                     key={index}></ProjectDashbord>
             )): <h1>Products not found</h1>
-        } </Containerr>
+        } 
+        </Containerr>
       </div>
 
 
@@ -119,7 +135,7 @@ return "I have individual net worth $200,000 and I have sufficient knowledge to 
     </Container>
     <Container>
 
-    </Container>
+    </Container> */}
     </SubContainer>
 </>
 ) : (<p></p>) }
@@ -129,7 +145,7 @@ return "I have individual net worth $200,000 and I have sufficient knowledge to 
 }
 
 const Container = styled.div`
-  width: 90%;
+  width: 40%;
   background: linear-gradient(to bottom right, white 0%, #e6e4ff 70%);
   border-bottom-right-radius: 2rem;
   border-top-right-radius: 2rem;
@@ -144,7 +160,7 @@ const Container = styled.div`
 
 const SubContainer = styled.div`
   height: 10%;
-  width: 65%;
+  width: 55%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -153,12 +169,25 @@ const SubContainer = styled.div`
   }
 `;
 
+const ProjectContainer = styled.div`
+width: 100%;
+height : 100% ; 
+background: linear-gradient(to bottom right, white 0%, #e6e4ff 70%);
+border-bottom-right-radius: 2rem;
+border-top-right-radius: 2rem;
+margin: 1rem 3rem 1rem 1rem;
+@media screen and (min-width: 320px) and (max-width: 1080px) {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 1rem 0 0 0;
+}
+`
 
-const Containerr = styled.div`
-    padding: 10px;
-    display: flex;
-    flex-wrap: column;
-    justify-content: space-between;
-    
-`;
+const Project= styled.div`
+display : flex;
+justify-content: space-between;
+flex-flow :row wrap; 
+align-items: stretch;
+`
 

@@ -39,7 +39,7 @@ const Comment = ({comment,replies,currentUserId,parentId ="null",addComment,upda
                 <CommentWrap>
                     <Row>
                         
-                    <Img src='/images/c_1.png' alt='#' />
+                    <Img src='https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png' alt='#' />
                         <Col>
                             <CHeading>User : {comment.id_user}</CHeading>
                             <PostDate>Posted: {new Date(comment.date).toLocaleDateString()} at {new Date(comment.date).getHours()}:{new Date(comment.date).getMinutes()} </PostDate>

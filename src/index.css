@@ -287,7 +287,9 @@ justify-content: center;
 
 .projectImage{
   z-index: 0;
-  border-radius: 25px;}
+  border-radius: 25px;
+  
+}
 
   .Product_card{
     height: 100%;
