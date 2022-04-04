@@ -8,6 +8,9 @@ import MoreDetailPage from "./MoreDetailPage";
 import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import Comments from "./Comments/Comments";
+import PostsPageByProject from "./PostsPageByProject";
+import { FacebookShareButton, TwitterShareButton } from "react-share";
+import { FacebookIcon, TwitterIcon } from "react-share";
 
 
 export default function ProjectDetailPage(props)  {
@@ -16,6 +19,8 @@ const a = ""
 let date
 let date_modifier
    const [toRender,err,reload] = useApi('project/project/'+id);
+
+
   // const date = new Date(toRender.end_date).toLocaleDateString();
   // console.log(toRender.map(title => {toRender[title]}))
   // var dataArray = Object.keys(toRender).map(function(k){return toRender[0]});
@@ -49,10 +54,16 @@ date_modifier = new Date(date).toLocaleDateString()
         <ImgContainer>
           <Image src={`http://localhost:5000/uploads/${toRender.images}`} />
         </ImgContainer>
+
+        
+
         <InfoContainer>
           <Title>{toRender.title} </Title>
           <Desc>
           {toRender.description}
+          {/* http://localhost:3001/explore/projectdetail/${toRender._id} */}
+         
+
           </Desc>
           <Row>
           <Text> <h1> Money to raise : $ {toRender.amount_to_collect}</h1></Text>
@@ -77,6 +88,29 @@ date_modifier = new Date(date).toLocaleDateString()
           </Row>
           <ButtonInvest>Invest</ButtonInvest>
 
+
+          <FacebookShareButton
+        url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
+        quote={"Investissez dans un projet sur FireUp et garantissez votre avenir"}
+        hashtag={"#FireUp"}
+        description={"Fire Up"}
+        className="Demo__some-network__share-button"
+      >
+        <br/>
+        <FacebookIcon size={52} round /> Soutenez le projet en partageant sur Facebook 
+      </FacebookShareButton>
+
+      <br />
+      <TwitterShareButton
+        title={"test"}
+        url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
+        hashtags={["FireUp"]}
+      >
+        <TwitterIcon size={52} round />
+        Soutenez le projet en partageant sur Twitter
+      </TwitterShareButton>
+
+
         </InfoContainer>
 
 
@@ -86,13 +120,19 @@ date_modifier = new Date(date).toLocaleDateString()
 )}
     </Container>
     <MoreDetailPage/>
+
+    <PostsPageByProject projectid={projectid}/>
+
     <Comments currentUserId="1" projectid={projectid} />
     
     </div>
   );
 };
 
-
+export const PostsHeading = styled.h1`
+    font-size:2rem;
+    padding:2rem 5%;
+`
 const Container = styled.div``;
 
 const Wrapper = styled.div`

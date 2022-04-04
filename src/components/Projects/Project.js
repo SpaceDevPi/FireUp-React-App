@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import {Link as LinkS} from 'react-scroll'
-import './Project.css';
+import './Projectt.css';
 export default function Project(props) {
 
 const navigate = useNavigate();
@@ -53,31 +53,8 @@ trigger the hook. */
     navigate(path)    }
 
   return (
-    project.likes >= 5 ? (
-      
-<ProductFrameBest>
-      <ProductImageWrapperBest>
-        <ProductImageBest src={"../images/yoga.jpg"}></ProductImageBest>
-      </ProductImageWrapperBest>
-      <ProductInfoWrapperBest>
-      <span>Best Project</span>
-        <span>
-        <Link to={"/projectdetail/" + project._id}>{project.title}</Link>
-        </span>
-        <span> {project.description} </span>
-        <span>Likes : {project.likes} </span>
-        <Button onClick={addLike}>Like</Button>
-        <Action>
-          <ButtonUpdate onClick={()=>navigate('/updateproject/'+project._id)}>Update</ButtonUpdate>
-          <ButtonDelete onClick={()=>props.deleteProject(project._id)}>Delete</ButtonDelete>
-
-        </Action>
-      </ProductInfoWrapperBest>
-    </ProductFrameBest>
-    ):(
-      
-
-      <div className="product_card">
+    project  ? (
+      <div className="project_card">
       <h3>{project.title} </h3>
       <Container  onClick={routeChange}> 
      
@@ -87,7 +64,7 @@ trigger the hook. */
      
                 </Info>
                 </Container>
-                <div className="product_box">
+                <div className="project_box">
                 <p> {project.description} </p>
                 </div>
         <ButtonInvest  onClick={routeChange}>Invest</ButtonInvest>
@@ -95,6 +72,8 @@ trigger the hook. */
                 
 
                     </div>
+    ):(
+      <p>no project found</p>
 
 
     )

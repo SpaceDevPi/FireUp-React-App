@@ -5,7 +5,7 @@ import { Link, NavLink, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import {Link as LinkS} from 'react-scroll'
-import '../Project.css';
+import './posts.css';
 import { useApi } from "../../../hooks/useApi";
 import { queryApi } from "../../../utils/queryApi";
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -22,25 +22,33 @@ export default function ManageUpdatePost() {
   
 
     const deleteProject= async (id)=>{
-         confirmAlert({
-            title: 'Confirm to Delete',
-            message: 'Are you sure to do this.',
-            buttons: [
-              {
-                label: 'Yes',
-                 onClick: () => (  async function deletePo() 
-                 {
-                     const [res,err] = await  queryApi('post/deletepost/'+id,{},'DELETE',false);
+        
+    if( window.confirm("Voulez vous supprimer définitivement ce post ")  )      
+      {
+        const [res,err] = await  queryApi('post/deletepost/'+id,{},'DELETE',false);
                      if(err){
                          console.log(err);
                      } else await reload();
-                 })
-              },
-              {
-                label: 'No',
-              }
-            ]
-          });
+      }
+      //  confirmAlert({
+        //     title: 'Confirm to Delete',
+        //     message: 'Are you sure to do this.',
+        //     buttons: [
+        //       {
+        //         label: 'Yes',
+        //          onClick: () => (  async function deletePo() 
+        //          {
+        //              const [res,err] = await  queryApi('post/deletepost/'+id,{},'DELETE',false);
+        //              if(err){
+        //                  console.log(err);
+        //              } else await reload();
+        //          })
+        //       },
+        //       {
+        //         label: 'No',
+        //       }
+        //     ]
+        //   });
 
     }
     const category = [
@@ -62,25 +70,26 @@ export default function ManageUpdatePost() {
                     </div>
  
  <Container2>
- {posts ? posts.map((posts,index) => (  
-< Product_card>
+ {posts ? posts.map((posts,index) => (   
+    <div className="posts_card">
       <h3>{posts.title} </h3>
-      <Container > 
-     
+      <Container  > 
+      <img  src={`http://localhost:5000/uploads/${posts.images}`}/>     
 
       <Info>
-      <p> {posts.content} </p>
+
+
                 </Info>
                 </Container>
+                <div className="product_box">
+                <p> {posts.content} </p>
+                </div>
+                <ButtonContainer >
+        <ButtonDelete  onClick={() => deleteProject(posts._id)}  >Delete this post </ButtonDelete>
+        </ButtonContainer>
                 
 
-                <ButtonContainer>
-                 
-                <ButtonDelete   onClick={() => deleteProject(posts._id)} >Delete This post</ButtonDelete>
-
-                </ButtonContainer>
-
-                    </Product_card>  
+                    </div>
   )) : (<h1>no posts found for this project</h1>) } </Container2>
 
       </div>
@@ -88,7 +97,8 @@ export default function ManageUpdatePost() {
 }
 
 const Image = styled.img`
-height: 50%;
+height: 90%;
+width : 90%;
 z-index: 2;
 `;
 const Container2 = styled.div`
@@ -141,7 +151,7 @@ left: 0;
 
 const Container = styled.div`
 flex: 1;
-margin: 2rem;
+margin: 5px;
 min-width: 280px;
 height: 350px;
 display: flex;
@@ -150,13 +160,23 @@ justify-content: center;
 background-color: #f5fbfd;
 position: relative;
 
-&:hover ${ButtonDelete}{
-    opacity: 1;
-  }
+`;
+
+const ContainerImage = styled.div`
+flex: 1;
+margin: 2rem;
+
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: #f5fbfd;
+position: relative;
+
+
 `;
 
 const ButtonContainer = styled.div`
-    padding: 20px;
+    
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

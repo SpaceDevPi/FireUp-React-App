@@ -30,7 +30,6 @@ export default function CreateProject(props) {
   const [formErrors, setFormErrors] = useState({});
 
   const [showLoader, setShowLoader] = useState(false);
-  const [error, setError] = useState({ visible: false, message: "" });
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -68,22 +67,26 @@ const onChange = (e) =>
     if (!title) {
       errors.title = "Title is required";
     }  
+
    if (!description) {
     errors.description = "description is required";
   } 
+
    if (!end_date) {
     errors.end_date = "End date is required";
   } 
-   if (amount_to_collect ==0) {
+  // else if(end_date < new Date(). )
+  // errors.end_date = "End date must be superior to Today date ";
+    if (amount_to_collect ===0) {
     errors.amount_to_collect = "Amount to collect is required";
   } 
    if (!offering_type) {
     errors.offering_type = "Offering type is required";
-  } 
+  }
    if(!category) {
     errors.category = "Category is required";
   }  
-   if (price_per_share==0) {
+   if (price_per_share===0) {
     errors.price_per_share = "Price per share is required";
   } 
   else if(price_per_share>amount_to_collect){
@@ -98,7 +101,9 @@ const onChange = (e) =>
   } 
    if (!email) {
     errors.email = "Email is required";
-  } 
+  }
+
+
     return errors;
   };
   
@@ -107,21 +112,19 @@ const onSubmit = async (e) => {
   e.preventDefault();
   setShowLoader(true);
 
-    setFormErrors(validate());
     setIsSubmit(true)
     console.log("is submit " +isSubmit )
-    if (!Object.keys(formErrors).length === 0 && isSubmit)
+    setFormErrors(validate());
+    console.log("(Object.keys(formErrors).length : " +Object.keys(formErrors).length )
+
+    if (Object.keys(formErrors).length === 0 && isSubmit)
     {
-     
-    }
-  else {
- const [, err] = await queryApi("project/newproject", formData, "POST", false);
+
+      console.log("okkkk")
+      const [, err] = await queryApi("project/newproject", formData, "POST", false);
       if (err) {
         setShowLoader(false);
-        setError({
-          visible: true,
-          message: JSON.stringify(err.errors, null, 2),
-        });
+       
         console.log(formData)
       } else    { console.log(formData);
        
@@ -129,7 +132,10 @@ const onSubmit = async (e) => {
     
        
      navigate("/explore");
-    }}
+    }
+    }
+  else {
+}
   
 };
 
@@ -185,6 +191,18 @@ const onDelete = (image) => {
 console.log("images :" + Images)
 
 
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+var yyyy = today.getFullYear();
+if(dd<10){
+  dd='0'+dd
+} 
+if(mm<10){
+  mm='0'+mm
+} 
+
+today = yyyy+'-'+mm+'-'+dd;
 
 
     return (<> 
@@ -220,7 +238,7 @@ console.log("images :" + Images)
                       <FormError>{formErrors.end_date}</FormError>  
 
                           <label for="exampleInputPassword1" class="form-label">Date of end</label>
-                          <input type="date" value={end_date} name="end_date" onChange={(e) => onChange(e)}  placeholder="date of end" class="form-control" />
+                          <input type="date" min={today} value={end_date} name="end_date" onChange={(e) => onChange(e)}  placeholder="date of end" class="form-control" />
                       </div>
                       
                      

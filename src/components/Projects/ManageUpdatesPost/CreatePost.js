@@ -28,17 +28,40 @@ export default function CreatePost({projectname}) {
     });
     const { title, content, images,id_project} = formData;
   
-  
-    const onChangeFile = (e) =>
+    const [Images, setImages] = useState('')
+
+  const onChangeFile = (e) =>{
+  onDrop(e.target.files)
     setFormData({ ...formData, images: e.target.files[0].name });
-  
+
+}
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   
   
-    const [Images, setImages] = useState([])
+
   
   
+const onDrop = (files) => {
+
+  let formData = new FormData();
+  const config = {
+      header: { 'content-type': 'multipart/form-data' }
+  }
+  formData.append("file", files[0])
+  //save the Image we chose inside the Node Server 
+  Axios.post('http://localhost:5000/api/project/uploadImage', formData, config)
+      .then(response => {
+          if (response.data.success) {
+
+              setImages(files[0].name)
+
+          } else {
+              alert('Failed to save the Image in Server')
+          }
+      })
+}
   const onSubmit = async (e) => {
     e.preventDefault();
     setShowLoader(true);
@@ -109,9 +132,22 @@ export default function CreatePost({projectname}) {
                     <div className="row justify-content-md-center">
 
                         <div class="mb-3 col-lg-6 col-md-6 col-12">
-                         <FileUpload name="images" 
-              onChange={(e) => onChangeFile(e)}  refreshFunction={updateImages} />
-                        </div></div>
+                        <input type="file"  name="images" 
+            onChange={(e) => onChangeFile(e)} placeholder="Image" className="form-control"/> 
+                  
+                        </div>
+                        
+                        
+                        <div className="row justify-content-md-center">
+
+                        <div class="mb-3 col-lg-6 col-md-6 col-12">
+
+    <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`http://localhost:5000/uploads/${Images}`} />
+
+</div>
+</div>
+                        
+                        </div>
                         <div className="row justify-content-md-center">
 
                         <button type="submit"  disabled={showLoader} class="newUserButton">Create </button>

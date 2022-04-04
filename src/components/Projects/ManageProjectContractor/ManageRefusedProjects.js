@@ -7,10 +7,10 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { NavLink, useParams } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import PostAddIcon from '@mui/icons-material/PostAdd';
-export default function ManageMyProjects() {
+export default function ManageRefusedProjects() {
     const navigate = useNavigate();
 
-    const [projects,err,reload] = useApi('project/getApprovedProjectsByContractorId/1');
+    const [projects,err,reload] = useApi('project/getRefusedProjectsByContractorId/1');
     const deleteProject= async (id)=>{
         const[,err] = await queryApi('project/deleteproject/'+id,{},'DELETE',false);
         if(err){
@@ -26,14 +26,14 @@ export default function ManageMyProjects() {
 
 
                 <div className="container">
-                <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center',color:'#F57C00'}}>Manage My Projects</h1>
+                <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center',color:'#F57C00'}}>My Refused Projects</h1>
 <br></br>
                     <div style={{display: 'flex',  justifyContent:'space-between'}}>
                     <NavLink to='/managemyprojects' className="btn btn-success">My Published Projects</NavLink >
 
                         <NavLink to='/addproject' className="btn btn-primary">Add A Project</NavLink >
                         <NavLink to='/managemyprojects/ManageProjectsWaitingForConfirmation' className="btn btn-success">Projects awaiting confirmation  </NavLink >
-                        <NavLink to='/addproject' className="btn btn-danger">Consult my refused projects </NavLink >
+                        <NavLink to='/managemyprojects/ManageRefusedProjects' className="btn btn-danger">Consult my refused projects </NavLink >
 
                     </div>
     <br></br>
@@ -73,7 +73,7 @@ export default function ManageMyProjects() {
                                                 })()}
 
                                                 <td>{ (new Date(element.end_date)).toLocaleDateString()}  </td>
-                                                <td style={{color:'#146c43',fontWeight: 'bold'}}>APPROVED  </td>
+                                                <td style={{color:'#b02a37',fontWeight: 'bold'}}>REFUSED  </td>
 
                                                 <td className="d-flex justify-content-between">
                                           <button className="btn btn-success"  onClick={()=>navigate('/explore/projectdetail/'+element._id)}><RemoveRedEyeIcon /></button>

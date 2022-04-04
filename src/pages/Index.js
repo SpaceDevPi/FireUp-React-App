@@ -21,6 +21,8 @@ import ManageMyProjects from '../components/Projects/ManageProjectContractor/Man
 import EditProject from '../components/Projects/ManageProjectContractor/EditProject';
 import CreatePost from '../components/Projects/ManageUpdatesPost/CreatePost';
 import ManageUpdatePost from '../components/Projects/ManageUpdatesPost/ManageUpdatePost';
+import ManageProjectsWaitingForConfirmation from '../components/Projects/ManageProjectContractor/ManageProjectsWaitingForConfirmation';
+import ManageRefusedProjects from '../components/Projects/ManageProjectContractor/ManageRefusedProjects';
 
 const Index = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +49,8 @@ const Index = () => {
         <Route path="/editproject/:id" element={<EditProject />} />
         <Route path="/managemyprojects/createpost/:nomprojet/:id" element={<CreatePost />} />
         <Route path="/managemyprojects/managemyposts/:nomprojet/:id" element={<ManageUpdatePost />} />
+        <Route path="/managemyprojects/ManageProjectsWaitingForConfirmation" element={<ManageProjectsWaitingForConfirmation/>} />
+        <Route path="/managemyprojects/ManageRefusedProjects" element={<ManageRefusedProjects/>} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

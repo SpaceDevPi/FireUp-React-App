@@ -2,9 +2,7 @@ import React from 'react'
 import styled from "styled-components";
 import {Link as LinkS} from 'react-scroll'
 import CommentForm from './CommentForm';
-import { queryApi } from '../../../utils/queryApi';
-import { useApi } from '../../../hooks/useApi';
-import { textAlign } from '@mui/system';
+
 
 const Comment = ({comment,replies,currentUserId,parentId ="null",addComment,updateComment, setActiveComment,
     activeComment,projectid ,deleteComment}) => {

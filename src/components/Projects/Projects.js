@@ -18,6 +18,7 @@ export default function Projects() {
         } else await reload();
     }
     const [Skip, setSkip] = useState(0)
+
     // const [Limit, setLimit] = useState(8)
 
     // const [Filters, setFilters] = useState({
@@ -69,8 +70,15 @@ export default function Projects() {
         </FilterContainer> */}
         <Container> {
           projects ? projects.map((project, index) => (
-                <Project deleteProject={deleteProject} project={project}
-                    key={index}></Project>
+         
+        
+            
+// project.approved ===true &&
+
+<Project deleteProject={deleteProject} project={project}
+                 key={index}/>
+                
+          
             )): <h1>Products not found</h1>
         } </Container>
         </div>
