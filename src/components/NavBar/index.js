@@ -149,7 +149,7 @@ const test=()=>{
     else {
       return (
         <><NavMenu>
-          <NavLink to="/explore">Explore Investments</NavLink>
+          <NavLink to="/AllProjectInvestor">Explore Investments</NavLink>
           <NavLink to="/signUpContractor">Get Funding</NavLink>
           <NavLink to="/blog">Blog</NavLink>
           <NavLink to="/signInCoach">Join Team</NavLink>

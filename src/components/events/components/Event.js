@@ -14,7 +14,7 @@ const Event = memo(({ event }) => {
           <h6>${price}</h6>
           <p>The ticket</p>
         </div>
-        <Link to={`/events/${slug}`} className="btn-primary event-link">
+        <Link to={`/events/${slug}`} className="Btn-primary event-link">
           features
         </Link>
       </div>

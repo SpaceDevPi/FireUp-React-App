@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { EventProvider } from "../src/components/events/context";
+import "bootstrap/dist/css/bootstrap.min.css"
 
 ReactDOM.render(
   

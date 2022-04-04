@@ -9,7 +9,7 @@ export default function HomeEvent() {
     <>
       <Hero>
         <Banner title="Events That Might Interest YOU" subtitle="New Events">
-          <Link to="/events" className="btn-primary">
+          <Link to="/events" className="Btn-primary">
             Our Events
           </Link>
         </Banner>

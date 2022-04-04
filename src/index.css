@@ -254,11 +254,11 @@ margin-left: 3%;
 }
 .dashbordNav{
   box-shadow: 0 2px 4px rgb(78, 76, 76);
-  width: 70%;
+  width: 100%;
 padding-left: 10%;
 padding-right: 10%;
-padding-bottom: 5%;
-padding-top: 5%;
+padding-bottom: 1%;
+padding-top: 1%;
 height: 50%;
 border-radius: 20%;
 display: flex;
@@ -274,8 +274,8 @@ justify-content: center;
   margin-right: 5%;
 }
 .FormINvestementCOntainer{
-  width: 400px;
-  height: 450px;
+  width: 500px;
+  height: 550px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
@@ -324,7 +324,7 @@ justify-content: center;
 /* globals */
 
 
-.btn-primary {
+.Btn-primary {
   display: inline-block;
   text-decoration: none;
   letter-spacing: var(--mainSpacing);
@@ -336,7 +336,7 @@ justify-content: center;
   text-transform: uppercase;
   cursor: pointer;
 }
-.btn-primary:hover {
+.Btn-primary:hover {
   background: transparent;
   color: var(--primaryColor);
 }

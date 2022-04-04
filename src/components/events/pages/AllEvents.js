@@ -9,7 +9,7 @@ const Events = () => {
     <>
       <Hero hero="eventsHero">
         <Banner title="Events">
-          <Link to="/HomeEvent" className="btn-primary">
+          <Link to="/HomeEvent" className="Btn-primary">
             ReturnHome
           </Link>
         </Banner>

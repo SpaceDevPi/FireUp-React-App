@@ -2,9 +2,7 @@ import React from 'react'
 import styled from "styled-components";
 import {Link as LinkS} from 'react-scroll'
 import CommentForm from './CommentForm';
-import { queryApi } from '../../../utils/queryApi';
-import { useApi } from '../../../hooks/useApi';
-import { textAlign } from '@mui/system';
+
 
 const Comment = ({comment,replies,currentUserId,parentId ="null",addComment,updateComment, setActiveComment,
     activeComment,projectid ,deleteComment}) => {
@@ -39,7 +37,7 @@ const Comment = ({comment,replies,currentUserId,parentId ="null",addComment,upda
                 <CommentWrap>
                     <Row>
                         
-                    <Img src='https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png' alt='#' />
+                    <Img src='/images/c_1.png' alt='#' />
                         <Col>
                             <CHeading>User : {comment.id_user}</CHeading>
                             <PostDate>Posted: {new Date(comment.date).toLocaleDateString()} at {new Date(comment.date).getHours()}:{new Date(comment.date).getMinutes()} </PostDate>

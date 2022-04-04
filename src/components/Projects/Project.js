@@ -77,18 +77,18 @@ trigger the hook. */
     ):(
       
 
-      <div className="product_card">
+      <div className="project_card">
       <h3>{project.title} </h3>
       <Container  onClick={routeChange}> 
      
       {/* <img src={`${process.env.REACT_APP_API_URL_UPLOADS}/${project.images}`}/>      */}
-      <img src='project.png'/>
+      <img src={`http://localhost:5000/uploads/${project.images}`}/>     
 
       <Info>
      
                 </Info>
                 </Container>
-                <div className="product_box">
+                <div className="project_box">
                 <p> {project.description} </p>
                 </div>
         <ButtonInvest  onClick={routeChange}>Invest</ButtonInvest>
@@ -104,53 +104,6 @@ trigger the hook. */
 }
 
 
-const Product_card = styled.div`
-max-width: 300px;
-    overflow: hidden;
-    height: 500px;
-    padding: 15px;
-    box-shadow: 0 0 15px #ddd;
-    margin: 10px 0;
-    position: relative;
-`;
-
-const Product_box  = styled.div`
-width: 100%;
-h2{
-  width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  text-transform: capitalize;
-  cursor: pointer;
-  color: #323232;
-}
-p{
-  width: 100%;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  height: 70px;
-  overflow: hidden;
-  color: #323232;
-}
-`;
-
-const Row_btn = styled.div`
-width: 100%;
-margin-top: 10px;
-display: flex;
-justify-content: space-between;
-{
-  width: 50%;
-  text-align: center;
-  text-transform: uppercase;
-  color: white;
-  font-weight: 600;
-  letter-spacing: 2px;
-  padding: 6px;
-}
-`;
 
 
 const Info = styled.div`

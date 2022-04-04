@@ -30,8 +30,10 @@ import CreateProject from '../components/Projects/ManageProjectContractor/Create
 import ManageMyProjects from '../components/Projects/ManageProjectContractor/ManageMyProjects';
 import EditProject from '../components/Projects/ManageProjectContractor/EditProject';
 import CreatePost from '../components/Projects/ManageUpdatesPost/CreatePost';
-
-
+import ManageUpdatePost from '../components/Projects/ManageUpdatesPost/ManageUpdatePost';
+import ManageProjectsWaitingForConfirmation from '../components/Projects/ManageProjectContractor/ManageProjectsWaitingForConfirmation';
+import ManageRefusedProjects from '../components/Projects/ManageProjectContractor/ManageRefusedProjects';
+// import "bootstrap/dist/css/bootstrap.min.css"
 import Events from "../components/events/pages/AllEvents";
 import SingleEvent from "../components/events/pages/SingleEvent";
 import BookNow from "../components/events/pages/BookNow";
@@ -51,7 +53,7 @@ const Index = () => {
       <Navbar toggle={toggleSidebar} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/explore" element={<Explore />} />
+        <Route path="/AllProjectInvestor" element={<Explore />} />
         <Route path="/about" element={<About />} />
         <Route path="/event" element={<Event />} />
         <Route path="/blog" element={<Blog />} />
@@ -76,6 +78,12 @@ const Index = () => {
         <Route exact path="/events/:slug" element={<SingleEvent />} />
         <Route exact path="/BookNow/:slug" element={<BookNow/>} />
         <Route exact path="/TicketBooking" element={<TicketBooking/>} />
+
+
+        <Route path="/managemyprojects/createpost/:nomprojet/:id" element={<CreatePost />} />
+        <Route path="/managemyprojects/managemyposts/:nomprojet/:id" element={<ManageUpdatePost />} />
+        <Route path="/managemyprojects/ManageProjectsWaitingForConfirmation" element={<ManageProjectsWaitingForConfirmation/>} />
+        <Route path="/managemyprojects/ManageRefusedProjects" element={<ManageRefusedProjects/>} />
         
         
 

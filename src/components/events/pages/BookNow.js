@@ -22,7 +22,7 @@ export default class BookNow extends Component {
     const { startDate, endDate } = this.state;
     if (!event) {
       return (
-        <div className="container eventerror">
+        <div className="Container eventerror">
           <div className="row my-5">
             <div className="col-md-6 col-12 mx-auto">
               <div className="card shadow-lg border-0 p-4 error">
@@ -41,7 +41,7 @@ export default class BookNow extends Component {
     const [mainImg, ...defaultBcg] = images;
     return (
       <div className="">
-        <div class="container">
+        <div class="Container">
           <div class="cover"></div>
           <div class="content">
             {/* <h1 className="display-4">Booking</h1> */}
@@ -108,12 +108,12 @@ export default class BookNow extends Component {
               </div> */}
             <div >
               <h3>
-                <Link to="/" className="btn-primary float-right ">
+                <Link to="/" className="Btn-primary float-right ">
                   Goto Home
                 </Link>
                 <br />
                 <br />
-                <Link to="/TicketBooking" className="btn-primary float-right ">
+                <Link to="/TicketBooking" className="Btn-primary float-right ">
                   Go to your ticket
                 </Link>
               </h3>

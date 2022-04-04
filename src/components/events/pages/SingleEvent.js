@@ -36,7 +36,7 @@ export default class SingleEvent extends Component {
       return (
         <div className="error">
           <h3> no such event could be found...</h3>
-          <Link to="/events" className="btn-primary">
+          <Link to="/events" className="Btn-primary">
             back to events
           </Link>
         </div>
@@ -59,7 +59,7 @@ export default class SingleEvent extends Component {
       <>
         <StyledHero img={images[0] || this.state.defaultBcg}>
           <Banner title={`${name} event`}>
-            <Link to="/events" className="btn-primary">
+            <Link to="/events" className="Btn-primary">
               back to events
             </Link>
           </Banner>
@@ -99,7 +99,7 @@ export default class SingleEvent extends Component {
               <div className="col-md-3 col-12 ml-auto">
                 <Link
                   to={`/booknow/${this.state.slug}`}
-                  className="btn-primary float-right "
+                  className="Btn-primary float-right "
                 >
                   Book Now
                 </Link>

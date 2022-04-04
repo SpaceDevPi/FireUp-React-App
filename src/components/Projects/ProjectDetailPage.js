@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function ProjectDetailPage(props)  {
   const { id } = useParams();
   const history = useNavigate ();
-
+  var investorId = 1;
 
   function investir () {
     history("/InvestementProject/"+id);
@@ -63,7 +63,9 @@ if (toRender.montantRestant==-1){
 date_modifier = new Date(date).toLocaleDateString()
 
 const { investor } = useSelector((state) => state.auth);
-
+if (investor != null){
+  investorId= investor._id
+}
 
 
   return (
@@ -76,7 +78,7 @@ const { investor } = useSelector((state) => state.auth);
       <Wrapper>
         <ImgContainer>
           {/* <Image src={"../../images/"+toRender.images} /> */}
-          <Image src='/project.png'/>
+          <img src={`http://localhost:5000/uploads/${toRender.images}`}/>     
 
         </ImgContainer>
         <InfoContainer>
@@ -117,7 +119,7 @@ const { investor } = useSelector((state) => state.auth);
 )}
     </Container>
     <MoreDetailPage/>
-    <Comments currentUserId={investor._id} projectid={projectid} />
+    <Comments currentUserId={investorId} projectid={projectid} />
     
     </div>
   );

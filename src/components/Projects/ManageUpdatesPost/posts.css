@@ -1,19 +1,21 @@
-.project_card{
-    max-width: 350px;
-    overflow: hidden;
-    height: 550px;
-    padding: 15px;
-    box-shadow: 0 0 15px #ddd;
-    margin: 10px 0;
-    position: relative;
+.posts_card{
+    width: 500px;
+overflow: hidden;
+height: 600px;
+padding: 15px;
+box-shadow: 0 0 15px #ddd;
+margin: 10px 0 ;
+margin-bottom: 10px;
+position: relative;
 }
-.project_card img{
+
+.posts_card img{
     width: 100%;
     height: 300px;
     display: block;
     object-fit: cover;
 }
-.project_box h2{
+.product_box h2{
     width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -22,16 +24,15 @@
     cursor: pointer;
     color: #323232;
 }
-.project_card span{
+.product_card span{
     color: crimson;
 }
-.project_box p{
+.product_box p{
     width: 100%;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
-    height: 70px;
-    overflow: hidden;
+    height: 120px;
     color: #323232;
 }
 .row_btn{
@@ -57,7 +58,7 @@
     background: teal;
     margin-left: 5px;
 }
-.project_card input{
+.product_card input{
     position: absolute;
     width: 25px;
     height: 25px;
