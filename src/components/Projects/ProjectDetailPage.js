@@ -10,6 +10,8 @@ import React, { useEffect, useState } from "react";
 import Comments from "./Comments/Comments";
 import { useNavigate  } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
+import { FacebookShareButton, TwitterShareButton } from "react-share";
+import { FacebookIcon, TwitterIcon } from "react-share";
 
 
 
@@ -109,6 +111,27 @@ if (investor != null){
           <br/><br/>
           </Row>
           <ButtonInvest onClick={investir}>Invest</ButtonInvest>
+
+          <FacebookShareButton
+        url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
+        quote={"Investissez dans un projet sur FireUp et garantissez votre avenir"}
+        hashtag={"#FireUp"}
+        description={"Fire Up"}
+        className="Demo__some-network__share-button"
+      >
+        <br/>
+        <FacebookIcon size={52} round /> Soutenez le projet en partageant sur Facebook 
+      </FacebookShareButton>
+
+      <br />
+      <TwitterShareButton
+        title={"test"}
+        url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
+        hashtags={["FireUp"]}
+      >
+        <TwitterIcon size={52} round />
+        Soutenez le projet en partageant sur Twitter
+      </TwitterShareButton>
 
         </InfoContainer>
 

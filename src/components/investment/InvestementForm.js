@@ -51,7 +51,8 @@ const ShowInvestement=async(e)=>{
 const [formProject, setFormProject] = useState({
   title:"", 
   montantTotal : "",
-  montantRestant : ""
+  montantRestant : "", 
+  imageProject : ""
 });
 
   const [formData, setFormData] = useState({
@@ -72,6 +73,7 @@ const [formProject, setFormProject] = useState({
     formData.idProject= project._id; 
     formProject.title= project.title ;
     formProject.monatantTotal=project.amount_to_collect; 
+    formProject.imageProject= project.images; 
     if(project.montantRestant == -1){
       formProject.montantRestant= project.amount_to_collect; 
     }
@@ -108,7 +110,7 @@ if (investement_Form=="crowdequity"){
   return (
     <Container>
             
-    <img src="/project.png" />
+    <img src={`http://localhost:5000/uploads/${formProject.imageProject}`}/>     
     <div class="MultiStep">
     <div className="form-Login" >
 

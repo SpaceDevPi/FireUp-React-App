@@ -77,7 +77,7 @@ trigger the hook. */
     ):(
       
 
-      <div className="product_card">
+      <div className="project_card">
       <h3>{project.title} </h3>
       <Container  onClick={routeChange}> 
      
@@ -88,7 +88,7 @@ trigger the hook. */
      
                 </Info>
                 </Container>
-                <div className="product_box">
+                <div className="project_box">
                 <p> {project.description} </p>
                 </div>
         <ButtonInvest  onClick={routeChange}>Invest</ButtonInvest>
