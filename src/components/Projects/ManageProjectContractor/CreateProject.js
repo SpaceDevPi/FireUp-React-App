@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Typography, Button, Form, message, Input, Alert } from 'antd';
-import FileUpload from '../../../utils/FileUpload';
+import FileUpload from '../../../utils/FileUpload.js';
 import Axios from 'axios';
 import "./CreateProject.css";
 import styled from "styled-components";

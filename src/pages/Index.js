@@ -1,16 +1,16 @@
 import React, {useState } from 'react';
 import '../styles/home.css';
-// import Rocket from '../assets/images/rocket.svg';
+import Rocket from '../assets/images/rocket.svg';
 import Sidebar from '../components/SideBar';
 import Navbar from '../components/NavBar';
 import Home from '../pages/Home';
-// import "bootstrap/dist/css/bootstrap.min.css"
+    import "bootstrap/dist/css/bootstrap.min.css"
 import {Explore} from "../pages/Explore";
 import About from "../pages/About";
 import Event from "../pages/Event";
-import Blog from "../pages/Blog";
+// import Blog from "../pages/Blog";
 import NotFoundPage from "../pages/NotFoundPage";
-import { Route, Routes } from 'react-router-dom';
+ import { Route, Routes } from 'react-router-dom';
 import ContractorDashboard from './ContractorDashboard';
 import SignUpContractor from '../pages/SignUpContractor';
 import RegisterInvestisor from '../components/InvestorForm/RegisterInvestor';
@@ -33,14 +33,33 @@ import CreatePost from '../components/Projects/ManageUpdatesPost/CreatePost';
 import ManageUpdatePost from '../components/Projects/ManageUpdatesPost/ManageUpdatePost';
 import ManageProjectsWaitingForConfirmation from '../components/Projects/ManageProjectContractor/ManageProjectsWaitingForConfirmation';
 import ManageRefusedProjects from '../components/Projects/ManageProjectContractor/ManageRefusedProjects';
-// import "bootstrap/dist/css/bootstrap.min.css"
 import Events from "../components/events/pages/AllEvents";
 import SingleEvent from "../components/events/pages/SingleEvent";
 import BookNow from "../components/events/pages/BookNow";
 import TicketBooking from "../components/events/pages/TicketBooking";
+import Offerlist from './Offerlist';
+import Offer from './Offer';
+import Offertickets from './Offertickets';
+import Articles from './Articles';
 
+import Blog from './Blog/index';
+
+import  { Suspense,useEffect } from "react";
+
+import { useDispatch } from "react-redux";
+import { fetchOffers } from "../redux/slices/offersSlice";
+import { fetchArticles } from "../redux/slices/articlesSlice";
 
 const Index = () => {
+  console.log("davv")
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchOffers());
+    dispatch(fetchArticles());
+
+    console.log("herew")
+  }, [dispatch]);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -56,7 +75,9 @@ const Index = () => {
         <Route path="/AllProjectInvestor" element={<Explore />} />
         <Route path="/about" element={<About />} />
         <Route path="/event" element={<Event />} />
-        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog" element={<Articles />} />
+
+        <Route path="/blog/:id" element={<Blog />} />
         <Route path="/signUpContractor" element={<SignUpContractor />} />
         <Route path="/signInContractor" element={<Login />} />
         <Route path="/RegestrationInvestor" element={<RegisterInvestisor/>}/>
@@ -78,7 +99,9 @@ const Index = () => {
         <Route exact path="/events/:slug" element={<SingleEvent />} />
         <Route exact path="/BookNow/:slug" element={<BookNow/>} />
         <Route exact path="/TicketBooking" element={<TicketBooking/>} />
-
+        <Route path='/offerlist' exact element={<Offerlist/>} />
+         <Route path='/offer/:id' exact element={<Offer/>} />
+         <Route path='/Offertickets/:id' exact element={<Offertickets/>} />  
 
         <Route path="/managemyprojects/createpost/:nomprojet/:id" element={<CreatePost />} />
         <Route path="/managemyprojects/managemyposts/:nomprojet/:id" element={<ManageUpdatePost />} />

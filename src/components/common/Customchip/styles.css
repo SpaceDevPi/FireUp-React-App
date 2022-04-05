@@ -1,0 +1,40 @@
+.chip {
+  font-size: 1.1rem;
+  background: linear-gradient(to right, #6190e8, #a7bfe8);
+  color: #fff;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  width: fit-content;
+  text-transform: capitalize;
+}
+
+.chipbronze{
+  font-size: 1.1rem;
+  background: rgb(205, 127, 50);
+  color: #fff;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  width: fit-content;
+  text-transform: capitalize;
+}
+.chipgold{
+  font-size: 1.1rem;
+  background: rgb(255,215,0);
+  color: #fff;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  width: fit-content;
+  text-transform: capitalize;
+  
+}
+.chipsilver{
+  font-size: 1.1rem;
+  background: linear-gradient(to right, 	#C0C0C0, #a7bfe8);
+  color: #fff;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  width: fit-content;
+  text-transform: capitalize;
+  
+}
+

@@ -4,20 +4,29 @@ import './index.css';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { store } from './app/store';
-import { EventProvider } from "../src/components/events/context";
-import "bootstrap/dist/css/bootstrap.min.css"
+import store from "./redux/store";
+// import { EventProvider } from "../src/components/events/context";
+// import "bootstrap/dist/css/bootstrap.min.css"
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import { BrowserRouter } from 'react-router-dom';
+
+let persistor = persistStore(store);
 
 ReactDOM.render(
   
   <React.StrictMode>
-        <EventProvider>
+        {/* <EventProvider> */}
 
     <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+    <BrowserRouter>
 
       <App />
+      </BrowserRouter>  
+      </PersistGate>
     </Provider>
-    </EventProvider>
+    {/* </EventProvider> */}
 
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,12 +1,12 @@
 import api from "./api";
 /**
-* @param {String} endpoint relative endpoint
-* @param {object} body request body
-* @param {String} method method can be ["GET","POST","PUT", "DELETE"] | Default
+ * @param {String} endpoint relative endpoint
+ * @param {object} body request body
+ * @param {String} method method can be ["GET","POST","PUT", "DELETE"] | Default
 GET
-* @param {boolean} transformBody whether to transform the request body from JSON
-to FormData | Default false
-*/
+ * @param {boolean} transformBody whether to transform the request body from JSON
+ to FormData | Default false
+ */
 export async function queryApi(
   endpoint,
   body = null,
@@ -21,7 +21,6 @@ export async function queryApi(
       method,
       url: `${process.env.REACT_APP_API_URL}/${endpoint}`,
     };
-
     if (body) {
       // If we have a body and the method is GET, the config is the following
       if (method.toUpperCase() === "GET")
@@ -64,7 +63,6 @@ export async function queryApi(
     // if (token)
     // config.headers = { ...config.headers, Authorization: `Bearer ${token}` }
     // console.log(`Requesting : ${config.url}`)
-
     // console.log(config)
     const res = await api(config);
     result = res.data;
