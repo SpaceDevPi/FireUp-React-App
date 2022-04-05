@@ -21,7 +21,7 @@ const BlogItem = ({
   return (
     <div className='blogItem-wrap'>
 
-      <img className='blogItem-cover' src={`http://localhost:3008/uploads/`+image} alt='cover' />
+      <img className='blogItem-cover' src={`http://localhost:5000/uploads/`+image} alt='cover' />
       <Chip label={coachfullname} />
       <h2>ROOM NUMBER : {numroom}</h2>
       <h3>{datestart}-{dateend}</h3>

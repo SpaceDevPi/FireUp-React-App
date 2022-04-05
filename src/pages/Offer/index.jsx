@@ -145,7 +145,7 @@ console.log(number)
             <h2>Offer available </h2>
             <h2>{article.datestart}- {article.dateend}</h2>
           </header>
-          <img  src={`http://localhost:3008/uploads/`+article.image} alt='cover' />
+          <img  src={`http://localhost:5000/uploads/`+article.image} alt='cover' />
 
           <h1 className="testcoachname">Coach : {article.coachfullname}</h1>
 

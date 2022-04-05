@@ -18,13 +18,13 @@ const BlogItem = ({
 }) => {
   return (
     <div className='blogItem-wrap'>
-      <img className='blogItem-cover' src={`http://localhost:3008/uploads/`+Image} alt='cover' />
+      <img className='blogItem-cover' src={`http://localhost:5000/uploads/`+Image} alt='cover' />
       <Chip label={Category} />
       <h3>{Title}</h3>
       <p className='blogItem-desc'>{Description}</p>
       <footer>
         <div className='blogItem-author'>
-          <img src={`http://localhost:3008/uploads/`+coachimage} alt='avatar' />
+          <img src={`http://localhost:5000/uploads/`+coachimage} alt='avatar' />
           <div>
             <h6>{coachfullname}</h6>
             <p>{new Date(Date.parse(createdAt)).toLocaleDateString('EN-EN', options)}</p>

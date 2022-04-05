@@ -8,7 +8,7 @@ const ListItem = ({
 }) => (
   <div className='listItem-wrap'>
     
-    <img  src={`http://localhost:3008/uploads/`+image}  alt='' />
+    <img  src={`http://localhost:5000/uploads/`+image}  alt='' />
     
     <footer>
 
