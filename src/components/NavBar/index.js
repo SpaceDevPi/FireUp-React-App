@@ -116,7 +116,7 @@ const test=()=>{
           </NavLink>
           <NavLink to="/profile">Profile</NavLink>
           {/* <NavLink to="/AllProjectInvestor">Projects</NavLink> */}
-          <NavLink to="/Coachs">Coachs</NavLink>
+          <NavLink to="/offerlist">Coachs</NavLink>
           <NavLink to="/HomeEvent">Events</NavLink>
           <button className='button' onClick={onLogout}>Logout</button>
           
@@ -143,7 +143,7 @@ const test=()=>{
             </div></NavLink>
           <NavLink to="/profileInvestor">Profile</NavLink>
           <NavLink to="/AllProjectInvestor">Projects</NavLink>
-          <NavLink to="/Coachs">Coachs</NavLink>
+          <NavLink to="/offerlist">Coachs</NavLink>
           <NavLink to="/HomeEvent">Events</NavLink>
 
 
@@ -161,7 +161,7 @@ const test=()=>{
           <NavLink to="/AllProjectInvestor">Explore Investments</NavLink>
           <NavLink to="/signUpContractor">Get Funding</NavLink>
           <NavLink to="/blog">Blog</NavLink>
-          <NavLink to="/signInCoach">Join Team</NavLink>
+          <NavLink to="/offerlist">Our Coachs</NavLink>
           <NavLink to="/event">Explore Event</NavLink>
           <NavLink to="/about">About Us</NavLink>
         </NavMenu><NavBtn>

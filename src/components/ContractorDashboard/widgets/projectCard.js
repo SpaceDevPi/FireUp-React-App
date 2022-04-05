@@ -1,4 +1,3 @@
-import ManageMyProjects from '../../Projects/ManageProjectContractor/ManageMyProjects';
 import './widget.css';
 
 function ProjectCard() {
@@ -6,7 +5,6 @@ function ProjectCard() {
         <div className="project-card card">
             <div className="card-header">
                   <h3>My project</h3>
-                  {/* <ManageMyProjects/> */}
                 </div>
                 <div className="card-body">
                     
