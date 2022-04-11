@@ -82,7 +82,7 @@ if (investor != null){
       <Wrapper>
         <ImgContainer>
           {/* <Image src={"../../images/"+toRender.images} /> */}
-          <img src={`http://localhost:5000/uploads/${toRender.images}`}/>     
+          <Image src={`http://localhost:5000/uploads/${toRender.images}`}/>     
 
         </ImgContainer>
         <InfoContainer>

@@ -4,7 +4,10 @@ import Rocket from '../assets/images/rocket.svg';
 import Sidebar from '../components/SideBar';
 import Navbar from '../components/NavBar';
 import Home from '../pages/Home';
-    import "bootstrap/dist/css/bootstrap.min.css"
+    // import "bootstrap/dist/css/bootstrap.min.css"
+
+import './meet.css';
+
 import {Explore} from "../pages/Explore";
 import About from "../pages/About";
 import Event from "../pages/Event";
@@ -41,7 +44,8 @@ import Offerlist from './Offerlist';
 import Offer from './Offer';
 import Offertickets from './Offertickets';
 import Articles from './Articles';
-
+import Main from '../components/Main/Main';
+import Room from '../components/Room/Room'
 import Blog from './Blog/index';
 
 import  { Suspense,useEffect } from "react";
@@ -68,6 +72,7 @@ const Index = () => {
 
   return (
     <>
+    
       <Sidebar isOpen={isOpen}  toggle={toggleSidebar} />
       <Navbar toggle={toggleSidebar} />
       <Routes>
@@ -76,7 +81,8 @@ const Index = () => {
         <Route path="/about" element={<About />} />
         <Route path="/event" element={<Event />} />
         <Route path="/blog" element={<Articles />} />
-
+        <Route exact path="/meet" element={<Main/>} />
+          <Route exact path="/meet/room/:roomId" element={<Room/>} />
         <Route path="/blog/:id" element={<Blog />} />
         <Route path="/signUpContractor" element={<SignUpContractor />} />
         <Route path="/signInContractor" element={<Login />} />

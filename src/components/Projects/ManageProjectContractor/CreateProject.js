@@ -131,7 +131,7 @@ const onSubmit = async (e) => {
          alert('your project has been posted succesfully')
     
        
-     navigate("/explore");
+     navigate("/managemyprojects");
     }
     }
   else {

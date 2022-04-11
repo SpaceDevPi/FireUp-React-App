@@ -76,7 +76,7 @@ export default function ManageMyProjects() {
                                                 <td style={{color:'#146c43',fontWeight: 'bold'}}>APPROVED  </td>
 
                                                 <td className="d-flex justify-content-between">
-                                          <button className="btn btn-success"  onClick={()=>navigate('/explore/projectdetail/'+element._id)}><RemoveRedEyeIcon /></button>
+                                          <button className="btn btn-success"  onClick={()=>navigate('/AllProjectInvestor/projectdetail/'+element._id)}><RemoveRedEyeIcon /></button>
                                                      <button className="btn btn-primary" onClick={()=>navigate('/editproject/'+element._id)}><CreateIcon /></button>
                                                     <button className="btn btn-danger"   onClick={() => deleteProject(element._id)}><DeleteOutlineIcon /></button>
                                                     {/* <button className="btn btn-primary"  onClick={()=>navigate('/managemyprojects/createpost/'+element.title +'/'+element._id)}><PostAddIcon /></button> */}

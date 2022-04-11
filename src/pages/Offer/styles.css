@@ -14,6 +14,12 @@
 .blog-wrap header {
   text-align: center;
 }
+.banner_searchbutton{
+  background-color: white !important;
+  font-weight: 900 !important;
+  text-transform: inherit !important;
+  color: #3eff03  !important;
+}
 
 .blog-date {
   font-size: 0.8rem;
@@ -113,9 +119,17 @@
   margin-top: -40rem; 
   margin-left: 60rem; 
 
-  display: flex;
-  justify-content: center;
+  display: inline-block;
 }
 .wew{
   color: cyan;
+}
+.calendartest{
+  margin-top: -40rem; 
+  margin-left: -90rem;
+  display: flex;
+  justify-content: center;
+}
+.yo {
+  color: red;
 }
