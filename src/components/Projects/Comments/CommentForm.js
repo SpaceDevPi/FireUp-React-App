@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { queryApi } from "../../../utils/queryApi";
 import { BtnLink, BtnWrap, Form, TextArea } from "./Comment";
 import "./Comment.css"
+import styled from "styled-components";
 
 const CommentForm = ({
   handleSubmit,
@@ -82,4 +83,7 @@ const isCurrentUserId = currentUserId===1;
   );
 };
 
+
+
+const Container = styled.div``;
 export default CommentForm;

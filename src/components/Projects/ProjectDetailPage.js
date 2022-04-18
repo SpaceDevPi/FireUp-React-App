@@ -13,7 +13,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 import { FacebookIcon, TwitterIcon } from "react-share";
 import PostsPageByProject from "./PostsPageByProject";
-
+import ReactPlayer from "react-player"
+import Converter from "./Currency-converter/Converter";
 
 
 
@@ -71,11 +72,16 @@ if (investor != null){
   investorId= investor._id
 }
 
+// function websiteVisits(response) {
+//   document.querySelector("#visits").textContent = response.value;
+// }
 
   return (
-    
     <div>
-     
+      <Converter></Converter>
+          {/* <script async src="https://api.countapi.xyz/hit/projectdetail-1524/b921e75d-11d3-4eec-bbdf-ce0dac450dec?callback=websiteVisits"></script>
+
+     <h1>This site has been visited <span id="visits"></span> times.</h1> */}
     <Container>
     {toRender  ? (
 
@@ -144,10 +150,24 @@ if (investor != null){
 )}
     </Container>
     <MoreDetailPage/>
+    
+
     <PostsPageByProject projectid={projectid}/>
 
     <Comments currentUserId={investorId} projectid={projectid} />
-    
+    <div className="container">
+    <div className="player-wrapper">
+
+    <ReactPlayer
+    className="react-player"
+    playing
+    width="100%"
+    height="100%"
+              url="https://www.twitch.tv/videos/1458515587"
+              controls
+              />
+
+            </div></div>
     </div>
   );
 };
