@@ -3,6 +3,7 @@ import { useState , useEffect} from "react";
 import axios from "axios";
 import { queryApi } from "../../utils/queryApi";
 import {useApi} from "../../hooks/useApi";
+import { useSelector } from "react-redux";
 import {
     CalendarToday,
     LocationSearching,
@@ -16,15 +17,10 @@ import {
 
 export default function CampanySection() {
     const [company, setCompany] = useState(false);
-    const [idEntrepreneur , setId] = useState('');
+    const { entrepreneur } = useSelector((state) => state.auth);
     
 
-    const getUser = () => {
-        const user = localStorage.getItem('user')
-        const pp = JSON.parse(user)
-        console.log(pp._id)
-        setId(pp._id)
-      }
+   
 
 
 //       const [company,err,reload]= useApi("companies/entrepreneur/6248550b1f4217b5a91b2a93")
@@ -33,9 +29,8 @@ export default function CampanySection() {
 
 
 async function fetchData() {
-    console.log("aaaaaaa")
     
-    const [res, err] = await queryApi("companies/entrepreneur/6248550b1f4217b5a91b2a93" );
+    const [res, err] = await queryApi("companies/entrepreneur/"+entrepreneur._id); 
     console.log(res[0])
 
     setCompany(res[0]);
@@ -43,7 +38,7 @@ async function fetchData() {
   useEffect( () => {
     // getUser();
     fetchData()
-       }, [idEntrepreneur]);
+       }, [entrepreneur._id]);
        console.log("company: "+company)
 
 // const getCompany = () => {

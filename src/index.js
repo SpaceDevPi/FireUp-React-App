@@ -7,6 +7,11 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { EventProvider } from "../src/components/events/context";
 import "bootstrap/dist/css/bootstrap.min.css"
+import Kommunicate from '@kommunicate/kommunicate-chatbot-plugin';
+
+
+Kommunicate.init("3ce8803ca0caa1de897a96033bf92af3c",{appId:"3ce8803ca0caa1de897a96033bf92af3c"}); 
+
 
 ReactDOM.render(
   

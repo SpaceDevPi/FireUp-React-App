@@ -38,6 +38,8 @@ import Events from "../components/events/pages/AllEvents";
 import SingleEvent from "../components/events/pages/SingleEvent";
 import BookNow from "../components/events/pages/BookNow";
 import TicketBooking from "../components/events/pages/TicketBooking";
+import KommunicateChat from '../chat';
+import Chat from '../components/ContractorDashboard/Chat';
 
 
 const Index = () => {
@@ -65,6 +67,7 @@ const Index = () => {
         <Route path="/InvestementProject/:id" element={<InvestementForm/>}/>
         <Route path="/dashboard" element={<ContractorDashboard />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="/profileInvestor" element={<ProfileInvestor />} />
         <Route path="/projectsInvestor" element={<InvestorProject/>}/>
         <Route path="/AllProjectInvestor" element={<AllProjectInvestor/>}/>
@@ -90,6 +93,7 @@ const Index = () => {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <ToastContainer />
+      <KommunicateChat />
     </>
   )
 }
