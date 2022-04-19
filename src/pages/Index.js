@@ -4,7 +4,7 @@ import Rocket from '../assets/images/rocket.svg';
 import Sidebar from '../components/SideBar';
 import Navbar from '../components/NavBar';
 import Home from '../pages/Home';
-    // import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.min.css"
 
 import './meet.css';
 
@@ -53,16 +53,15 @@ import  { Suspense,useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchOffers } from "../redux/slices/offersSlice";
 import { fetchArticles } from "../redux/slices/articlesSlice";
+import Blockchain from '../Blockchain/Blockchain'
 
 const Index = () => {
-  console.log("davv")
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchOffers());
     dispatch(fetchArticles());
 
-    console.log("herew")
   }, [dispatch]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -113,6 +112,10 @@ const Index = () => {
         <Route path="/managemyprojects/managemyposts/:nomprojet/:id" element={<ManageUpdatePost />} />
         <Route path="/managemyprojects/ManageProjectsWaitingForConfirmation" element={<ManageProjectsWaitingForConfirmation/>} />
         <Route path="/managemyprojects/ManageRefusedProjects" element={<ManageRefusedProjects/>} />
+
+        <Route path="/Blockchain" element={<Blockchain/>} />
+
+
         
         
 

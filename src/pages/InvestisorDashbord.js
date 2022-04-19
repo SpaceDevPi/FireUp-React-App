@@ -13,7 +13,7 @@ const InvestisorDashbord = () => {
 
   useEffect(() => {
     if (!investor) {
-      navigate('/signInContractor');
+      navigate('/LoginInvestor');
     }
   }, [investor, navigate]);
 

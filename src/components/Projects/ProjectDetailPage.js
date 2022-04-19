@@ -25,6 +25,10 @@ export default function ProjectDetailPage(props)  {
   function investir () {
     history("/InvestementProject/"+id);
   }
+  function BlockChain() {
+    history("/Blockchain");
+
+  }
 const a = ""
 let date
 let date_modifier
@@ -112,7 +116,10 @@ if (investor != null){
 
           <br/><br/>
           </Row>
+          <div >
           <ButtonInvest onClick={investir}>Invest</ButtonInvest>
+          <ButtonBlockChain onClick={BlockChain}> Blockchain</ButtonBlockChain>
+          </div>
           <br/><br/>
           <FacebookShareButton
         url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
@@ -269,7 +276,22 @@ const Stats = styled.div `
   margin-bottom: 0px;
   margin-left: auto;
 }`;
+export const ButtonBlockChain= styled(LinkS)`
+color:#fff;
+background:#F57C00;
+font-size:1.2rem;
+font-weigth:600;
+padding:.7rem 3rem;
+border-radius:.5rem;
+border:none;
+cursor:pointer;
 
+left:60%;
+
+position: absolute;
+
+&:hover{background:#000;color:#fff}
+`
 export const ButtonInvest = styled(LinkS)`
     color:#fff;
     background:#F57C00;
@@ -286,6 +308,7 @@ export const ButtonInvest = styled(LinkS)`
 
     &:hover{background:#000;color:#fff}
 `
+
 
 export const Row = styled.div`
     display:flex;

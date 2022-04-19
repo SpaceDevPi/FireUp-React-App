@@ -231,6 +231,11 @@ code {
   margin-top: 3%;
 }
 
+.imageProject{
+  height : 80%; 
+  width: 80%;
+}
+
 .inputContainer{
   display: flex;
   margin-left : 60%; 
@@ -709,4 +714,188 @@ justify-content: center;
     width: 95vw;
     max-width: 1170px;
   }
+}
+
+
+
+.CompteBlock{
+  margin-top:7.5%; 
+  width: 30%;
+  height: 300px;
+  margin-left: 2%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
+  display: flex;
+  /* flex-direction: column; */
+}
+.text-ether{
+  color:white; 
+  margin-top : 10%; 
+  margin-left: 10%;
+  font-size:30px; 
+
+
+}
+.infoether{
+  margin-top: 1%;
+  margin-left: 1%;
+
+}
+
+.eth-card {
+  height: 100%;
+  width: 100%;
+  background-color:#a099ff;
+  background-image: 
+    radial-gradient(at 83% 67%, rgb(152, 231, 156) 0, transparent 58%), 
+    radial-gradient(at 67% 20%, hsla(357,94%,71%,1) 0, transparent 59%), 
+    radial-gradient(at 88% 35%, hsla(222,81%,65%,1) 0, transparent 50%), 
+    radial-gradient(at 31% 91%, hsla(9,61%,61%,1) 0, transparent 52%), 
+    radial-gradient(at 27% 71%, hsla(336,91%,65%,1) 0, transparent 49%), 
+    radial-gradient(at 74% 89%, hsla(30,98%,65%,1) 0, transparent 51%), 
+    radial-gradient(at 53% 75%, hsla(174,94%,68%,1) 0, transparent 45%);
+}
+
+.ContainerFormEther{
+  margin-top:5%; 
+  width: 20%;
+  height: 400px;
+  margin-left: 8%;
+  background-color: white;
+  padding-left: 2%;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+}
+.firstEtherCompo{
+  display: flex;
+
+}
+.inputEther{
+  width: 250px;
+  height: 30px;
+  padding-left: 5px;
+  font-size: 20px;
+  border: 2px solid #f26716;
+  border-radius: 5px;
+  margin-left: 30px;
+  margin-top: 15px;
+}
+
+
+.buttonEther{
+  border-radius: 7px;
+  width: 100px;
+  height: 40px;
+  background-color: #f26716;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin-top:15px ; 
+  margin-left: 30%;
+  
+}
+.buttonEther:hover {
+  border-radius: 7px;
+  width: 100px;
+  height: 40px;
+  background-color: #f58746;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin-top:15px ; 
+  margin-left: 40%;
+  
+}
+
+.buttonConnect{
+  border-radius: 7px;
+  width: 200px;
+  height: 70px;
+  background-color: #f26716;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin-top:15px ; 
+  margin-left: 45%;
+  font-size: 20px;
+  
+}
+.buttonConnect:hover {
+  border-radius: 7px;
+  width: 200px;
+  height: 70px;
+  background-color: #f58746;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin-top:15px ; 
+  margin-left: 45%;
+  font-size: 20px;
+  
+}
+
+.CompteBlock2{
+  width: 30%;
+  height: 300px;
+  margin-top:7.5%; 
+  margin-left: 8%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
+  display: flex;
+  padding-top:10px; 
+  padding-left: 10px;
+  justify-content:center; 
+}
+.serviceEther{
+  margin-top: 10%;
+}
+
+.transactionBlock{
+  margin-top:2%; 
+  width: 20%;
+  height: 250px;
+  margin-left:2%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
+  display: flex;
+  padding-top:10px; 
+  padding-left: 10px;
+  justify-content:center; 
+  color:#f26716;
+  font-size:20px; 
+}
+.transactionsbloc{
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding : 2%;
+  margin-bottom: 5;
+
+  
+
+}
+.transactions{
+  display: flex;
+  height: 100%;
+  margin-top:2%; 
+
 }
