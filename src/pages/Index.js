@@ -113,7 +113,7 @@ const Index = () => {
         <Route path="/managemyprojects/ManageProjectsWaitingForConfirmation" element={<ManageProjectsWaitingForConfirmation/>} />
         <Route path="/managemyprojects/ManageRefusedProjects" element={<ManageRefusedProjects/>} />
 
-        <Route path="/Blockchain" element={<Blockchain/>} />
+        <Route path="/Blockchain/:id" element={<Blockchain/>} />
 
 
         
