@@ -52,6 +52,8 @@ import  { Suspense,useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 import { fetchOffers } from "../redux/slices/offersSlice";
+import { fetchtickets } from "../redux/slices/ticketsSlice";
+
 import { fetchArticles } from "../redux/slices/articlesSlice";
 import Converter from "../components/Projects/Currency-converter/Converter";
 
@@ -63,6 +65,7 @@ const Index = () => {
   useEffect(() => {
     dispatch(fetchOffers());
     dispatch(fetchArticles());
+    dispatch(fetchtickets());
 
   }, [dispatch]);
   const [isOpen, setIsOpen] = useState(false);

@@ -13,7 +13,6 @@ import { BrowserRouter } from 'react-router-dom';
 import TransactionProvider from './Blockchain/context/TransactionContext'
 
 let persistor = persistStore(store);
-
 ReactDOM.render(
   <TransactionProvider>
   <React.StrictMode>

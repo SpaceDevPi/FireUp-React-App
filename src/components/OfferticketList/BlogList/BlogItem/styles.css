@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
 }
-.blogItem-cover {
+.blogItem-cover3 {
   width: 100%;
-  height: 250px;
+  height: 400px;
   object-fit: cover;
   border-radius: 20px;
   margin-bottom: 0.5rem;
