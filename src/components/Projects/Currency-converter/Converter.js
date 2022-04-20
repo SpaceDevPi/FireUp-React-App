@@ -1,6 +1,8 @@
 import CurrencyInput from "./CurrencyInput";
 import {useState, useEffect} from "react";
 import axios from "axios";
+import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
+import './currencyInput.css';
 
 function Converter() {
 
@@ -56,12 +58,17 @@ function Converter() {
   return (
    
    
-    <div>
-      {/* <div className="container"> */}
-      <div class="main__container">
-      <h1>Currency Converter</h1>
 
-      <div className="row">
+     
+      
+
+      <div className="container-converter">
+        <h1>Currency Converter</h1>
+<div className="row-container">
+<h3>From</h3>
+<h3>To</h3>
+</div>
+<div className="row-container">
 
       <CurrencyInput
       
@@ -70,15 +77,17 @@ function Converter() {
         currencies={Object.keys(rates)}
         amount={amount1}
         currency={currency1} />
+            
+
+<CompareArrowsIcon style={{ fontSize: 70,color:'#F57C00' }}/>
       <CurrencyInput
         onAmountChange={handleAmount2Change}
         onCurrencyChange={handleCurrency2Change}
         currencies={Object.keys(rates)}
         amount={amount2}
         currency={currency2} />
-      </div>
-      </div>
-    </div>
+            </div> 
+      </div> 
   );
 }
 

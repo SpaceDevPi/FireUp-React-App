@@ -78,7 +78,9 @@ if (investor != null){
 
   return (
     <div>
+
       <Converter></Converter>
+     
           {/* <script async src="https://api.countapi.xyz/hit/projectdetail-1524/b921e75d-11d3-4eec-bbdf-ce0dac450dec?callback=websiteVisits"></script>
 
      <h1>This site has been visited <span id="visits"></span> times.</h1> */}
