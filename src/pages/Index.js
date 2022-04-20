@@ -55,16 +55,15 @@ import { fetchOffers } from "../redux/slices/offersSlice";
 import { fetchArticles } from "../redux/slices/articlesSlice";
 import Converter from "../components/Projects/Currency-converter/Converter";
 
+import Blockchain from '../Blockchain/Blockchain'
 
 const Index = () => {
-  console.log("davv")
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchOffers());
     dispatch(fetchArticles());
 
-    console.log("herew")
   }, [dispatch]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -117,6 +116,11 @@ const Index = () => {
         <Route path="/managemyprojects/ManageRefusedProjects" element={<ManageRefusedProjects/>} />
         <Route path="/converter" element={<Converter/>} />
 
+
+        <Route path="/Blockchain" element={<Blockchain/>} />
+
+
+        
         
 
         <Route path="*" element={<NotFoundPage />} />

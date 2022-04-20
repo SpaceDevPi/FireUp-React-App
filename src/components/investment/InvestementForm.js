@@ -110,7 +110,9 @@ if (investement_Form=="crowdequity"){
   return (
     <Container>
             
-    <img src={`http://localhost:5000/uploads/${formProject.imageProject}`}/>     
+    {/* <img src={`http://localhost:5000/uploads/${formProject.imageProject}`}/>      */}
+    <img src='/project.png' className="imageProject"/>
+
     <div class="MultiStep">
     <div className="form-Login" >
 

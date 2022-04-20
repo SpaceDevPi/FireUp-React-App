@@ -33,6 +33,7 @@ const Login = () => {
         .post("http://localhost:5000/api/entrepreneurs/login", values)
         .then((res) => {
           localStorage.setItem("token", res.data.token);
+          console.log('value user : ' + values)
         })
         .catch((err) => {
           console.log(err);
@@ -89,7 +90,7 @@ const Login = () => {
             </div>
           </div>
           <div className="footer">
-            <button type="submit">Submit</button>
+            <button type="submit" className="button">Submit</button>
           </div>
         </div>
       </form>

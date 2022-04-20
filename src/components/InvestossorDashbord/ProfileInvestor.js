@@ -49,7 +49,7 @@ const [formData, setFormData] = useState({
     image : ""
 });
 
-          console.log(id)
+          console.log("my id is " + id)
           useEffect(() => {
             fetchData();
           }, [id]);
@@ -87,8 +87,10 @@ function ShowAccreditForm() {
   }
   
 }
+console.log(toRender)
 async function fetchData() {
   const [res, err] = await queryApi("investors/investorId/" + id);
+  if (toRender!=null) {
   setFormData({
     username: toRender.username,
     firstName: toRender.firstName,
@@ -106,7 +108,13 @@ async function fetchData() {
     image : toRender.image
     
   });
+
 }
+}
+console.log(formData)
+
+
+
 const { username, firstName, lastName,email ,password,phoneNumber,sexe,datOfBirth,adress,accreditationForm,centerOfInterest,accountType, image} = formData;
 
 
@@ -122,6 +130,7 @@ const onSubmit = async (e) => {
       visbile: true,
       message: JSON.stringify(err.errors, null, 2),
     });
+    navigate("/dashboardInvestor");
     
   } else navigate("/dashboardInvestor");
 };
@@ -229,7 +238,7 @@ const onDrop = (files) => {
                     type="text"
                     placeholder={toRender.username}
                     className="userUpdateInput"
-                    value={formData.username}
+                    value={username}
                     onChange={(e) => {
                       setFormData({ ...formData, username: e.target.value });
                     }}
@@ -241,7 +250,7 @@ const onDrop = (files) => {
                     type="text"
                     placeholder={toRender.firstName}
                     className="userUpdateInput"
-                    value={formData.firstName}
+                    value={firstName}
                     onChange={(e) => {
                       setFormData({ ...formData, firstName: e.target.value });
                     }}                  />
@@ -252,7 +261,7 @@ const onDrop = (files) => {
                     type="text"
                     placeholder={toRender.lastName}
                     className="userUpdateInput"
-                    value={formData.lastName}
+                    value={lastName}
                     onChange={(e) => {
                       setFormData({ ...formData, lastName: e.target.value });
                     }}
@@ -264,7 +273,7 @@ const onDrop = (files) => {
                     type="text"
                     placeholder={toRender.phoneNumber}
                     className="userUpdateInput"
-                    value={formData.phoneNumber}
+                    value={phoneNumber}
                     onChange={(e) => {
                       setFormData({ ...formData, phoneNumber: e.target.value });
                     }}
@@ -275,7 +284,8 @@ const onDrop = (files) => {
                   <input
                     type="date"
                     className="userUpdateInput"
-                    value={formData.datOfBirth}
+                    placeholder={toRender.datOfBirth}
+                    value={datOfBirth}
                     onChange={(e) => {
                       setFormData({ ...formData, datOfBirth: e.target.value });
                     }}
@@ -287,7 +297,7 @@ const onDrop = (files) => {
                     type="text"
                     placeholder={toRender.adress}
                     className="userUpdateInput"
-                    value={formData.adress}
+                    value={adress}
                     onChange={(e) => {
                       setFormData({ ...formData, adress: e.target.value });
                     }}
@@ -296,7 +306,7 @@ const onDrop = (files) => {
                 <div className="userUpdateItem">
                   <label>Status </label>
                    <select className="userUpdateInput" id="status" 
-                   value={formData.status}
+                   value={status}
                     onChange={(e) => { setFormData({ ...formData, status: e.target.value });  }} >
      <option >{status()}</option>
     <option value="0">Accredit Investor</option>
@@ -307,7 +317,7 @@ const onDrop = (files) => {
                 <div className="userUpdateItem">
                   <label>Acredit Status </label>
                   <div >
-     <select id="accreditationform"   value={formData.accreditationForm}
+     <select id="accreditationform"   value={accreditationForm}
                     onChange={(e) => {
                       setFormData({ ...formData, accreditationForm: e.target.value });
                     }}    className="userUpdateInput"

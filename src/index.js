@@ -10,11 +10,12 @@ import { EventProvider } from "../src/components/events/context";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter } from 'react-router-dom';
+import TransactionProvider from './Blockchain/context/TransactionContext'
 
 let persistor = persistStore(store);
 
 ReactDOM.render(
-  
+  <TransactionProvider>
   <React.StrictMode>
         <EventProvider>
 
@@ -28,7 +29,9 @@ ReactDOM.render(
     </Provider>
     </EventProvider>
 
-  </React.StrictMode>,
+  </React.StrictMode>
+  </TransactionProvider>,
+
   document.getElementById('root')
 );
 
