@@ -812,7 +812,7 @@ justify-content: center;
   cursor: pointer;
   padding: 10px 5px;
   margin-top:15px ; 
-  margin-left: 40%;
+  margin-left: 30%;
   
 }
 
@@ -868,8 +868,8 @@ justify-content: center;
 
 .transactionBlock{
   margin-top:2%; 
-  width: 20%;
-  height: 250px;
+  width: 300px;
+  height: 280px;
   margin-left:2%;
   background-color: white;
   border-radius: 8px;
@@ -877,19 +877,21 @@ justify-content: center;
   display: flex;
   padding-top:10px; 
   padding-left: 10px;
-  justify-content:center; 
+  align-items: space-around;
   color:#f26716;
   font-size:20px; 
+  flex-wrap: nowrap;
 }
 .transactionsbloc{
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
+  display: flex;
   border-radius: 8px;
   margin-top: 5%;
   margin-left: 5%;
   margin-right: 5%;
   padding : 2%;
   margin-bottom: 5;
-
+  background-color: #a099ff; 
   
 
 }
@@ -897,5 +899,23 @@ justify-content: center;
   display: flex;
   height: 100%;
   margin-top:2%; 
+  flex-wrap: wrap ;
+  justify-content: space-around;
+  
 
+}
+.infoInvestement{
+  background-image: url(../public/assets/images/info.jpg);
+  margin-top:5%; 
+  width: 35%;
+  height: 300px;
+  margin-left: 32.5%;
+  background-color: white;
+  padding-left: 2%;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
 }

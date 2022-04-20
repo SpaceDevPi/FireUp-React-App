@@ -73,7 +73,6 @@ const [formProject, setFormProject] = useState({
     formData.idProject= project._id; 
     formProject.title= project.title ;
     formProject.monatantTotal=project.amount_to_collect; 
-    formProject.imageProject= project.images; 
     if(project.montantRestant == -1){
       formProject.montantRestant= project.amount_to_collect; 
     }

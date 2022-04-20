@@ -27,7 +27,7 @@ export default function ProjectDetailPage(props)  {
     history("/InvestementProject/"+id);
   }
   function BlockChain() {
-    history("/Blockchain");
+    history("/Blockchain/"+id);
 
   }
 const a = ""

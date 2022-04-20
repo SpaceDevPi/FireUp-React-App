@@ -117,7 +117,7 @@ const Index = () => {
         <Route path="/converter" element={<Converter/>} />
 
 
-        <Route path="/Blockchain" element={<Blockchain/>} />
+        <Route path="/Blockchain/:id" element={<Blockchain/>} />
 
 
         
