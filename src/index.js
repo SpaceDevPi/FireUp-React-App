@@ -12,7 +12,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter } from 'react-router-dom';
 
 let persistor = persistStore(store);
-
 ReactDOM.render(
   
   <React.StrictMode>

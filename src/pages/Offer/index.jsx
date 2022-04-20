@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { ComboBoxComponent } from '@syncfusion/ej2-react-dropdowns';
 
 // import { blogList } from '../../config/data';
  import Chip from '../../components/common/Chip';
@@ -11,20 +12,50 @@ import EmptyView from '../../components/common/EmptyView';
 import './styles.css';
 import { Link } from 'react-router-dom';
 import { selectOffers } from "../../redux/slices/offersSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { selecttickets } from "../../redux/slices/ticketsSlice";
+
+import {  useSelector } from "react-redux";
 import { queryApi } from "../../utils/queryApi";
+import range from 'lodash/range'
 
 const Offer = () => {
   const { id } = useParams();
   const [formErrors, setFormErrors] = useState({});
-
   const [offerlist] = useSelector(selectOffers);
 const [article, setArticle] = useState(offerlist);
+const [ticketlist] = useSelector(selecttickets);
+const [timelist, setTimelist] = useState([]);
+
+
+const [ticket, setTicket] = useState(ticketlist);
+console.log(ticket)
+
 const [number,setNumber]= useState(0);
   const [searchItem, setSearchItem]= useState("false");
   const [searchItem2, setSearchItem2]= useState("false");
   const [Datee, setDate] = useState("");
   const [hour, setHour]= useState("");
+  const [hourlist, setHourlist]= useState([]);
+  const [hourlist2, setHourlist2]= useState([]);
+  const [testhere, setTesthere]= useState(false);
+
+  let str = 'Hello';
+ 
+  str = str.slice(1);
+  console.log(str);
+
+  // async function fetchData() {
+  //   console.log("aaaaaaa")
+    
+  //   const [res, err] = await queryApi("offerticket");
+   
+  // }
+  // useEffect( () => {
+  //   fetchData()
+    
+  //      }, []);
+
+
   const validate = () => {
     if (!Datee) {
       errors.Datee = "Date is required!";
@@ -52,6 +83,23 @@ const [number,setNumber]= useState(0);
     state:"Booked",
   });
   useEffect(() => {
+    if (article!=offerlist){
+      console.log("aa")
+      console.log(parseInt(article.endtime.slice(1,2))+1)
+      setHourlist(range(article.starttime.slice(1,2),parseInt(article.endtime.slice(1,2))+1)  )
+    // setHourlist(['1','3']) 
+    console.log("oh yes") 
+    setTesthere(true)
+      }
+}, [article._id]);
+
+useEffect(() => {
+hourlist.forEach(element => {console.log(element)
+  setHourlist2(hourlist2=>[...hourlist2,element+":00"]);
+});
+}, [testhere]);
+
+  useEffect(() => {
     setFormData({  idcoach:article.idcoach,
       idoffer:id,
       idclient:"34",
@@ -60,10 +108,36 @@ const [number,setNumber]= useState(0);
       dateoffer:Datee,
       timeoffer:hour,
       numroom:Math.floor(Math.random() * 10000)});
-   
-  }, [article._id,Datee,hour]);
 
-  console.log(formData)
+     
+  }, [article._id,Datee,hour]);
+  
+  console.log(hourlist)
+  console.log(hourlist2)
+
+
+  function arrayRemove(arr, value) { 
+    
+    return arr.filter(function(ele){ 
+        return ele != value; 
+    });
+}
+
+// var result = arrayRemove(array, 6);
+// result = [1, 2, 3, 4, 5, 7, 8, 9, 0]
+  // console.log(article.starttime.slice(1,2))
+  // console.log(article.endtime.slice(1,2))
+ 
+  // var result = arrayRemove(range(article.starttime.slice(1,2),article.endtime.slice(1,2)), 4);
+  const myArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+// const toRemove = new Set(['b', 'c', 'g']);
+const toRemove = new Set(timelist);
+
+const difference = hourlist2.filter( x => !toRemove.has(x) );
+
+console.log(difference); // ["a", "d", "e", "f"]
+  // console.log(result)
+  // console.log(formData)
   useEffect(() => {
     let article = offerlist.find((article) => article._id === (id));
     console.log(article)
@@ -73,6 +147,31 @@ const [number,setNumber]= useState(0);
 
     }
   }, []);
+
+
+  useEffect(() => {
+    setTimelist([])
+    let ticket = ticketlist.filter((ticket) => ticket.dateoffer === (Datee));
+
+    if (ticket) {
+      setTicket(ticket);
+      ticket.forEach(element => {console.log(element)
+        setTimelist(timelist=>[...timelist,element.timeoffer]);
+      });
+    }
+
+    
+  }, [Datee]);
+
+
+  const fn = () =>{
+    console.log("worked")
+    setSearchItem(!searchItem)
+    // ticket.forEach(element => {console.log(element)
+    //   setTimelist([element.timeoffer]);
+    // });
+  }
+console.log(timelist)
   const [isSubmit, setIsSubmit] = useState(false);
   useEffect(async () => {
     if (Object.keys(formErrors).length === 0 && isSubmit)
@@ -85,15 +184,14 @@ setNumber(number+1)
 console.log(res)
 }
 // window.location.href = '/'
+// const [, err2] = await  queryApi("offers/edit/"+formData.idoffer, formData2, "POST", false);
+// if (err2) {
+//   console.lo(err2)
 
-const [, err2] = await  queryApi("offers/edit/"+formData.idoffer, formData2, "POST", false);
-if (err2) {
-  console.lo(err2)
+// } else {
+//    window.location.href = '/'
 
-} else {
-  // window.location.href = '/'
-
-}
+// }
 }
   }, [formErrors])
 
@@ -128,8 +226,14 @@ console.log(err2)
 console.log(number)
 
 }
+const onChange = (e) => {
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+};
   // const test =formatter.format(Date.parse(article.createdAt))
-
+  function ontest(value){
+    console.log(value.value)
+    setHour(value.value)
+  }
   return (
     <>
       <Link className='blog-goBack' to='/offerlist'>
@@ -170,10 +274,12 @@ console.log(number)
               ))}
             </div> */}
 
+
+      
             <h2>Offer available </h2>
             <h2>{article.datestart}- {article.dateend}</h2>
           </header>
-          <img  src={`http://localhost:5000/uploads/`+article.image} alt='cover' />
+          <img class="blogItem-cover2" src={`http://localhost:5000/uploads/`+article.image} alt='cover' />
 
           <h1 className="testcoachname">Coach : {article.coachfullname}</h1>
 
@@ -182,11 +288,14 @@ console.log(number)
           <div class="calendartest">
             <div>
           {!searchItem &&           <Calendar passChildData={article.datestart}  passChildData2={article.dateend} passdatedata={setDate} /> }
-          <button onClick={()=> setSearchItem(!searchItem) } className="banner_searchbutton" variant="outlined">{!searchItem ? "Hide" : "Search Available Date"}</button>
+          <button onClick={()=> fn()  } className="banner_searchbutton" variant="outlined">{!searchItem ? "Hide" : "Search Available Date"}</button>
           <p class="yo">{formErrors.Datee}</p>
 
-          {!searchItem2 &&           <TimeCalender passtime1={article.starttime} passtime2={article.endtime} passtimedata={setHour}/> }
-          <button onClick={()=> setSearchItem2(!searchItem2) } className="banner_searchbutton" variant="outlined">{!searchItem2 ? "Hide" : "Search Available Time"}</button>
+          {/* {!searchItem2 &&           <TimeCalender passtime1={article.starttime} passtime2={article.endtime} passtimedata={setHour}/> }
+          <button onClick={()=> setSearchItem2(!searchItem2) } className="banner_searchbutton" variant="outlined">{!searchItem2 ? "Hide" : "Search Available Time"}</button> */}
+        
+          <ComboBoxComponent  id="comboelement" dataSource={difference} onChange={ontest}  placeholder="Select time" />
+
           <p class="yo">{formErrors.hour}</p>
 
           </div>
@@ -194,7 +303,19 @@ console.log(number)
           
 
 <br/>
+{/* <div className="newUserItem">
+<label>Category</label>
 
+        <select  >
+          
+          <option value="">Choose Category</option>
+          <option value="bronze">bronze</option>
+          <option value="silver">silver</option>
+          <option value="gold">gold</option>
+
+        </select>
+
+      </div> */}
         </div>
 
       ) : (

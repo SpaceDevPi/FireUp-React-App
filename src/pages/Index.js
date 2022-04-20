@@ -52,6 +52,8 @@ import  { Suspense,useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 import { fetchOffers } from "../redux/slices/offersSlice";
+import { fetchtickets } from "../redux/slices/ticketsSlice";
+
 import { fetchArticles } from "../redux/slices/articlesSlice";
 
 const Index = () => {
@@ -61,6 +63,7 @@ const Index = () => {
   useEffect(() => {
     dispatch(fetchOffers());
     dispatch(fetchArticles());
+    dispatch(fetchtickets());
 
     console.log("herew")
   }, [dispatch]);
