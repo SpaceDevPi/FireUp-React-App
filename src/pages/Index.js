@@ -49,6 +49,8 @@ import Room from '../components/Room/Room'
 import Blog from './Blog/index';
 
 import  { Suspense,useEffect } from "react";
+import KommunicateChat from '../chat';
+import Chat from '../components/ContractorDashboard/Chat';
 
 import { useDispatch } from "react-redux";
 import { fetchOffers } from "../redux/slices/offersSlice";
@@ -96,6 +98,7 @@ const Index = () => {
         <Route path="/InvestementProject/:id" element={<InvestementForm/>}/>
         <Route path="/dashboard" element={<ContractorDashboard />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="/profileInvestor" element={<ProfileInvestor />} />
         <Route path="/projectsInvestor" element={<InvestorProject/>}/>
         <Route path="/AllProjectInvestor" element={<AllProjectInvestor/>}/>
@@ -129,6 +132,7 @@ const Index = () => {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <ToastContainer />
+      <KommunicateChat />
     </>
   )
 }

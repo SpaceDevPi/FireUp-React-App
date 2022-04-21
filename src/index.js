@@ -11,6 +11,12 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter } from 'react-router-dom';
 import TransactionProvider from './Blockchain/context/TransactionContext'
+import "bootstrap/dist/css/bootstrap.min.css"
+import Kommunicate from '@kommunicate/kommunicate-chatbot-plugin';
+
+
+Kommunicate.init("3ce8803ca0caa1de897a96033bf92af3c",{appId:"3ce8803ca0caa1de897a96033bf92af3c"}); 
+
 
 let persistor = persistStore(store);
 ReactDOM.render(

@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import {useApi} from '../hooks/useApi';
 import '../styles/dashboard.css';
 import WalletCard from "../components/ContractorDashboard/widgets/walletCard";
 import NotificationCard from "../components/ContractorDashboard/widgets/notificationCard";
@@ -10,26 +12,20 @@ import CoachCard from "../components/ContractorDashboard/widgets/coachCard";
 const ContractorDashboard = () => {
   const navigate = useNavigate();
 
-  const [user, setUser] = useState(false);
-
-  const getUser = () => {
-    const user = localStorage.getItem("user");
-    const pp = JSON.parse(user);
-    console.log(pp);
-    setUser(pp);
-  };
+  const { entrepreneur } = useSelector((state) => state.auth);
+  const [toRender,err,reload] = useApi('entrepreneurs/'+entrepreneur._id);
+  console.log(toRender);
 
   useEffect(() => {
-    getUser();
-  }, []);
-
-  useEffect(() => {
-    if (!user) {
+    if (!entrepreneur) {
+      navigate('/signInContractor');
     }
-  }, [user, navigate]);
+  }, [entrepreneur, navigate]);
+
 
   return (
     <div>
+      { toRender ? (
       <div className="container">
         <div className="dashboard-header">
           <div className="row">
@@ -60,7 +56,7 @@ const ContractorDashboard = () => {
                         alt="profile-image"
                         class="profile"
                       />
-                      <h5 class="card-title text-center">{user.firstname} {user.lastname}</h5>
+                      <h5 class="card-title text-center">{toRender.firstname} {toRender.lastname}</h5>
                       <p class="card-text text-center">
                         Company: 
                       </p>
@@ -94,6 +90,7 @@ const ContractorDashboard = () => {
           </div>
         </div>
       </div>
+      ) : (<div>hello</div>)}
     </div>
   );
 };
