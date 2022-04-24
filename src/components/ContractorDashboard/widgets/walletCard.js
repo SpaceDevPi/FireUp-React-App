@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 // import useMetaMask from "../../../hooks/metamask";
 import { Button } from 'react-bootstrap'
+import './card.css'
 
 function WalletCard (){
   // const { connect, disconnect, isActive, account, shouldDisable } = useMetaMask()

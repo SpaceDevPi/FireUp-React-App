@@ -11,7 +11,8 @@ const initialState = {
     isError: false,
     isSuccess: false,
     isLoading: false,
-    message: ''
+    message: '',
+    newMessages: 0,
 };
 
 // register entrepreneur
@@ -63,7 +64,17 @@ export const authSlice = createSlice({
             state.isSuccess = false;
             state.isLoading = false;
             state.message = '';
-        }
+        },
+        addNotifications: (state, { payload }) => {
+            if (state.newMessages[payload]) {
+                state.newMessages[payload] += 1;
+            }else {
+                state.newMessages[payload] = 1;
+            }
+        },
+        resetNotifications: (state, { payload }) => {
+            delete state.newMessages[payload];
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -121,5 +132,5 @@ export const authSlice = createSlice({
     }
 });
 
-export const { reset } = authSlice.actions;
+export const { reset, addNotifications, resetNotifications } = authSlice.actions;
 export default authSlice.reducer;

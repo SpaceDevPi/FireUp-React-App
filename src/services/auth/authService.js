@@ -27,7 +27,10 @@ const login = async (userData) => {
 
 
 // logout user
-const logout = () => {
+const logout = async () => {
+    let user = JSON.parse(localStorage.getItem('entrepreneur'));
+    console.log(user);
+    await axios.put(API_URL+'entrepreneurs/logout/'+user._id);
     localStorage.removeItem('entrepreneur');
 }
 

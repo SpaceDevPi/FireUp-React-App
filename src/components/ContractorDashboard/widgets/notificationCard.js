@@ -7,7 +7,7 @@ function NotificationCard() {
                   <h3>Notifications</h3>
                 </div>
                 <div className="card-body">
-                  <div className="row">
+                  <div className="row notif-list">
                     <div className="col">
                         <NotificationsNoneIcon /> This is a notitifaction message.
                     </div>

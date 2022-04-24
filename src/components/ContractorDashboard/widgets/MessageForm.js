@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useRef, useEffect } from 'react'
 import { Form, Button, Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
@@ -10,7 +10,10 @@ function MessageForm() {
     const [message, setMessage] = useState("");
     const {entrepreneur} = useSelector((state) => state.auth);
     const {socket, currentRoom, setMessages, messages, privateMemberMsg} = useContext(AppContext);
-
+    const messageEndRef = useRef(null);
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
     function getFormattedDate() {
         const date = new Date();
         const year = date.getFullYear();
@@ -35,10 +38,8 @@ function MessageForm() {
     const todayDate = getFormattedDate();
 
     socket.off('room-messages').on('room-messages', (roomMessages) => {
-        console.log(roomMessages);
         //setMessages(roomMessages);
         getMessages();  
-        console.log(messages);
     });
 
 
@@ -56,17 +57,77 @@ function MessageForm() {
         getMessages();
     }
 
+    function getEntrepreneur(id){
+        socket.emit("get-entrepreneur", id);
+        socket.on("get-entrepreneur", (payload) => {
+            return payload.firstname + " " + payload.lastname;
+        })
+    }
 
+    function dateRender(date){
+        const today = new Date();
+        const todayDate = today.getDate();
+        const todayMonth = today.getMonth();
+        const todayYear = today.getFullYear();
+        const messageDate = new Date(date);
+        const messageDateDay = messageDate.getDate();
+        const messageDateMonth = messageDate.getMonth();
+        const messageDateYear = messageDate.getFullYear();
+        if(todayDate === messageDateDay && todayMonth === messageDateMonth && todayYear === messageDateYear){
+            return "Today";
+        }else if(todayDate - 1 === messageDateDay && todayMonth === messageDateMonth && todayYear === messageDateYear){
+            return "Yesterday";
+        }else {
+            return messageDate.toDateString();
+        }
+    }
+
+    function scrollToBottom() {
+        if (messageEndRef.current) {
+            messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+
+    function renderMessage(message){
+         if(message.from === entrepreneur._id){
+            return (
+                <li className="clearfix">
+                    <div className="message-data align-right">
+                      <span className="message-data-time" >{message.time}, {dateRender(message.date)}</span> &nbsp; &nbsp;
+                      <span className="message-data-name" >{ message.from }</span> <i class="fa fa-circle me"></i>
+                      
+                    </div>
+                    <div className="message other-message float-right">
+                        {message.content}
+                    </div> 
+                
+                    </li>
+            )
+        } else {
+            return (
+                <li>
+                    <div class="message-data">
+                        <span class="message-data-name"><i class="fa fa-circle online"></i> { message.from}</span>
+                        <span class="message-data-time">{message.time}, {dateRender(message.date)}</span>
+                    </div>
+                    <div class="message my-message">
+                        {message.content}
+                    </div>
+                </li>
+            )
+        }
+    }
     
     return (
         <>
             <div className="messages-output">
                 {!entrepreneur && <div className="alert alert-danger">You are not logged in</div>}
                 {entrepreneur && messages.map((message) => (
-                    <div className="message-container">
-                        {message.content}
-                    </div>
+                    
+                    renderMessage(message)
+            
                 ))}
+                <div ref={messageEndRef} />
                 {/* {entrepreneur && messages.map(({_id: date,messagesByDate}, idx) => {
                     <div key={idx}>
                         <p className="alert alert-info text-center message-date-indicator">{date}</p>  

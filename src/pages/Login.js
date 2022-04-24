@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { login, reset } from "../services/auth/authSlice";
 import Spinner from "../components/Spinner";
 import { AppContext } from "../context/appContext";
+import GoogleButton from "react-google-button";
 
 function Login() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -64,6 +65,11 @@ function Login() {
     }
   };
 
+  const redirectToGoogleSSO = async () => {
+    const googleLoginUrl = `${process.env.REACT_APP_API_URL}/auth/google`;
+    const newWindow = window.open(googleLoginUrl, "_blank", "width=500,height=600");
+    
+  }
 
 
   return (
@@ -113,6 +119,11 @@ function Login() {
 
         <Col>
           Get Funding ? <Link to="/signUpContractor">Register Here</Link>
+        </Col>
+        <Col>
+
+          <GoogleButton onClick={redirectToGoogleSSO}/>
+          
         </Col>
       </div>
     </div>

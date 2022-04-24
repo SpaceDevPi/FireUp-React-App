@@ -13,20 +13,23 @@ import Kommunicate from '@kommunicate/kommunicate-chatbot-plugin';
 Kommunicate.init("3ce8803ca0caa1de897a96033bf92af3c",{appId:"3ce8803ca0caa1de897a96033bf92af3c"}); 
 
 
+
 ReactDOM.render(
   
   <React.StrictMode>
         <EventProvider>
 
     <Provider store={store}>
-
-      <App />
+      
+        <App />
+      
     </Provider>
     </EventProvider>
 
   </React.StrictMode>,
   document.getElementById('root')
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
