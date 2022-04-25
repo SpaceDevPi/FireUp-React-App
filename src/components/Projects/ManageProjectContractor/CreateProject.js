@@ -25,7 +25,7 @@ const { TextArea } = Input;
 // ]
 export default function CreateProject(props) {
   const navigate = useNavigate();
-  const { entrepreneur } = useSelector((state) => state.entrepreneur);
+  const { entrepreneur } = useSelector((state) => state.auth);
 
   const [isSubmit, setIsSubmit] = useState(false);
   const [formErrors, setFormErrors] = useState({});
@@ -42,7 +42,7 @@ export default function CreateProject(props) {
     category: "",
     price_per_share: "0",
     place: "",
-    contractor_id: "",
+
   });
   const {
     title,
@@ -55,7 +55,7 @@ export default function CreateProject(props) {
     category,
     price_per_share,
     place,
-    contractor_id,
+
   } = formData;
 
   const [Images, setImages] = useState("");
@@ -186,7 +186,7 @@ export default function CreateProject(props) {
       category: formData.category,
       price_per_share: formData.price_per_share,
       place: formData.place,
-      contractor_id: entrepreneur._id,
+
     });
     props.refreshFunction(newImages);
   };

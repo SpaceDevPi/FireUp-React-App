@@ -7,7 +7,7 @@ import axios from "axios";
 import { addNotifications, resetNotifications } from '../../../services/auth/authSlice';
 
 
-const url = "http://localhost:5001/rooms";
+const url = "http://localhost:5000/rooms";
 
 function Sidebar() {
     const {entrepreneur} = useSelector((state) => state.auth);
