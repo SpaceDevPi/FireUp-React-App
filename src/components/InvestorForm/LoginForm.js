@@ -1,16 +1,12 @@
-import { radioClasses } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import axios from "axios";
-import { queryApi } from "../../utils/queryApi";
 import { useNavigate  } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import {  useEffect } from 'react';
-import { FaSignInAlt } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { login, loginInvestor, reset } from '../../services/auth/authSlice';
+import { loginInvestor, reset } from '../../services/auth/authSlice';
 import Spinner from '../../components/Spinner';
 import { GoogleLogin } from 'react-google-login';
 

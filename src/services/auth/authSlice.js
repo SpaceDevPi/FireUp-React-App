@@ -2,32 +2,33 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './authService';
 
 // get user from local storage
-const user = JSON.parse(localStorage.getItem('user'));
+const entrepreneur = JSON.parse(localStorage.getItem('entrepreneur'));
 const investor = JSON.parse(localStorage.getItem('investor'));
 
 const initialState = {
-    user: user ? user : null,
+    entrepreneur: entrepreneur ? entrepreneur : null,
     investor : investor ? investor : null , 
     isError: false,
     isSuccess: false,
     isLoading: false,
-    message: ''
+    message: '',
+    newMessages: 0,
 };
 
-// register user
-export const register = createAsyncThunk('auth/register', async(user, thunkAPI) => {
+// register entrepreneur
+export const register = createAsyncThunk('auth/register', async(entrepreneur, thunkAPI) => {
     try {
-        return await authService.register(user);
+        return await authService.register(entrepreneur);
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
     }
 })
 
-// login in user
-export const login = createAsyncThunk('auth/login', async(user, thunkAPI) => {
+// login in entrepreneur
+export const login = createAsyncThunk('auth/login', async(entrepreneur, thunkAPI) => {
     try {
-        return await authService.login(user);
+        return await authService.login(entrepreneur);
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
@@ -63,7 +64,17 @@ export const authSlice = createSlice({
             state.isSuccess = false;
             state.isLoading = false;
             state.message = '';
-        }
+        },
+        addNotifications: (state, { payload }) => {
+            if (state.newMessages[payload]) {
+                state.newMessages[payload] += 1;
+            }else {
+                state.newMessages[payload] = 1;
+            }
+        },
+        resetNotifications: (state, { payload }) => {
+            delete state.newMessages[payload];
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -73,17 +84,17 @@ export const authSlice = createSlice({
             .addCase(register.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-                state.user = action.payload;
+                state.entrepreneur = action.payload;
             })
             .addCase(register.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload;
-                state.user = null;
+                state.entrepreneur = null;
             })
             .addCase(logout.fulfilled, (state) => {
                 state.isLoading = false;
-                state.user = null;
+                state.entrepreneur = null;
             })
             .addCase(login.pending, (state) => {
                 state.isLoading = true;
@@ -91,13 +102,13 @@ export const authSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-                state.user = action.payload;
+                state.entrepreneur = action.payload;
             })
             .addCase(login.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload;
-                state.user = null;
+                state.entrepreneur = null;
             })
             .addCase(loginInvestor.pending, (state) => {
                 state.isLoading = true;
@@ -121,5 +132,5 @@ export const authSlice = createSlice({
     }
 });
 
-export const { reset } = authSlice.actions;
+export const { reset, addNotifications, resetNotifications } = authSlice.actions;
 export default authSlice.reducer;

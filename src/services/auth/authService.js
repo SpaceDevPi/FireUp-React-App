@@ -7,7 +7,7 @@ const register = async (userData) => {
     const response = await axios.post(API_URL+'users', userData);
     
     if(response.data){
-        localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('entrepreneur', JSON.stringify(response.data));
     }
 
     return response.data;
@@ -15,10 +15,10 @@ const register = async (userData) => {
 
 // login user
 const login = async (userData) => {
-    const response = await axios.post(API_URL+'entrepreneurs/login', userData);
+    const response = await axios.post('http://localhost:5001/api/entrepreneurs/login', userData);
     
     if(response.data){
-        localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('entrepreneur', JSON.stringify(response.data));
     }
 
     return response.data;
@@ -27,8 +27,11 @@ const login = async (userData) => {
 
 
 // logout user
-const logout = () => {
-    localStorage.removeItem('user');
+const logout = async () => {
+    let user = JSON.parse(localStorage.getItem('entrepreneur'));
+    console.log(user);
+    await axios.put('http://localhost:5001/api/entrepreneurs/logout/'+user._id);
+    localStorage.removeItem('entrepreneur');
 }
 
 // login investors

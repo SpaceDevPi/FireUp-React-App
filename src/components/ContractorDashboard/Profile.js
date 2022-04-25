@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useApi } from "../../hooks/useApi";
-import { queryApi } from "../../utils/queryApi";
 import axios from "axios";
 import CompanySection from "./companySection";
 
@@ -20,51 +19,62 @@ const url = "http://localhost:5000/api/entrepreneurs/";
 
 export default function Profile() {
   const navigate = useNavigate();
-  const [entrepreneur , setUser] = useState(false)
 
-  const getUser = () => {
-    const user = localStorage.getItem('user')
-    const pp = JSON.parse(user)
-    console.log(pp)
-    setUser(pp)
-  }
+  const { entrepreneur } = useSelector((state) => state.auth);
+  const [data,err,reload] = useApi('entrepreneurs/'+entrepreneur._id);
 
   useEffect(() => {
-      getUser();
-      setFormData({
-        firstname: entrepreneur.firstname,
-        lastname: entrepreneur.lastname,
-        phone: entrepreneur.phone,
-        address: entrepreneur.address,
-        city: entrepreneur.city,
-        state: entrepreneur.state,
-        zip: entrepreneur.zip,
-      });
+    if (!entrepreneur) {
+      navigate('/signInContractor');
+    }
+  }, [entrepreneur, navigate]);
+
+
+  // useEffect(() => {
+      
+  //     setFormData({
+  //       firstname: data.firstname,
+  //       lastname: data.lastname,
+  //       phone: data.phone,
+  //       address: data.address,
+  //       city: data.city,
+  //       state: data.state,
+  //       zip: data.zip,
+  //     });
     
-  }, [entrepreneur.address, entrepreneur.city, entrepreneur.firstname, entrepreneur.lastname, entrepreneur.phone, entrepreneur.state, entrepreneur.zip])
+  // }, [data.address, data.city, data.firstname, data.lastname, data.phone, data.state, data.zip])
 
  
 
   const id = entrepreneur._id;
 
   const [formData, setFormData] = useState({
-    firstname: entrepreneur.firstname,
-    lastname: entrepreneur.lastname,
-    phone: entrepreneur.phone,  
-    address: entrepreneur.address,  
-    city:entrepreneur.city,  
-    state: entrepreneur.state,  
-    zip: entrepreneur.zip,  
+    firstname: "",
+    lastname:   "",
+    phone: "",  
+    address: "", 
+    city: "",  
+    state: "", 
+    zip: "",
   });
 
-
-
-
-  console.log();
+  async function fetchData(){
+    const res = await axios.get(url+id);
+    console.log(res.data);
+    setFormData({
+      firstname: res.data.firstname,
+      lastname: res.data.lastname,
+      phone: res.data.phone,
+      address: res.data.address,
+      city: res.data.city,
+      state: res.data.state,
+      zip: res.data.zip,
+    });
+  }
 
   useEffect(() => {
-    
-  }, []);
+    fetchData();
+  }, [id]);
 
 
   const onSubmit = async (e) => {
@@ -80,7 +90,6 @@ export default function Profile() {
     try {
       const res = await axios.put(`http://localhost:5000/api/entrepreneurs/${id}`, body, config);
       console.log(res);
-      localStorage.setItem("user", JSON.stringify(res.data));
       window.location.href = "/profile";
       
     } catch (err) {
@@ -90,7 +99,7 @@ export default function Profile() {
 
   return (
     <>
-      {entrepreneur ? (
+      {data ? (
         <>
           <div className="user">
             <div className="userTitleContainer">
@@ -100,29 +109,29 @@ export default function Profile() {
               <div className="userShow">
                 <div className="userShowTop">
                   <div className="userShowTopTitle">
-                    <span className="userShowUserTitle">{entrepreneur.firstname} {entrepreneur.lastname}</span>
+                    <span className="userShowUserTitle">{data.firstname} {data.lastname}</span>
                   </div>
                 </div>
                 <div className="userShowBottom">
                   <span className="userShowTitle">Account Details</span>
                   <div className="userShowInfo">
                     <MailOutline className="userShowIcon" />
-                    <span className="userShowInfoTitle">{entrepreneur.email}</span>
+                    <span className="userShowInfoTitle">{data.email}</span>
                   </div>
                   <div className="userShowInfo">
                     <CalendarToday className="userShowIcon" />
-                    <span className="userShowInfoTitle">{ new Date(entrepreneur.birthday).toLocaleDateString()}</span>
+                    <span className="userShowInfoTitle">{ new Date(data.birthday).toLocaleDateString()}</span>
                   </div>
                   <span className="userShowTitle">Contact Details</span>
                   <div className="userShowInfo">
                     <PhoneAndroid className="userShowIcon" />
-                    <span className="userShowInfoTitle">{entrepreneur.phone}</span>
+                    <span className="userShowInfoTitle">{data.phone}</span>
                   </div>
                  
                   <div className="userShowInfo">
                     <LocationSearching className="userShowIcon" />
                     <span className="userShowInfoTitle">
-                      {entrepreneur.address} | {entrepreneur.city} | {entrepreneur.state} 
+                      {data.address} | {data.city} | {data.state} 
                     </span>
                   </div>
                 </div>
@@ -218,9 +227,11 @@ export default function Profile() {
           </div>
         </>
       ) : (
-        <></>
+        <>
+          <p>Profile not found</p>
+        </>
       )}
-      <CompanySection  idEntrepreneur={id}/>
+      <CompanySection />
     </>
   );
 }

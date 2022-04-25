@@ -79,7 +79,7 @@ function Navbar  ({toggle})  {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {user} = useSelector((state) => state.auth);
+  const {entrepreneur} = useSelector((state) => state.auth);
 
   
 
@@ -96,25 +96,24 @@ function Navbar  ({toggle})  {
     navigate('/');
   }
 //console.log(investor)
-const test=()=>{
 
-}
   const renderMenu = () => {
-    if (user) {
+    if (entrepreneur) {
       return (
       
         <NavMenu>
 
           <NavLink to="/dashboard">
           <div>
-            <div className='dashbordNav' onClick={test}>
+            <div className='dashbordNav' >
 
-            Dashboard  {user.firstname}
+            Dashboard  
 
             </div>
             </div>
           </NavLink>
           <NavLink to="/profile">Profile</NavLink>
+          <NavLink to="/chat">Messages</NavLink>
           {/* <NavLink to="/AllProjectInvestor">Projects</NavLink> */}
           <NavLink to="/offerlist">Coachs</NavLink>
           <NavLink to="/HomeEvent">Events</NavLink>
@@ -125,7 +124,7 @@ const test=()=>{
       
 
       
-    }if (investor) {
+    } else if (investor) {
 
        if(toRender){
         console.log(toRender)
@@ -134,7 +133,7 @@ const test=()=>{
         <NavMenu>
           <NavLink to="/dashboardInvestor">
             <div>
-            <div className='dashbordNav' onClick={test}>
+            <div className='dashbordNav' >
              <img src={toRender.image} className='imageNavBar'/> 
 
             Dashboard  {investor.name}

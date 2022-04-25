@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useApi } from "../../../hooks/useApi";
 import { queryApi } from "../../../utils/queryApi";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
@@ -7,10 +7,15 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { NavLink, useParams } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import PostAddIcon from '@mui/icons-material/PostAdd';
+import { useSelector } from 'react-redux';
+
 export default function ManageMyProjects() {
     const navigate = useNavigate();
+    const { entrepreneur } = useSelector((state) => state.auth);
 
-    const [projects,err,reload] = useApi('project/getApprovedProjectsByContractorId/1');
+    
+
+    const [projects,err,reload] = useApi('project/getApprovedProjectsByContractorId/' + entrepreneur._id);
     const deleteProject= async (id)=>{
         const[,err] = await queryApi('project/deleteproject/'+id,{},'DELETE',false);
         if(err){
