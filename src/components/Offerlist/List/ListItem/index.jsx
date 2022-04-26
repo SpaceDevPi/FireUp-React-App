@@ -7,9 +7,11 @@ const ListItem = ({
   item: { image, title, price, type, state, rating ,coachfullname,_id,category},
 }) => (
   <div className='listItem-wrap'>
-    
-    <img  src={`http://localhost:5000/uploads/`+image}  alt='' />
-    
+    {type==="Contractor" ?     <div class="corner-ribbon top-left sticky turquoise shadow">{type}</div>
+: <div class="corner-ribbon top-left sticky blue shadow">{type}</div>}
+
+    <img className="lool" src={`http://localhost:5000/uploads/`+image}  alt='' />
+
     <footer>
 
     <h3>{coachfullname} </h3>
@@ -36,7 +38,7 @@ const ListItem = ({
       </p>
     </footer>
     {/* {state!=="Booked" &&  */}
-    <Link className='blogItem-link' to={`/offer/${_id}`}>
+    <Link className='blogItem-link'   to={`/offer/${_id}`} onClick={() => window.location.href=`/offer/${_id}`}>
           ➝
         </Link>
         {/* } */}

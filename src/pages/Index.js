@@ -65,7 +65,7 @@ const Index = () => {
   useEffect(() => {
     dispatch(fetchOffers());
     dispatch(fetchArticles());
-    dispatch(fetchtickets());
+    // dispatch(fetchtickets());
 
   }, [dispatch]);
   const [isOpen, setIsOpen] = useState(false);
