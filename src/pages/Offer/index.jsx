@@ -91,6 +91,7 @@ const [number,setNumber]= useState(0);
         dateoffer:"",
         timeoffer:"",
         clientfullname:"",
+        offertitle:"",
   });
 
   const [formData2, setFormData2] = useState({
@@ -125,7 +126,7 @@ hourlist.forEach(element => {console.log(element)
       dateoffer:Datee,
       timeoffer:hour,
       clientfullname:investor.name,
-
+      offertitle:article.title,
       numroom:Math.floor(Math.random() * 10000)});
      
   }, [article._id,Datee,hour]);

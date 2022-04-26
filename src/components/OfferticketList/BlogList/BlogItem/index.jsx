@@ -4,22 +4,27 @@ import './styles.css';
 import Stars from '../../../Stars';
 
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
 const BlogItem = ({
   blog: {
-
+    idoffer,
     createdAt,
     coachfullname,
     image,
     numroom,
     timeoffer,
     dateoffer,
-    state,
+    offertitle,
 
   },
 }) => {
+  const [rating, setRating] = useState(5) // initial rating value
   const [testf,settestf] = useState(false)
   const [expired,setexpired] = useState(false)
-
+  const [formData2, setFormData2] = useState({
+    idoffer:"",
+    star:0,
+  });
   const test = async () => {
      window.location.href='/meet'
     
@@ -45,7 +50,7 @@ setexpired(true)
                       }
     }, []);
 // console.log((parseInt(dateoffer.slice(0,4))===(new Date().getFullYear()))&&((parseInt(dateoffer.split('-')[1])-1)===(parseInt(new Date().getMonth())))&&((parseInt(dateoffer.split('-')[2]))===(new Date().getDate())))
-
+console.log(rating)
   console.log(timeoffer.split(':')[0])
   console.log(new Date().getFullYear())
    console.log(testf)
@@ -63,14 +68,14 @@ setexpired(true)
       <footer>
         <div className='blogItem-author'>
           <div>
-            <h5>{state}</h5>
+            <h5 className='h5test'>Offer title : {offertitle}</h5>
             <p>Booked at :{new Date(Date.parse(createdAt)).toLocaleDateString('EN-EN', options)}</p>
           </div>
         </div>
         {expired ?  <div>
             <h2 className="wew"> please rate this coach</h2>
-          <Stars/>
-          {/* <button className="button-22" role="button" onClick={submitstar}>Rate now!</button> */}
+          <Stars setrating={setRating}/>
+           <button className="button-22" role="button" onClick={submitstar}>Rate now!</button> 
          
 
 
