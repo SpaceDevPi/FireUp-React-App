@@ -111,11 +111,12 @@ const Index = () => {
           path="/managemyprojects/createpost/:idprojet"
           element={<CreatePost />}
         />
-        <Route path="/HomeEvent" element={<HomeEvent></HomeEvent>} />
         <Route exact path="/events" element={<Events />} />
-        <Route exact path="/events/:slug" element={<SingleEvent />} />
-        <Route exact path="/BookNow/:slug" element={<BookNow />} />
-        <Route exact path="/TicketBooking" element={<TicketBooking />} />
+        <Route exact path="/events/:id" element={<SingleEvent />} />
+        <Route exact path="/booknow/:id/:idparticipant" element={<BookNow />} />
+        <Route exact path="/bookings/newBooking" element={<BookNow />} />
+
+        <Route exact path="/TicketBooking/:id" element={<TicketBooking />} />
         <Route path="/offerlist" exact element={<Offerlist />} />
         <Route path="/offer/:id" exact element={<Offer />} />
         <Route path="/Offertickets/:id" exact element={<Offertickets />} />

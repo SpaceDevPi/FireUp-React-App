@@ -1,6 +1,140 @@
- 
+.cardWrapticket {
+  width: 35em;
+  margin: 3em auto;
+  color: #fff;
+  font-family: sans-serif;
+}
+.cardticket {
+  background: linear-gradient(
+    to bottom,
+    #e84c3d 0%,
+    #e84c3d 26%,
+    #ecedef 26%,
+    #ecedef 100%
+  );
+  height: 14em;
+  float: left;
+  position: relative;
+  padding: 1em;
+  margin-top: 100px;
+}
+.cardLeftticket {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  width: 20em;
+}
+.cardRightticket {
+  width: 9em;
+  border-left: 0.18em dashed #fff;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.cardRightticket:before,
+.cardRightticket:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0.9em;
+  height: 0.9em;
+  background: #fff;
+  border-radius: 50%;
+  left: -0.5em;
+}
+.cardRightticket:before {
+  top: -0.4em;
+}
+.cardRightticket:after {
+  bottom: -0.4em;
+}
+
+.titleticket,
+.nameticket,
+.seatticket,
+.timeticket {
+  text-transform: uppercase;
+  font-weight: normal;
+}
+.titleticket h2,
+.nameticket h2,
+.seatticket h2,
+.timeticket h2 {
+  font-size: 1em;
+  color: #525252;
+  margin: 0;
+  padding-top: 1em;
+}
+.titleticket span,
+.nameticket span,
+.seatticket span,
+.timeticket span {
+  font-size: 0.7em;
+  color: #a2aeae;
+}
+.titleticket {
+  margin: 0.8em 0 0 0;
+}
+.nameticket,
+.seatticket {
+  margin: 1.5em 2em 0 0;
+}
+.timeticket {
+  margin: -0.4em 0 0 0;
+}
+.seatticket,
+.timeticket {
+  float: left;
+}
+.eyeticket {
+  position: relative;
+  width: 2em;
+  height: 1.5em;
+  background: #fff;
+  margin: 0 auto;
+  border-radius: 1em/0.6em;
+  z-index: 1;
+}
+.eyeticket:before,
+.eyeticket:after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+}
+.eyeticket:before {
+  width: 1em;
+  height: 1em;
+  background: #e84c3d;
+  z-index: 2;
+  left: 8px;
+  top: 4px;
+}
+.eyeticket:after {
+  width: 0.5em;
+  height: 0.5em;
+  background: #fff;
+  z-index: 3;
+  left: 12px;
+  top: 8px;
+}
+.numberticket {
+  text-align: center;
+  text-transform: uppercase;
+}
+.numberticket h3 {
+  color: #e84c3d;
+  margin: 0.9em 0 0 0;
+  font-size: 2.5em;
+}
+.numberticket span {
+  display: block;
+  color: #a2aeae;
+}
+.barcodeticket {
+  height: 2.5em;
+  width: 0;
+  margin: 0.8em 0 0 0;
+  margin-left: 2em;
   /* margin: 1.2em 0 0 0.8em; */
-  /*
   box-shadow: 1px 0 0 1px #343434, 5px 0 0 1px #343434, 10px 0 0 1px #343434,
     11px 0 0 1px #343434, 15px 0 0 1px #343434, 18px 0 0 1px #343434,
     22px 0 0 1px #343434, 23px 0 0 1px #343434, 26px 0 0 1px #343434,
@@ -9,4 +143,4 @@
     51px 0 0 1px #343434, 56px 0 0 1px #343434, 59px 0 0 1px #343434,
     64px 0 0 1px #343434, 68px 0 0 1px #343434, 72px 0 0 1px #343434,
     74px 0 0 1px #343434, 77px 0 0 1px #343434, 81px 0 0 1px #343434;
-} */
+}

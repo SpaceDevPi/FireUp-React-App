@@ -116,7 +116,7 @@ function Navbar  ({toggle})  {
           <NavLink to="/chat">Messages</NavLink>
           {/* <NavLink to="/AllProjectInvestor">Projects</NavLink> */}
           <NavLink to="/offerlist">Coachs</NavLink>
-          <NavLink to="/HomeEvent">Events</NavLink>
+          <NavLink to="/events">Events</NavLink>
           <button className='button' onClick={onLogout}>Logout</button>
           
         </NavMenu>
@@ -143,7 +143,7 @@ function Navbar  ({toggle})  {
           <NavLink to="/profileInvestor">Profile</NavLink>
           <NavLink to="/AllProjectInvestor">Projects</NavLink>
           <NavLink to="/offerlist">Coachs</NavLink>
-          <NavLink to="/HomeEvent">Events</NavLink>
+          <NavLink to="/events">Events</NavLink>
 
 
           <button className='button' onClick={onLogoutInvestor}>Logout</button>
@@ -161,7 +161,7 @@ function Navbar  ({toggle})  {
           <NavLink to="/signUpContractor">Get Funding</NavLink>
           <NavLink to="/blog">Blog</NavLink>
           <NavLink to="/offerlist">Our Coachs</NavLink>
-          <NavLink to="/event">Explore Event</NavLink>
+          <NavLink to="/events">Explore Event</NavLink>
           <NavLink to="/about">About Us</NavLink>
         </NavMenu><NavBtn>
           <NavBtnLink to="/RegestrationInvestor">Start Investing</NavBtnLink>
