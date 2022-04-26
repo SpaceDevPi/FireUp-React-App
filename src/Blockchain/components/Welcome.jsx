@@ -76,7 +76,7 @@ const Welcome = () => {
       
   }
 
-    const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading } = useContext(TransactionContext);
+    const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading , Balance} = useContext(TransactionContext);
    
     if ( project != null ){
         
@@ -139,7 +139,8 @@ const Welcome = () => {
                 <SiEthereum fontSize={25} color="#fff" />
                 Ethereum <br/>
                 {shortenAddress(currentAccount)}
-
+                <br/>
+                Balance : {Balance} ETH
                 
                 </p>
               </div>

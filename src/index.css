@@ -919,3 +919,24 @@ justify-content: center;
   justify-content: center;
   justify-items: center;
 }
+
+.investorProfileContainer{
+  margin-top : 5px;
+  display: flex;
+  justify-content: center;
+}
+.CompteBlock3{
+  width: 30%;
+  height: 300px;
+  margin-top:7.5%; 
+  margin-left: 1%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
+  display: flex;
+  padding-top:10px; 
+  padding-left: 10px;
+  justify-content:center; 
+  align-items:center;
+  align-content: center;
+}

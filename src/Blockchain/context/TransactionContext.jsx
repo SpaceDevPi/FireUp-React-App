@@ -18,6 +18,7 @@ const createEthereumContract = () => {
  const TransactionsProvider = ({ children }) => {
   const [formData, setformData] = useState({ addressTo: "", amount: "", keyword: "", message: "" });
   const [currentAccount, setCurrentAccount] = useState("");
+  const [Balance , setBalance ] = useState(""); 
   const [isLoading, setIsLoading] = useState(false);
   const [transactionCount, setTransactionCount] = useState(localStorage.getItem("transactionCount"));
   const [transactions, setTransactions] = useState([]);
@@ -52,7 +53,12 @@ const createEthereumContract = () => {
       console.log(error);
     }
   };
-
+  const getUserBalance=(adresse)=>{
+    window.ethereum.request({method: "eth_getBalance", params: [adresse, 'latest']})
+    .then(balance=>{
+      setBalance(ethers.utils.formatEther(balance));
+    })
+  }
   const checkIfWalletIsConnect = async () => {
     try {
       if (!ethereum) return alert("Please install MetaMask.");
@@ -61,8 +67,12 @@ const createEthereumContract = () => {
         
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
+        getUserBalance(accounts[0])
 
         getAllTransactions();
+
+        
+
       } else {
         console.log("No accounts found");
       }
@@ -100,6 +110,8 @@ const createEthereumContract = () => {
       throw new Error("No ethereum object");
     }
   };
+
+
 
   const sendTransaction = async () => {
     try {
@@ -157,6 +169,7 @@ const createEthereumContract = () => {
         sendTransaction,
         handleChange,
         formData,
+        Balance, 
       }}
     >
       {children}

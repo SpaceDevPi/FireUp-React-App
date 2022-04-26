@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Navbar from './Navbar';
-import Grid from '@material-ui/core/Grid';
-import WelcomeWidget from './widgets/WelcomeWidget';
-import AchievementWidget from './widgets/AchibvementWidget';
 import Link from 'react-scroll/modules/components/Link';
 import { NavLink } from 'react-router-dom';
 import ProjectDashbord from  "../Projects/ProjectDashbord";
@@ -13,10 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import {useApi} from '../../hooks/useApi'
 import {queryApi} from '../../utils/queryApi'
+import { TransactionContext } from "../../Blockchain/context/TransactionContext";
+import { AiFillPlayCircle } from "react-icons/ai";
+import { SiEthereum } from "react-icons/si";
+import { BsInfoCircle } from "react-icons/bs";
+import { shortenAddress } from "../../Blockchain/utils/shortenAddress";
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import PrivacyTipOutlinedIcon from '@mui/icons-material/PrivacyTipOutlined';
-import { ColumnDirective, ColumnsDirective, GridComponent } from '@syncfusion/ej2-react-grids';
-
+import Projects from '../../components/Projects/Projects'
 
 export default function MainContent  () {
 
@@ -46,6 +47,7 @@ return "I have individual net worth $200,000 and I have sufficient knowledge to 
 
 
   const navigate = useNavigate();
+  const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading , Balance} = useContext(TransactionContext);
 
   const { investor } = useSelector((state) => state.auth);
   const [toRender,err,reload] = useApi('investors/investorId/'+investor._id);
@@ -67,7 +69,71 @@ return "I have individual net worth $200,000 and I have sufficient knowledge to 
     <>
       { toRender ? (
     <>
-    <Container>
+
+
+<div className="CompteBlock">
+
+ <div className="eth-card ">
+            <div >
+              <div >
+                <div >
+                </div>
+                <BsInfoCircle fontSize={25} color="#fff" className="infoether"/>
+              </div>
+              <div>
+               
+                <p className="text-ether">
+                My Account
+                <br/>
+                <SiEthereum fontSize={25} color="#fff" />
+                
+                Ethereum <br/>
+                {shortenAddress(currentAccount)}
+                <br/>
+                Balance : {Balance} ETH
+                
+                </p>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <div class="col-md-4  float-right m-3 ">
+                  <div class="card5 profile-card-5 profile ">
+                    
+                    <div class="card-body pt-5">
+                      <img
+                        src={toRender.image}
+                        alt="profile-image"
+                        class="profile"
+                      />
+                      <h5 class="card-title text-center">{toRender.firstName} {toRender.lastName}</h5>
+                     
+                      <div class="icon-block text-center">
+                      <p class="mt-3 w-100 float-left text-center buttons">
+                        <button class="btn-view" onClick={() => {navigate("/profileInvestor")}}>view profile</button>
+                      </p>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <div className="CompteBlock3">
+              <div>
+                <h3>Account informations</h3>
+                <div> <span className="userShowInfoTitle"><h2><AccountBoxOutlinedIcon />Your Account type : <span className="userShowInfoTitle">{toRender.accountType}</span></h2></span></div>
+                <div className="userShowInfoTitle"> <h2><PrivacyTipOutlinedIcon className="userShowIcon"/>Your status : <span className="userShowInfoTitle">{status()}</span></h2></div>       
+
+               
+                </div>
+            </div>
+
+           
+
+          
+    {/* <Container>
         <Navbar />
         <div className='informationdashbord'>
           <div className="userShowInfo">
@@ -95,7 +161,7 @@ return "I have individual net worth $200,000 and I have sufficient knowledge to 
           </ProjectContainer>
 
 
-    {/* <Container>
+     <Container>
       
     <span className ="userShowUserTitle">My Projects : </span>
     <NavLink to='/projectsInvestor'>
@@ -136,59 +202,11 @@ return "I have individual net worth $200,000 and I have sufficient knowledge to 
     </Container>
     <Container>
 
-    </Container> */}
-    </SubContainer>
+    </Container> 
+    </SubContainer> */}
 </>
 ) : (<p></p>) }
 
 </>
   )
 }
-
-const Container = styled.div`
-  width: 40%;
-  background: linear-gradient(to bottom right, white 0%, #e6e4ff 70%);
-  border-bottom-right-radius: 2rem;
-  border-top-right-radius: 2rem;
-  margin: 1rem 3rem 1rem 1rem;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 1rem 0 0 0;
-  }
-`;
-
-const SubContainer = styled.div`
-  height: 10%;
-  width: 55%;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  @media screen and (min-width: 320px) and (max-width: 1080px) {
-    height: 100%;
-  }
-`;
-
-const ProjectContainer = styled.div`
-width: 100%;
-height : 100% ; 
-background: linear-gradient(to bottom right, white 0%, #e6e4ff 70%);
-border-bottom-right-radius: 2rem;
-border-top-right-radius: 2rem;
-margin: 1rem 3rem 1rem 1rem;
-@media screen and (min-width: 320px) and (max-width: 1080px) {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 1rem 0 0 0;
-}
-`
-
-const Project= styled.div`
-display : flex;
-justify-content: space-between;
-flex-flow :row wrap; 
-align-items: stretch;
-`
-
