@@ -6,7 +6,7 @@ import { ComboBoxComponent } from '@syncfusion/ej2-react-dropdowns';
  import Chip from '../../components/common/Chip';
  import Stars from '../../components/Stars';
  import Calendar from '../../components/calendar';
- import TimeCalender from '../../components/timecalendar';
+//  import TimeCalender from '../../components/timecalendar';
 
 import EmptyView from '../../components/common/EmptyView';
 import './styles.css';
@@ -17,9 +17,20 @@ import { selecttickets } from "../../redux/slices/ticketsSlice";
 import {  useSelector } from "react-redux";
 import { queryApi } from "../../utils/queryApi";
 import range from 'lodash/range'
+// import { date } from 'yup';
+import { useDispatch } from "react-redux";
+import { fetchticketsbyidoffer } from "../../redux/slices/ticketsSlice";
 
 const Offer = () => {
+  const { investor } = useSelector((state) => state.auth);
+console.log(investor)
+  const dispatch = useDispatch();
+ 
+
   const { id } = useParams();
+  useEffect(() => {
+    dispatch(fetchticketsbyidoffer(id));
+  }, [dispatch,id]);
   const [formErrors, setFormErrors] = useState({});
   const [offerlist] = useSelector(selectOffers);
 const [article, setArticle] = useState(offerlist);
@@ -38,9 +49,12 @@ const [number,setNumber]= useState(0);
   const [hourlist, setHourlist]= useState([]);
   const [hourlist2, setHourlist2]= useState([]);
   const [testhere, setTesthere]= useState(false);
+  const [dates, setdates]= useState([]);
+  const [datesocc, setdatesocc]= useState([]);
+  const [datestosend, setdatestosend]= useState([]);
 
   let str = 'Hello';
- 
+
   str = str.slice(1);
   console.log(str);
 
@@ -76,7 +90,7 @@ const [number,setNumber]= useState(0);
         image:"",
         dateoffer:"",
         timeoffer:"",
-    
+        clientfullname:"",
   });
 
   const [formData2, setFormData2] = useState({
@@ -85,13 +99,16 @@ const [number,setNumber]= useState(0);
   useEffect(() => {
     if (article!=offerlist){
       console.log("aa")
-      console.log(parseInt(article.endtime.slice(1,2))+1)
-      setHourlist(range(article.starttime.slice(1,2),parseInt(article.endtime.slice(1,2))+1)  )
+      console.log(parseInt(article.endtime.split(':')[0])+1)
+      setHourlist(range(article.starttime.split(':')[0],parseInt(article.endtime.split(':')[0])+1)  )
     // setHourlist(['1','3']) 
     console.log("oh yes") 
     setTesthere(true)
       }
 }, [article._id]);
+
+
+
 
 useEffect(() => {
 hourlist.forEach(element => {console.log(element)
@@ -102,13 +119,14 @@ hourlist.forEach(element => {console.log(element)
   useEffect(() => {
     setFormData({  idcoach:article.idcoach,
       idoffer:id,
-      idclient:"34",
+      idclient:investor._id,
       coachfullname:article.coachfullname,
       image:article.image,
       dateoffer:Datee,
       timeoffer:hour,
-      numroom:Math.floor(Math.random() * 10000)});
+      clientfullname:investor.name,
 
+      numroom:Math.floor(Math.random() * 10000)});
      
   }, [article._id,Datee,hour]);
   
@@ -146,24 +164,81 @@ console.log(difference); // ["a", "d", "e", "f"]
       setArticle(article);
 
     }
+    ticketlist.forEach(element => {console.log(element)
+      setdates(dates=>[...dates,element.dateoffer])
+    });
+
+
   }, []);
 
 
   useEffect(() => {
     setTimelist([])
-    let ticket = ticketlist.filter((ticket) => ticket.dateoffer === (Datee));
+    let tickett = ticketlist.filter((ticket) => ticket.dateoffer === (Datee));
 
-    if (ticket) {
-      setTicket(ticket);
-      ticket.forEach(element => {console.log(element)
+    if (tickett) {
+      setTicket(tickett);
+      tickett.forEach(element => {console.log(element)
         setTimelist(timelist=>[...timelist,element.timeoffer]);
       });
     }
 
     
   }, [Datee]);
+  useEffect(() => {
+console.log("yadhashuifaddddddddddddddddd")
+
+      // dates.forEach((date) => {
+      //   console.log(date);
+      //   console.log(datesocc)
+      //   if (datesocc[date]>0) {
+      //     // { ...formData, [e.target.name]: e.target.value }
+      //     setdatesocc(datesocc=>({...datesocc,[date]:9}))
+      //   } else {
+      //     setdatesocc(datesocc=>({...datesocc,[date]:2}))
+      //   }
+      // });
+      let datesocc2=[]
+
+            dates.forEach((date) => {
+        console.log(date);
+        console.log(datesocc2)
+        if (datesocc2[date]>0) {
+          // { ...formData, [e.target.name]: e.target.value }
+         datesocc2[date]+=1;
+        } else {
+          datesocc2[date]=1;
+        }
+      });
+
+     
+      setdatesocc(datesocc2)
+    console.log(datesocc2)
 
 
+  }, [dates]);
+  useEffect(() => {
+
+  dates.forEach(element => {console.log(element)
+    console.log(datesocc[element])
+
+    if ((datesocc[element])>=hourlist.length){
+    console.log("yaa") 
+    setdatestosend(datestosend=>[...datestosend,element]);
+  }
+    // setdates(dates=>[...dates,element.dateoffer])
+  });
+}, [datesocc,hourlist]);
+console.log(datestosend)
+const filteredData = [...new Set(datestosend)];
+console.log(filteredData);
+
+console.log(dates)
+console.log(datesocc)
+console.log(hourlist.length)
+var counts = {};
+ticketlist.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
+console.log(counts)
   const fn = () =>{
     console.log("worked")
     setSearchItem(!searchItem)
@@ -180,7 +255,10 @@ console.log(timelist)
 if (err) {
 console.log(err)
 } else {
+
 setNumber(number+1)
+window.location.href = '/offerlist'
+
 console.log(res)
 }
 // window.location.href = '/'
@@ -287,7 +365,7 @@ const onChange = (e) => {
           <button className="button-33" role="button" onClick={test}>Book now</button>
           <div class="calendartest">
             <div>
-          {!searchItem &&           <Calendar passChildData={article.datestart}  passChildData2={article.dateend} passdatedata={setDate} /> }
+          {!searchItem &&           <Calendar datestodis={filteredData} weekend={article.weekend} passChildData={article.datestart}  passChildData2={article.dateend} passdatedata={setDate} /> }
           <button onClick={()=> fn()  } className="banner_searchbutton" variant="outlined">{!searchItem ? "Hide" : "Search Available Date"}</button>
           <p class="yo">{formErrors.Datee}</p>
 

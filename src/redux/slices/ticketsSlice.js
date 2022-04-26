@@ -49,7 +49,23 @@ export const fetchtickets = () => async (dispatch) => {
 };
 
 export const fetchticketsbyid = (id) => async (dispatch) => {
-  const [res, error] = await queryApi("tickets/findallbyid/"+id);
+  const [res, error] = await queryApi("offerticket/findallbyid/"+id);
+  if (error) {
+    dispatch(setErrors(error));
+  } else {
+    dispatch(populatetickets(res));
+  }
+};
+export const fetchticketsbyidoffer = (id) => async (dispatch) => {
+  const [res, error] = await queryApi("offerticket/findallbyidoffer/"+id);
+  if (error) {
+    dispatch(setErrors(error));
+  } else {
+    dispatch(populatetickets(res));
+  }
+};
+export const fetchticketsbyidcoach = (id) => async (dispatch) => {
+  const [res, error] = await queryApi("offerticket/findallbyidforcoach/"+id);
   if (error) {
     dispatch(setErrors(error));
   } else {

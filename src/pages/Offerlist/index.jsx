@@ -12,6 +12,8 @@ import {  useSelector } from "react-redux";
 import ButtonCartCount from '../../components/common/ButtonCartCount';
 
 const Offerlist = () => {
+  const { investor } = useSelector((state) => state.auth);
+
   const [offerlist] = useSelector(selectOffers);
   console.log(offerlist)
   const [selectedType, setSelectedType] = useState(null);
@@ -106,7 +108,7 @@ const Offerlist = () => {
 
   return (
     <div className='home'>
-            <ButtonCartCount  props={"34"}/>
+            <ButtonCartCount  props={investor._id}/>
 
       {/* Search Bar */}
       <SearchBar
