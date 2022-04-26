@@ -104,6 +104,7 @@ function Sidebar() {
                             {member.firstname} {member.lastname}
                             {member._id == entrepreneur._id && <span> (You)</span>}
                             {member.status == "offline" && <span> (Offline)</span>}
+                            {member.status == "online" && <span> <i class="fa fa-circle online"></i></span>}
                         </Col>
                     </Row>
                     

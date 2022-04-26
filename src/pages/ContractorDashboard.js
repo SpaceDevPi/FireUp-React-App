@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {useApi} from '../hooks/useApi';
 import '../styles/dashboard.css';
@@ -10,12 +10,13 @@ import ProjectCard from "../components/ContractorDashboard/widgets/projectCard";
 import CoachCard from "../components/ContractorDashboard/widgets/coachCard";
 import { useTour } from '@reactour/tour'
 import Tour from "reactour";
+import { Button } from "react-bootstrap";
 
 
 const ContractorDashboard = () => {
-  const { setIsOpen } = useTour();
+  const [isOpen, setIsOpen] = useState(true);
+  const [isLastSlide, setIsLastSlide] = useState(false);
   const navigate = useNavigate();
-
   const { entrepreneur } = useSelector((state) => state.auth);
   const [toRender,err,reload] = useApi('entrepreneurs/'+entrepreneur._id);
   console.log(toRender);
@@ -29,32 +30,54 @@ const ContractorDashboard = () => {
 
   const tourConfig = [
     {
-      selector: '[data-tut="reactour__iso"]',
-      content: `Ok, let's start with the name of the Tour that is about to begin.`
+      selector: '[data-tut="reactour__Welcome]',
+      content: `Welcome to your dashboard! Here you can see your wallet, your notifications, and your projects.`,
     },
     {
-      selector: '[data-tut="reactour__logo"]',
-      content: `And this is our cool bus...`
+      selector: '[data-tut="reactour__step1"]',
+      content: `Ok, let's start by creating a project.`,
     },
     {
-      selector: '[data-tut="reactour__copy"]',
-      content: `Keep in mind that you could try and test everithing during the Tour. 
-        For example, try selecting the highlighted text…`
+      selector: '[data-tut="reactour__step2"]',
+      content: `Next, we move to your wallet. You can see your current balance and how much you have earned.`,
+    },
+    {
+      selector: '[data-tut="reactour__step3"]',
+      content: `And now, your notifications. Here you can see all the notifications you have received.`,
+    },
+    {
+      selector: '[data-tut="reactour__step4"]',
+      content: `Here you can see all the projects you have created.`
+    },
+    {
+      selector: '[data-tut="reactour__step5"]',
+      content: `Here you can find all the events you joined.`,
+    },
+    {
+      selector: '[data-tut="reactour__step6"]',
+      content: `tour is done and you can close it.`
     },
   ];
 
+  function handleTourClose(){
+    setIsOpen(false);
+  }
+
+  const handleLastButtonClick = () => {
+    setIsLastSlide(false);
+  }
 
   return (
     <div>
       { toRender ? (
-      <div className="container">
+      <div className="container reactour__Welcome">
         <div className="dashboard-header">
           <div className="row">
             <div className="col float-md-start">
               <h1>My dashboard </h1>
             </div>
             <div className="col float-md-end" >
-              <button className="btn btn-primary float-end mt-2 e-first-step" data-tut="reactour__copy" onClick={()=>{navigate('/addproject')}}>
+              <button className="btn btn-primary float-end mt-2 " data-tut="reactour__step1" onClick={()=>{navigate('/addproject')}}>
                 New project
               </button>
             </div>
@@ -63,8 +86,8 @@ const ContractorDashboard = () => {
         <div className="dashboard-body">
           <div className="row d-flex flex-row">
             <div className="col d-flex justify-content-start">
-              <div className="col-md-4 mt-4 float-left">
-                <WalletCard />
+              <div className="col-md-4 mt-4 float-left" data-tut="reactour__step2">
+                <WalletCard  />
               </div>
 
               
@@ -92,32 +115,32 @@ const ContractorDashboard = () => {
                   
                 </div>
 
-                <div className="col-md-4 mt-4 float-left">
+                <div className="col-md-4 mt-4 float-left" data-tut="reactour__step3">
                   <NotificationCard />
                 </div>
               
             </div>
           </div>
           <div className="row mt-4">
-          <div className="col-12">
+          <div className="col-12" data-tut="reactour__step4">
               
                 <ProjectCard />
               
-              {/* <div className="col-md-4 mt-4 float-left">
+              <div className="col-md-4 mt-4 float-left" data-tut="reactour__step5">
                 <CoachCard />
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
       </div>
       ) : (<div>hello</div>)}
-      {/* <Tour 
+      <Tour 
         steps={tourConfig} 
-        isOpen={setIsOpen}
-        onRequestClose={() => {
-          setIsOpen(false);
-        }}
-      /> */}
+        isOpen={isOpen}
+        onRequestClose={handleTourClose}
+        lastStepNextButton={<Button onClick={handleTourClose}>Done! Let's start </Button>}
+        closeWithMask={true}
+      />
     </div>
   );
 };
