@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import Chip from '../../../common/Chip';
 import './styles.css';
 import Stars from '../../../Stars';
+import { queryApi } from "../../../../utils/queryApi";
 
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
@@ -21,9 +22,11 @@ const BlogItem = ({
   const [rating, setRating] = useState(5) // initial rating value
   const [testf,settestf] = useState(false)
   const [expired,setexpired] = useState(false)
+  const [teststars,setteststars] = useState(false)
+
   const [formData2, setFormData2] = useState({
     idoffer:"",
-    star:0,
+    stars:0,
   });
   const test = async () => {
      window.location.href='/meet'
@@ -54,9 +57,23 @@ console.log(rating)
   console.log(timeoffer.split(':')[0])
   console.log(new Date().getFullYear())
    console.log(testf)
-  function submitstar(){
-
+   const submitstar = async () => {
+     formData2.stars=rating;
+     formData2.idoffer=idoffer;
+     setteststars(true)
+    setFormData2({
+      stars:rating,
+      idoffer:idoffer,
+    });
+    const [, err] = await  queryApi("stars/add", formData2, "POST", false);
+    if (err) {
+  console.log(err)
+  } else 
+  // history.push("/products");
+  console.log("yes")
+  // history.push("/articles")
   }
+  
   return (
     <div className='blogItem-wrap'>
           {expired ? <div class="corner-ribbon2 top-left sticky red shadow">Finished</div> :''}
@@ -72,7 +89,7 @@ console.log(rating)
             <p>Booked at :{new Date(Date.parse(createdAt)).toLocaleDateString('EN-EN', options)}</p>
           </div>
         </div>
-        {expired ?  <div>
+        {expired && !teststars ?  <div>
             <h2 className="wew"> please rate this coach</h2>
           <Stars setrating={setRating}/>
            <button className="button-22" role="button" onClick={submitstar}>Rate now!</button> 
