@@ -106,8 +106,10 @@ const Offerlist = () => {
     applyFilters();
   }, [selectedRating, selectedType, categorys, searchInput, selectedPrice]);
 
+
   return (
     <div className='home'>
+      
             <ButtonCartCount  props={investor._id}/>
 
       {/* Search Bar */}

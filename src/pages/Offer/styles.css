@@ -18,11 +18,12 @@
   background-color: white !important;
   font-weight: 900 !important;
   text-transform: inherit !important;
-  color: #3eff03  !important;
+  color: #f26716  !important;
+  font-size: 25px;
 }
 
 .blog-date {
-  font-size: 0.8rem;
+  font-size: 20px !important;  ;
   color: #a9a9a9;
   font-weight: 500;
 }
@@ -44,11 +45,10 @@
   margin: 1rem;
 }
 .blog-desc {
-  padding: 1rem;
-  margin-top: -8rem;
+  margin-top: -120px !important;
 }
 .blog-wrap header span {
-  font-size: 0.7rem;
+  font-size: 1rem ;
   background-color: #97ffff;
   padding: 0.5rem;
   border-radius: 10px;
@@ -68,10 +68,10 @@
 .button-33 {
   margin-left:18rem;
 
-  background-color: #c2fbd7;
+  background-color: #f26716;
   border-radius: 100px;
   box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
-  color: green;
+  color: white;
   cursor: pointer;
   display: inline-block;
   font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
@@ -80,10 +80,11 @@
   text-decoration: none;
   transition: all 250ms;
   border: 0;
-  font-size: 16px;
+  font-size: 20px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  margin-bottom: 10px;
 }
 
 .button-33:hover {
@@ -117,15 +118,15 @@
 }
 .teststars {
   margin-top: -40rem; 
-  margin-left: 60rem; 
+  margin-left: 60rem;   
 
   display: inline-block;
 }
 .wew{
-  color: cyan;
+  color: #f26716;
 }
 .calendartest{
-  margin-top: -40rem; 
+  margin-top: -90%; 
   margin-left: -90rem;
   display: flex;
   justify-content: center;

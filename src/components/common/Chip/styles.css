@@ -1,11 +1,16 @@
 .chip {
   font-size: 1.1rem;
-  background: linear-gradient(to right, #6190e8, #a7bfe8);
+  background: linear-gradient(to right, #f26716, #f26716);
+  margin-left: 10px;
   color: #fff;
   padding: 0.3rem 0.5rem;
   border-radius: 5px;
   width: fit-content;
   text-transform: capitalize;
+}
+
+#comboelement{
+  font-size: 18px;
 }
 
 .chipbronze{
