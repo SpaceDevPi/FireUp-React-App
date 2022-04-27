@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -11,6 +11,8 @@ import CoachCard from "../components/ContractorDashboard/widgets/coachCard";
 import { useTour } from '@reactour/tour'
 import Tour from "reactour";
 import { Button } from "react-bootstrap";
+import { AiFillPlayCircle } from "react-icons/ai";
+import { TransactionContext } from "../Blockchain/context/TransactionContext";
 
 
 const ContractorDashboard = () => {
@@ -27,6 +29,7 @@ const ContractorDashboard = () => {
     }
     setIsOpen(true);
   }, [entrepreneur, navigate]);
+  const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading , Balance} = useContext(TransactionContext);
 
   const tourConfig = [
     {
@@ -107,6 +110,17 @@ const ContractorDashboard = () => {
                       <div class="icon-block text-center">
                       <p class="mt-3 w-100 float-left text-center buttons">
                         <button class="btn-view" onClick={() => {navigate("/profile")}}>view profile</button>
+                        {!currentAccount && (
+            <button
+              type="button"
+               onClick={connectWallet}
+              className="btn-view"
+            >
+              <p >
+                Connect Wallet
+              </p>
+            </button>
+          )} 
                       </p>
                         
                       </div>

@@ -88,7 +88,7 @@ My event
       <div className="eventslist-centerprofile">
         {Events ? (
           Events.map((item) => {
-            return <Event className="eventProfilecontainer" key={item.id} event={item} />;
+            return <Event className=" " key={item.id} event={item} />;
           })
         ) : (
           <h1> Events not found </h1>
