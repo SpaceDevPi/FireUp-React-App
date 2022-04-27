@@ -315,7 +315,7 @@ const onChange = (e) => {
   }
   return (
     <>
-      <Link className='blog-goBack' to='/offerlist'>
+      <Link className='button' to='/offerlist'>
         <span> &#8592;</span> <span>Go Back</span>
       </Link>
       {/* <div className="teststars" >
@@ -335,7 +335,7 @@ const onChange = (e) => {
             <p className='blog-date'>Published {new Date(Date.parse(article.createdAt)).toLocaleDateString('EN-EN', options)}</p>
             <h1>{article.title}</h1>
             <div className='blog-subCategory'>
-            <Chip label={article.category} />
+            <Chip  label={article.category} />
             <Chip label={article.type} />
             <Chip label={article.state} />
             </div>
