@@ -5,7 +5,7 @@ const EventsList = ({ events }) => {
   const [Events, setEvents] = useState(null);
 
   async function fetchData() {
-    console.log("aaaaaaa");
+    // console.log("aaaaaaa");
 
     const [res, err] = await queryApi("events");
     setEvents(res);

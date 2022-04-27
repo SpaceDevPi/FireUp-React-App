@@ -108,7 +108,7 @@ async function fetchData() {
     image : toRender.image
     
   });
-
+  setImages(res.image)
 }
 }
 console.log(formData)
@@ -122,6 +122,9 @@ const { username, firstName, lastName,email ,password,phoneNumber,sexe,datOfBirt
 const history = useNavigate ();
 
 const onSubmit = async (e) => {
+  console.log(Images)
+  if (Images!=='')
+  formData.image=Images;
   e.preventDefault();
   //console.log(formData);
   const [, err] = await queryApi("investors/ubdateInvestor/" + id, formData, "PUT", false);
@@ -130,36 +133,38 @@ const onSubmit = async (e) => {
       visbile: true,
       message: JSON.stringify(err.errors, null, 2),
     });
-    navigate("/dashboardInvestor");
+    // navigate("/dashboardInvestor");
     
   } else navigate("/dashboardInvestor");
 };
 const [Images, setImages] = useState('')
-  const onChangeFile = (e) =>{
+
+const onChangeFile = (e) => {
   onDrop(e.target.files)
-    setFormData({ ...formData, images: e.target.files[0].name });
 
-}
-
+  setFormData({ ...formData, image: e.target.files[0].name });
+};
 const onDrop = (files) => {
-
+  
   let formData = new FormData();
   const config = {
       header: { 'content-type': 'multipart/form-data' }
   }
-  formData.append("file", files[0])
+  let f= files[0]
+  formData.append("file", f)
   //save the Image we chose inside the Node Server 
-  Axios.post('http://localhost:5000/api/investors/uploadImage', formData, config)
+  Axios.post('http://localhost:5000/api/articles/uploadImage', formData, config)
       .then(response => {
           if (response.data.success) {
-
-              setImages(files[0].name)
+            setImages(response.data.fileName)
 
           } else {
               alert('Failed to save the Image in Server')
           }
+          console.log(response)
       })
 }
+
 
   
     return (
@@ -335,17 +340,17 @@ const onDrop = (files) => {
               </div>
               <div className="userUpdateRight">
                 <div className="userUpdateUpload">
-                  <img
-                    className="userUpdateImg"
-                    src={`http://localhost:5000/uploads/investor/${Images}`}
-                    alt=""
-                  />
+                {Images ? ( <img
+                  className="userUpdateImg"
+                  src={`${process.env.REACT_APP_API_URL_UPLOADS + '/' + Images}`}                    alt=""
+                />) :('') }
                   {/* <label htmlFor="file">
                     <Publish className="userUpdateIcon" />
                   </label> */}
 
                   <input type="file"  name="image"  
-                  onChange={(e) => {onChangeFile(e); setFormData({ ...formData, image: e.target.value });}} placeholder="Image" className="form-control"/>
+                                                    onChange={(e) => onChangeFile(e)}
+                                                    placeholder="Image" className="form-control"/>
              
                   {/* <input type="file" id="file" style={{ display: "none" }} /> */}
                 </div>
