@@ -15,13 +15,15 @@ import { FacebookIcon, TwitterIcon } from "react-share";
 import PostsPageByProject from "./PostsPageByProject";
 import ReactPlayer from "react-player"
 import Converter from "./Currency-converter/Converter";
+import { queryApi } from '../../utils/queryApi';
 
 
 
 export default function ProjectDetailPage(props)  {
   const { id } = useParams();
   const history = useNavigate ();
-  var investorId = 1;
+  var currentUserId = 1;
+
 
   function investir () {
     history("/InvestementProject/"+id);
@@ -36,19 +38,40 @@ let date_modifier
    const [toRender,err,reload] = useApi('project/project/'+id);
 
    const [projectInvestor,error,reloaded] = useApi('investement/getInvestmentsByProject/'+id);
-   // const date = new Date(toRender.end_date).toLocaleDateString();
-  // console.log(toRender.map(title => {toRender[title]}))
-  // var dataArray = Object.keys(toRender).map(function(k){return toRender[0]});
+  //  const [projectLive,errr,reloadd] = await queryA('projectlive/ProjectLiveByProjects/'+id);
 
-  // function afficherProps(obj, nomObjet) {
-  //   let resultat = "";
-  //   for (let i in obj) {
-  //     if (obj.hasOwnProperty(i)) {
-  //         resultat += `${nomObjet}.${i} = ${obj[i]}\n`;
-  //     }
-  //   }
-  //   return resultat;
-  // }
+
+   const [projectLive,setprojectLive]= useState(null)
+  //  async function fetchData() {
+  //    console.log("aaaaaaa")
+     
+  //    const [res, err] = await queryApi("projectlive/ProjectLiveByProjects/"+id);
+  //    console.log(res)
+  //    setprojectLive(res);
+      
+
+    
+  //  }
+  //  useEffect( () => {
+  //    fetchData()
+  //       }, [id]);
+
+   var projectLiveLink
+var projectLiveLink2
+if(projectLive!=null)
+{  console.log("link ")
+console.log(projectLive.link)
+
+
+
+  projectLiveLink=projectLive.link
+  projectLiveLink2='"'+ "https://www.twitch.tv/zwave69" +'"'
+  
+
+   }else {  projectLiveLink="https://www.twitch.tv/tchizzz8"
+   projectLiveLink2='"'+ projectLiveLink +'"'}
+
+
 
   if(projectInvestor==null){
   var nbrINvestor = 0;
@@ -72,10 +95,15 @@ if (toRender.montantRestant==-1){
 date_modifier = new Date(date).toLocaleDateString()
 
 const { investor } = useSelector((state) => state.auth);
-if (investor != null){
-  investorId= investor._id
-}
+const { entrepreneur } = useSelector((state) => state.auth);
 
+if (investor != null){
+  currentUserId= investor._id
+}
+else if(entrepreneur!=null)
+{
+  currentUserId= entrepreneur._id
+}
 // function websiteVisits(response) {
 //   document.querySelector("#visits").textContent = response.value;
 // }
@@ -163,7 +191,7 @@ if (investor != null){
 
     <PostsPageByProject projectid={projectid}/>
 
-    <Comments currentUserId={investorId} projectid={projectid} />
+    <Comments currentUserId={currentUserId} projectid={projectid} />
     <div className="container">
     <div className="player-wrapper">
 
@@ -172,7 +200,7 @@ if (investor != null){
     playing
     width="100%"
     height="100%"
-              url="https://www.twitch.tv/videos/1458515587"
+              url="https://www.twitch.tv/tchizzz8"
               controls
               />
 

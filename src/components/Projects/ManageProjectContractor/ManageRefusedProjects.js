@@ -7,10 +7,14 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { NavLink, useParams } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import PostAddIcon from '@mui/icons-material/PostAdd';
+import { useSelector } from 'react-redux';
+
+
 export default function ManageRefusedProjects() {
     const navigate = useNavigate();
+    const { entrepreneur } = useSelector((state) => state.auth);
 
-    const [projects,err,reload] = useApi('project/getRefusedProjectsByContractorId/1');
+    const [projects,err,reload] = useApi('project/getRefusedProjectsByContractorId/' + entrepreneur._id);
     const deleteProject= async (id)=>{
         const[,err] = await queryApi('project/deleteproject/'+id,{},'DELETE',false);
         if(err){

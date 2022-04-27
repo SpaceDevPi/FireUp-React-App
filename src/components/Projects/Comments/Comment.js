@@ -1,11 +1,48 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from "styled-components";
 import {Link as LinkS} from 'react-scroll'
 import CommentForm from './CommentForm';
-
+import { useSelector } from 'react-redux';
+import { Badge } from '@mui/material';
+import { useApi } from '../../../hooks/useApi';
+import { textTransform } from '@mui/system';
 
 const Comment = ({comment,replies,currentUserId,parentId ="null",addComment,updateComment, setActiveComment,
     activeComment,projectid ,deleteComment}) => {
+console.log("projetcttttttttt id + " + projectid)
+
+const [project,err,reload] = useApi('project/project/' + projectid);
+
+useEffect( () => {
+     }, [comment.id_user]);
+
+const [contractorInfo] = useApi('entrepreneurs/' + comment.id_user);
+const [investorInfo] = useApi('investors/investorId/' +  comment.id_user);
+console.log( investorInfo)
+console.log( contractorInfo)
+
+
+var userName 
+if (investorInfo!=null)
+{
+  userName = investorInfo.firstName+ " "+investorInfo.lastName
+}
+else 
+if(contractorInfo!=null)
+{
+  userName = contractorInfo.firstname + " "+contractorInfo.lastname
+}
+
+console.log( project)
+
+var CommentBadge = false
+if(project !=null){
+if (project.contractor_id==comment.id_user)
+CommentBadge=true
+}
+
+      const { entrepreneur } = useSelector((state) => state.auth);
+
             console.log("current user id "+currentUserId)
         const isEditing =
     activeComment &&
@@ -33,13 +70,20 @@ const Comment = ({comment,replies,currentUserId,parentId ="null",addComment,upda
   const replyId = parentId ? parentId : comment._id;
     return (
         <>
+
         <div key={comment.id}   class="container">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
                 <CommentWrap>
                     <Row>
                         
-                    <Img src='/images/c_1.png' alt='#' />
+                    <Img src='/c_1.png' alt='#' />
                         <Col>
-                            <CHeading>User : {comment.id_user}</CHeading>
+                     
+                        {/* <CHeading>   <Badge badgeContent="Project Owner" color="primary"/></CHeading>  */}
+                            <CHeading> User : <a style={{ textTransform: 'capitalize'}}>{userName}</a>                         {CommentBadge &&  (<span class="w3-tag w3-orange">Project Owner</span>)} 
+
+</CHeading> 
                             <PostDate>Posted: {new Date(comment.date).toLocaleDateString()} at {new Date(comment.date).getHours()}:{new Date(comment.date).getMinutes()} </PostDate>
                             {/* <div className="comment-text">{comment.content}
                          </div> */}
