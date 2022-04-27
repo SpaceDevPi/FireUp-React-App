@@ -51,7 +51,7 @@ function MessageForm() {
         const time = today.getHours() + ':' + minutes;
         const roomId = currentRoom;
         
-        socket.emit("message-room", roomId, message, entrepreneur._id, time, todayDate);
+        socket.emit("message-room", roomId, message, entrepreneur._id, entrepreneur.fullName, time, todayDate);
         setMessage("");
         //reload page 
         getMessages();
@@ -94,7 +94,7 @@ function MessageForm() {
                 <li className="clearfix">
                     <div className="message-data align-right">
                       <span className="message-data-time" >{message.time}, {dateRender(message.date)}</span> &nbsp; &nbsp;
-                      <span className="message-data-name" >{ message.from }</span> <i class="fa fa-circle me"></i>
+                      <span className="message-data-name" >{ message.senderName }</span> <i class="fa fa-circle me"></i>
                       
                     </div>
                     <div className="message other-message float-right">
@@ -107,7 +107,7 @@ function MessageForm() {
             return (
                 <li>
                     <div class="message-data">
-                        <span class="message-data-name"><i class="fa fa-circle online"></i> { message.from}</span>
+                        <span class="message-data-name"><i class="fa fa-circle online"></i> {message.senderName}</span>
                         <span class="message-data-time">{message.time}, {dateRender(message.date)}</span>
                     </div>
                     <div class="message my-message">
