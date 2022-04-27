@@ -8,6 +8,7 @@ import { NavLink, useParams } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { useSelector } from 'react-redux';
+import NotificationCard from '../../ContractorDashboard/widgets/notificationCard';
 
 export default function ManageMyProjects() {
     const navigate = useNavigate();
@@ -33,12 +34,21 @@ export default function ManageMyProjects() {
                 <div className="container">
                 <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center',color:'#F57C00'}}>Manage My Projects</h1>
 <br></br>
+
+
+<div style={{display: 'flex',  justifyContent:'space-between'}}>
+                    <NavLink to='/managemyprojects/createprojectlive' className="btn btn-success">Plan a Live Video</NavLink >
+                    <NavLink to='/managemyprojects/myplannedlive' className="btn btn-success">Manage My Planned Video</NavLink >
+
+                       
+                    </div>
+                    <br></br>
                     <div style={{display: 'flex',  justifyContent:'space-between'}}>
                     <NavLink to='/managemyprojects' className="btn btn-success">My Published Projects</NavLink >
 
                         <NavLink to='/addproject' className="btn btn-primary">Add A Project</NavLink >
                         <NavLink to='/managemyprojects/ManageProjectsWaitingForConfirmation' className="btn btn-success">Projects awaiting confirmation  </NavLink >
-                        <NavLink to='/addproject' className="btn btn-danger">Consult my refused projects </NavLink >
+                        <NavLink to='/managemyprojects/ManageRefusedProjects' className="btn btn-danger">Consult my refused projects </NavLink >
 
                     </div>
     <br></br>

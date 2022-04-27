@@ -15,11 +15,13 @@ import { FacebookIcon, TwitterIcon } from "react-share";
 import PostsPageByProject from "./PostsPageByProject";
 import ReactPlayer from "react-player";
 import Converter from "./Currency-converter/Converter";
+import { queryApi } from '../../utils/queryApi';
 
 export default function ProjectDetailPage(props) {
   const { id } = useParams();
-  const history = useNavigate();
-  var investorId = 1;
+  const history = useNavigate ();
+  var currentUserId = 1;
+
 
   function investir() {
     history("/InvestementProject/" + id);
@@ -32,22 +34,41 @@ export default function ProjectDetailPage(props) {
   let date_modifier;
   const [toRender, err, reload] = useApi("project/project/" + id);
 
-  const [projectInvestor, error, reloaded] = useApi(
-    "investement/getInvestmentsByProject/" + id
-  );
-  // const date = new Date(toRender.end_date).toLocaleDateString();
-  // console.log(toRender.map(title => {toRender[title]}))
-  // var dataArray = Object.keys(toRender).map(function(k){return toRender[0]});
+   const [projectInvestor,error,reloaded] = useApi('investement/getInvestmentsByProject/'+id);
+  //  const [projectLive,errr,reloadd] = await queryA('projectlive/ProjectLiveByProjects/'+id);
 
-  // function afficherProps(obj, nomObjet) {
-  //   let resultat = "";
-  //   for (let i in obj) {
-  //     if (obj.hasOwnProperty(i)) {
-  //         resultat += `${nomObjet}.${i} = ${obj[i]}\n`;
-  //     }
-  //   }
-  //   return resultat;
-  // }
+
+   const [projectLive,setprojectLive]= useState(null)
+  //  async function fetchData() {
+  //    console.log("aaaaaaa")
+     
+  //    const [res, err] = await queryApi("projectlive/ProjectLiveByProjects/"+id);
+  //    console.log(res)
+  //    setprojectLive(res);
+      
+
+    
+  //  }
+  //  useEffect( () => {
+  //    fetchData()
+  //       }, [id]);
+
+   var projectLiveLink
+var projectLiveLink2
+if(projectLive!=null)
+{  console.log("link ")
+console.log(projectLive.link)
+
+
+
+  projectLiveLink=projectLive.link
+  projectLiveLink2='"'+ "https://www.twitch.tv/zwave69" +'"'
+  
+
+   }else {  projectLiveLink="https://www.twitch.tv/tchizzz8"
+   projectLiveLink2='"'+ projectLiveLink +'"'}
+
+
 
   if (projectInvestor == null) {
     var nbrINvestor = 0;
@@ -68,14 +89,19 @@ export default function ProjectDetailPage(props) {
   }
   date_modifier = new Date(date).toLocaleDateString();
 
-  const { investor } = useSelector((state) => state.auth);
-  if (investor != null) {
-    investorId = investor._id;
-  }
+const { investor } = useSelector((state) => state.auth);
+const { entrepreneur } = useSelector((state) => state.auth);
 
-  // function websiteVisits(response) {
-  //   document.querySelector("#visits").textContent = response.value;
-  // }
+if (investor != null){
+  currentUserId= investor._id
+}
+else if(entrepreneur!=null)
+{
+  currentUserId= entrepreneur._id
+}
+// function websiteVisits(response) {
+//   document.querySelector("#visits").textContent = response.value;
+// }
 
   return (
     <div>
@@ -84,94 +110,95 @@ export default function ProjectDetailPage(props) {
       {/* <script async src="https://api.countapi.xyz/hit/projectdetail-1524/b921e75d-11d3-4eec-bbdf-ce0dac450dec?callback=websiteVisits"></script>
 
      <h1>This site has been visited <span id="visits"></span> times.</h1> */}
-      <Container>
-        {toRender ? (
-          <Wrapper>
-            <ImgContainer>
-              {/* <Image src={"../../images/"+toRender.images} /> */}
-              <Image src={`http://localhost:5000/uploads/${toRender.images}`} />
-            </ImgContainer>
-            <InfoContainer>
-              <Title>{toRender.title} </Title>
-              <Desc>{toRender.description}</Desc>
-              <Row>
-                <Text>
-                  {" "}
-                  <h1> Money to raise : $ {toRender.amount_to_collect}</h1>
-                </Text>
+    <Container>
+    {toRender  ? (
 
-                <RowStat>
-                  <h3>Remaining amount : $ {montantRestant} </h3>
+      <Wrapper>
+        <ImgContainer>
+          {/* <Image src={"../../images/"+toRender.images} /> */}
+          <Image src={`http://localhost:5000/uploads/${toRender.images}`}/>     
 
-                  <h3>
-                    Raised Money : ${" "}
-                    {toRender.amount_to_collect - montantRestant}{" "}
-                  </h3>
-                  <h3>Investors : {nbrINvestor} </h3>
+        </ImgContainer>
+        <InfoContainer>
+          <Title>{toRender.title} </Title>
+          <Desc>
+          {toRender.description}
+          </Desc>
+          <Row>
+          <Text> <h1> Money to raise : $ {toRender.amount_to_collect}</h1></Text>
 
-                  <h3>Offering Type : {toRender.offering_type}</h3>
-                  <h3>Price per share : {toRender.price_per_share}</h3>
-                  <h3 name="end_date">End of collect : {date_modifier}</h3>
-                </RowStat>
+          <RowStat>
 
-                <br />
-                <br />
-              </Row>
-              <div>
-                <ButtonInvest onClick={investir}>Invest</ButtonInvest>
-                <ButtonBlockChain onClick={BlockChain}>
-                  {" "}
-                  Blockchain
-                </ButtonBlockChain>
-              </div>
-              <br />
-              <br />
-              <FacebookShareButton
-                url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
-                quote={
-                  "Investissez dans un projet sur FireUp et garantissez votre avenir"
-                }
-                hashtag={"#FireUp"}
-                description={"Fire Up"}
-                className="Demo__some-network__share-button"
-              >
-                <br />
-                <FacebookIcon size={52} round /> Soutenez le projet en
-                partageant sur Facebook
-              </FacebookShareButton>
+         
+          <h3>Remaining amount : $ {montantRestant} </h3> 
 
-              <br />
-              <TwitterShareButton
-                title={"test"}
-                url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
-                hashtags={["FireUp"]}
-              >
-                <TwitterIcon size={52} round />
-                Soutenez le projet en partageant sur Twitter
-              </TwitterShareButton>
-            </InfoContainer>
-          </Wrapper>
-        ) : (
-          <p>Product not found</p>
-        )}
-      </Container>
-      <MoreDetailPage />
+          <h3>Raised Money : $ {toRender.amount_to_collect - montantRestant } </h3> 
+          <h3>Investors : {nbrINvestor} </h3>
 
-      <PostsPageByProject projectid={projectid} />
+         
 
-      <Comments currentUserId={investorId} projectid={projectid} />
-      <div className="container">
-        <div className="player-wrapper">
-          <ReactPlayer
-            className="react-player"
-            playing
-            width="100%"
-            height="100%"
-            url="https://www.twitch.tv/tchizzz8"
-            controls
-          />
-        </div>
-      </div>
+          <h3>Offering Type :  {toRender.offering_type}</h3>
+          <h3>Price per share :  {toRender.price_per_share}</h3>
+          <h3 name="end_date" >End of collect : {date_modifier}</h3>
+
+          
+          </RowStat>
+
+          <br/><br/>
+          </Row>
+          <div >
+          <ButtonInvest onClick={investir}>Invest</ButtonInvest>
+          <ButtonBlockChain onClick={BlockChain}> Blockchain</ButtonBlockChain>
+          </div>
+          <br/><br/>
+          <FacebookShareButton
+        url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
+        quote={"Investissez dans un projet sur FireUp et garantissez votre avenir"}
+        hashtag={"#FireUp"}
+        description={"Fire Up"}
+        className="Demo__some-network__share-button"
+      >
+        <br/>
+        <FacebookIcon size={52} round /> Soutenez le projet en partageant sur Facebook 
+      </FacebookShareButton>
+
+      <br />
+      <TwitterShareButton
+        title={"test"}
+        url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
+        hashtags={["FireUp"]}
+      >
+        <TwitterIcon size={52} round />
+        Soutenez le projet en partageant sur Twitter
+      </TwitterShareButton>
+
+        </InfoContainer>
+
+
+      </Wrapper>
+ ) : (
+  <p>Product not found</p>
+)}
+    </Container>
+    <MoreDetailPage/>
+    
+
+    <PostsPageByProject projectid={projectid}/>
+
+    <Comments currentUserId={currentUserId} projectid={projectid} />
+    <div className="container">
+    <div className="player-wrapper">
+
+    <ReactPlayer
+    className="react-player"
+    playing
+    width="100%"
+    height="100%"
+              url="https://www.twitch.tv/tchizzz8"
+              controls
+              />
+
+            </div></div>
     </div>
   );
 }

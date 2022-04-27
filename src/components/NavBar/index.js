@@ -113,6 +113,8 @@ function Navbar  ({toggle})  {
             </div>
           </NavLink>
           <NavLink to="/profile">Profile</NavLink>
+          <NavLink to="/managemyprojects">Manage My Projects</NavLink>
+
           <NavLink to="/chat">Messages</NavLink>
           {/* <NavLink to="/AllProjectInvestor">Projects</NavLink> */}
           <NavLink to="/offerlist">Coachs</NavLink>

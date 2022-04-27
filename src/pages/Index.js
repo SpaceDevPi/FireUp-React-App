@@ -60,6 +60,8 @@ import { fetchArticles } from "../redux/slices/articlesSlice";
 import Converter from "../components/Projects/Currency-converter/Converter";
 
 import Blockchain from "../Blockchain/Blockchain";
+import CreateProjectLive from "../components/Projects/ProjectLive/CreateProjectLive";
+import ManageMyProjectsLives from "../components/Projects/ProjectLive/ManageProjectLive";
 
 const Index = () => {
  
@@ -140,6 +142,15 @@ const Index = () => {
         <Route path="/converter" element={<Converter />} />
 
         <Route path="/Blockchain/:id" element={<Blockchain />} />
+
+        <Route
+          path="/managemyprojects/createprojectlive"
+          element={<CreateProjectLive />}
+        />
+         <Route
+          path="/managemyprojects/myplannedlive"
+          element={<ManageMyProjectsLives />}
+        />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

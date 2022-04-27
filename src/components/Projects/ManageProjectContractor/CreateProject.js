@@ -42,6 +42,7 @@ export default function CreateProject(props) {
     category: "",
     price_per_share: "0",
     place: "",
+    contractor_id :entrepreneur._id
 
   });
   const {
