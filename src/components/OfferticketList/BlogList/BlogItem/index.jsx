@@ -3,6 +3,7 @@ import Chip from '../../../common/Chip';
 import './styles.css';
 import Stars from '../../../Stars';
 import { queryApi } from "../../../../utils/queryApi";
+var lodash = require('lodash');
 
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
@@ -28,12 +29,36 @@ const BlogItem = ({
     idoffer:"",
     stars:0,
   });
+  const [ratinglist,setratinglist] = useState([])
+   const [stars,setstars]= useState([])
+   async function fetchData() {
+     console.log("aaaaaaa")
+     const [res, err] = await queryApi("stars/findstarsbyidoffer/" + idoffer);
+     console.log(res)
+     setstars(res);
+   }
+   useEffect( () => {
+    fetchData()
+       }, [idoffer]);
+
+
+       useEffect( () => {
+        setratinglist([]);
+        stars.forEach(element => {console.log(element)
+          setratinglist(ratinglist=>[...ratinglist,element.stars]);
+        });
+       }, [stars]);
+
+  const [formData3, setFormData3] = useState({
+    rating:0,
+  });
   const test = async () => {
      window.location.href='/meet'
     
   }
   
   useEffect(() => {
+
     console.log(dateoffer)
     if ((parseInt(dateoffer.slice(0,4))===(new Date().getFullYear()))&&((parseInt(dateoffer.split('-')[1])-1)===(parseInt(new Date().getMonth())))&&((parseInt(dateoffer.split('-')[2]))===(new Date().getDate())&&(parseInt(timeoffer.split(':')[0]))===new Date().getHours())){
     // if (dateoffer.slice(0,4)===new Date().getFullYear())  {
@@ -58,13 +83,25 @@ console.log(rating)
   console.log(new Date().getFullYear())
    console.log(testf)
    const submitstar = async () => {
-     formData2.stars=rating;
+    setratinglist(ratinglist=>[...ratinglist,rating]);
+    ratinglist.push(rating)
+    console.log(ratinglist)
+    var sum = lodash.sum(ratinglist);
+    let k=stars.length+1
+    console.log(parseInt(sum/k));
+    setFormData3({
+     rating:parseInt(sum/k),
+    }); 
+    formData2.stars=rating;
      formData2.idoffer=idoffer;
+     formData3.rating=parseInt(sum/k);
      setteststars(true)
     setFormData2({
       stars:rating,
       idoffer:idoffer,
     });
+      const [, error] = await  queryApi("offers/edit/"+idoffer, formData3, "POST", false);
+
     const [, err] = await  queryApi("stars/add", formData2, "POST", false);
     if (err) {
   console.log(err)
