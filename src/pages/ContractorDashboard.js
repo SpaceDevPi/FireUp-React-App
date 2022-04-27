@@ -141,7 +141,7 @@ const ContractorDashboard = () => {
                 <ProjectCard />
               
               <div className="col-md-4 mt-4 float-left" data-tut="reactour__step5">
-                <CoachCard />
+                {/* <CoachCard /> */}
               </div>
             </div>
           </div>
