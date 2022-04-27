@@ -134,8 +134,10 @@ function Navbar  ({toggle})  {
           <NavLink to="/dashboardInvestor">
             <div>
             <div className='dashbordNav' >
-             <img src={toRender.image} className='imageNavBar'/> 
-
+            <img
+            src={`${process.env.REACT_APP_API_URL_UPLOADS + '/' + toRender.image}`}                      alt=""
+              className="userShowImg"
+            />
             Dashboard  {investor.name}
 
             </div>

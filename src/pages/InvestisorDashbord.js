@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Projects from '../components/Projects/Projects';
 import {useApi} from '../hooks/useApi'; 
+import { queryApi } from "../utils/queryApi";
+import Event from "../components/events/components/Event";
+
 import {  useState } from 'react';
 import ProjectDashbord from  "../components/Projects/ProjectDashbord";
 
@@ -40,6 +43,20 @@ const InvestisorDashbord = () => {
     }
   }, [investor, navigate]);
 
+
+  const [Events, setEvents] = useState(null);
+
+  async function fetchData() {
+    // console.log("aaaaaaa");
+
+    const [evnts, err] = await queryApi("events");
+    setEvents(evnts);
+  }
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
   return (
     <div>
     <div>
@@ -48,7 +65,7 @@ const InvestisorDashbord = () => {
             <MainContent />
         </Container>
     </div>
-
+<div className="ProjectEvent">
      <div className="listOfProjectProfile">
      <ProjectContainer>
           <span className ="userShowUserTitle">My Projects : </span>
@@ -64,6 +81,21 @@ const InvestisorDashbord = () => {
           </ProjectContainer>
 
        
+       </div>
+       <div className="listeOfEvent">
+My event
+<section className="eventslist">
+      <div className="eventslist-centerprofile">
+        {Events ? (
+          Events.map((item) => {
+            return <Event className="eventProfilecontainer" key={item.id} event={item} />;
+          })
+        ) : (
+          <h1> Events not found </h1>
+        )}
+      </div>
+    </section>
+       </div>
        </div>
        </div>
   )
@@ -82,7 +114,6 @@ const Container = styled.div`
 const ProjectContainer = styled.div`
 width: 100%;
 height : 100% ; 
-background: linear-gradient(to bottom right, white 0%, #e6e4ff 70%);
 border-bottom-right-radius: 2rem;
 border-top-right-radius: 2rem;
 margin: 1rem 3rem 1rem 1rem;
