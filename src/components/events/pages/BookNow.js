@@ -55,8 +55,8 @@ export default function BookNow(props) {
 
   const [formData, setFormData] = useState({
     Name_Event: "",
-    idTicket: 2000,
-    Participant_Name: "adamooo",
+    idTicket: 1,
+    Participant_Name: "adam",
     // Sexe: "",
     Price: 0,
     Date_Debut: "",
@@ -141,10 +141,10 @@ export default function BookNow(props) {
     formData.img = "mmm";
   }
   {
-    formData.idTicket = 2000;
+    formData.idTicket = 1;
   }
   {
-    formData.Participant_Name = "ahmadooo";
+    formData.Participant_Name = "adam";
   }
   {
     formData.Price = 90;

@@ -549,11 +549,6 @@ code {
 /* end of room  */
 /* single room*/
 
-.envoyerevent {
-  margin-left: 47%;
-  margin-bottom: 2%;
-}
-
 .single-event {
   padding: 5rem 0 0 0;
 }
@@ -796,6 +791,15 @@ code {
   padding: 10px 5px;
   margin-top: 15px;
   margin-left: 30%;
+}
+.envoyerevent {
+  margin-left: 47%;
+  margin-bottom: 2%;
+}
+
+.envoyerevent:hover {
+  margin-left: 47%;
+  margin-bottom: 2%;
 }
 
 .buttonConnect {
