@@ -202,7 +202,9 @@ export default function TicketBooking(props) {
               {/* <div class="barcodeticket" ref={canvas}></div> */}
             </div>
           </div>
-          <button onClick={handlePrint}>Print</button>
+          <button onClick={handlePrint} className="button">
+            Print
+          </button>
           <div
             class="form-container sign-in-container"
             className="ticket-booking"
@@ -924,7 +926,11 @@ export default function TicketBooking(props) {
                   </table>
                 </center>
               </div> */}
-              <button type="submit" onClick={() => dodo()}>
+              <button
+                type="submit"
+                className="button envoyerevent"
+                onClick={() => dodo()}
+              >
                 Envoyer
               </button>
             </form>

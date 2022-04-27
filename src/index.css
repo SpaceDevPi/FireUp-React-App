@@ -1,22 +1,19 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
-
-
-
-.button{
+.button {
   border-radius: 7px;
   width: 100px;
   height: 40px;
@@ -29,10 +26,8 @@ code {
   padding: 10px 5px;
   margin: 10px 5px;
   margin: 5px;
-  
 }
 .button:hover {
-  
   border-radius: 7px;
   width: 100px;
   height: 40px;
@@ -46,7 +41,6 @@ code {
   margin: 10px 5px;
   margin: 5px;
 }
-
 
 .form-Login {
   width: 100%;
@@ -81,7 +75,6 @@ code {
   flex: 20%;
   display: grid;
   place-items: center;
-  
 }
 
 .form-container .body {
@@ -118,13 +111,13 @@ code {
   align-items: center;
 }
 
-.sign-up-container .input , .select  {
+.sign-up-container .input,
+.select {
   margin: 5px;
   width: 200px;
   height: 30px;
   padding-left: 5px;
   font-size: 20px;
-  
 }
 
 .personal-info-container {
@@ -136,7 +129,8 @@ code {
   align-items: center;
 }
 
-.personal-info-container .input , .select {
+.personal-info-container .input,
+.select {
   margin: 5px;
   width: 200px;
   height: 30px;
@@ -151,7 +145,6 @@ code {
   background-color: white;
   margin-bottom: 20px;
   margin-right: 60%;
-
 }
 
 .progressbar div {
@@ -169,7 +162,7 @@ code {
   align-items: center;
 }
 
-.select{
+.select {
   margin: 5px;
   width: 200px;
   height: 30px;
@@ -177,7 +170,8 @@ code {
   font-size: 20px;
 }
 
-.other-info-container .input, .select {
+.other-info-container .input,
+.select {
   margin: 5px;
   width: 250px;
   height: 30px;
@@ -189,21 +183,19 @@ code {
   border: 2px solid #f26716;
   border-radius: 5px;
   margin: 5px;
-
 }
 
 .input:focus {
   border: 3px solid #f26716;
 }
 
-.input{
+.input {
   border: 2px solid #f26716;
   border-radius: 5px;
   margin: 5px;
-  
 }
 
-.Gain{
+.Gain {
   width: 80%;
   height: 80px;
   background-color: white;
@@ -215,39 +207,38 @@ code {
   flex-direction: column;
   font-size: 15px;
 }
-.fireUp{
+.fireUp {
   color: #f26716;
 }
 
-.dashbordBotton{
+.dashbordBotton {
   display: flex;
   justify-content: center;
 }
 
-.image{
+.image {
   height: 20%;
-  width: 20%; 
+  width: 20%;
   margin-right: 3%;
   margin-top: 3%;
 }
 
-.imageProject{
-  height : 80%; 
+.imageProject {
+  height: 80%;
   width: 80%;
 }
 
-.inputContainer{
+.inputContainer {
   display: flex;
-  margin-left : 60%; 
+  margin-left: 60%;
   margin-top: 1%;
 }
 
-.informationdashbord{
-margin-left: 3%;
-
+.informationdashbord {
+  margin-left: 3%;
 }
 
-.social{
+.social {
   width: 80%;
   margin: 10% 0;
   height: 50px;
@@ -257,28 +248,28 @@ margin-left: 3%;
   letter-spacing: 1.3px;
   box-shadow: 0 2px 4px rgb(77, 73, 73);
 }
-.dashbordNav{
+.dashbordNav {
   box-shadow: 0 2px 4px rgb(78, 76, 76);
   width: 100%;
-padding-left: 10%;
-padding-right: 10%;
-padding-bottom: 1%;
-padding-top: 1%;
-height: 50%;
-border-radius: 20%;
-display: flex;
-justify-content: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 1%;
+  padding-top: 1%;
+  height: 50%;
+  border-radius: 20%;
+  display: flex;
+  justify-content: center;
 }
-.dashbordNav:hover{
+.dashbordNav:hover {
   background-color: rgb(232, 232, 240);
 }
 
-.imageNavBar{
+.imageNavBar {
   height: 50px;
   width: 50px;
   margin-right: 5%;
 }
-.FormINvestementCOntainer{
+.FormINvestementCOntainer {
   width: 500px;
   height: 550px;
   background-color: white;
@@ -290,29 +281,21 @@ justify-content: center;
   flex-direction: column;
 }
 
-.projectImage{
+.projectImage {
   z-index: 0;
   border-radius: 25px;
-  
 }
 
-  .Product_card{
+.Product_card {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
     height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    @media screen and (min-width: 320px) and (max-width: 1080px) {
-      height: 100%;
   }
 }
-
-
-
-
-
-
-
 
 :root {
   --primaryColor: #af9a7d;
@@ -322,12 +305,11 @@ justify-content: center;
   --mainGrey: #ececec;
   --darkGrey: #cfcfcf;
   --mainTransition: all 0.3s linear;
-  
+
   --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
   --darkShadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
 }
 /* globals */
-
 
 .Btn-primary {
   display: inline-block;
@@ -364,7 +346,8 @@ justify-content: center;
 .defaultHero,
 .eventsHero {
   min-height: calc(100vh - 66px);
-  background: url("../src/components/events/images/event-home-page.jpg") center/cover no-repeat;
+  background: url("../src/components/events/images/event-home-page.jpg")
+    center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -566,6 +549,11 @@ justify-content: center;
 /* end of room  */
 /* single room*/
 
+.envoyerevent {
+  margin-left: 47%;
+  margin-bottom: 2%;
+}
+
 .single-event {
   padding: 5rem 0 0 0;
 }
@@ -716,10 +704,8 @@ justify-content: center;
   }
 }
 
-
-
-.CompteBlock{
-  margin-top:7.5%; 
+.CompteBlock {
+  margin-top: 7.5%;
   width: 30%;
   height: 300px;
   margin-left: 2%;
@@ -729,36 +715,36 @@ justify-content: center;
   display: flex;
   /* flex-direction: column; */
 }
-.text-ether{
-  color:white; 
-  margin-top : 10%; 
+.text-ether {
+  color: white;
+  margin-top: 10%;
   margin-left: 10%;
-  font-size:30px; 
-
-
+  font-size: 30px;
 }
-.infoether{
+.infoether {
   margin-top: 1%;
   margin-left: 1%;
-
 }
 
 .eth-card {
   height: 100%;
   width: 100%;
-  background-color:#a099ff;
-  background-image: 
-    radial-gradient(at 83% 67%, rgb(152, 231, 156) 0, transparent 58%), 
-    radial-gradient(at 67% 20%, hsla(357,94%,71%,1) 0, transparent 59%), 
-    radial-gradient(at 88% 35%, hsla(222,81%,65%,1) 0, transparent 50%), 
-    radial-gradient(at 31% 91%, hsla(9,61%,61%,1) 0, transparent 52%), 
-    radial-gradient(at 27% 71%, hsla(336,91%,65%,1) 0, transparent 49%), 
-    radial-gradient(at 74% 89%, hsla(30,98%,65%,1) 0, transparent 51%), 
-    radial-gradient(at 53% 75%, hsla(174,94%,68%,1) 0, transparent 45%);
+  background-color: #a099ff;
+  background-image: radial-gradient(
+      at 83% 67%,
+      rgb(152, 231, 156) 0,
+      transparent 58%
+    ),
+    radial-gradient(at 67% 20%, hsla(357, 94%, 71%, 1) 0, transparent 59%),
+    radial-gradient(at 88% 35%, hsla(222, 81%, 65%, 1) 0, transparent 50%),
+    radial-gradient(at 31% 91%, hsla(9, 61%, 61%, 1) 0, transparent 52%),
+    radial-gradient(at 27% 71%, hsla(336, 91%, 65%, 1) 0, transparent 49%),
+    radial-gradient(at 74% 89%, hsla(30, 98%, 65%, 1) 0, transparent 51%),
+    radial-gradient(at 53% 75%, hsla(174, 94%, 68%, 1) 0, transparent 45%);
 }
 
-.ContainerFormEther{
-  margin-top:5%; 
+.ContainerFormEther {
+  margin-top: 5%;
   width: 20%;
   height: 400px;
   margin-left: 8%;
@@ -769,11 +755,10 @@ justify-content: center;
   display: flex;
   justify-content: center;
 }
-.firstEtherCompo{
+.firstEtherCompo {
   display: flex;
-
 }
-.inputEther{
+.inputEther {
   width: 250px;
   height: 30px;
   padding-left: 5px;
@@ -784,8 +769,7 @@ justify-content: center;
   margin-top: 15px;
 }
 
-
-.buttonEther{
+.buttonEther {
   border-radius: 7px;
   width: 100px;
   height: 40px;
@@ -796,9 +780,8 @@ justify-content: center;
   border-radius: 5px;
   cursor: pointer;
   padding: 10px 5px;
-  margin-top:15px ; 
+  margin-top: 15px;
   margin-left: 30%;
-  
 }
 .buttonEther:hover {
   border-radius: 7px;
@@ -811,12 +794,11 @@ justify-content: center;
   border-radius: 5px;
   cursor: pointer;
   padding: 10px 5px;
-  margin-top:15px ; 
+  margin-top: 15px;
   margin-left: 30%;
-  
 }
 
-.buttonConnect{
+.buttonConnect {
   border-radius: 7px;
   width: 200px;
   height: 70px;
@@ -827,10 +809,9 @@ justify-content: center;
   border-radius: 5px;
   cursor: pointer;
   padding: 10px 5px;
-  margin-top:15px ; 
+  margin-top: 15px;
   margin-left: 45%;
   font-size: 20px;
-  
 }
 .buttonConnect:hover {
   border-radius: 7px;
@@ -843,70 +824,65 @@ justify-content: center;
   border-radius: 5px;
   cursor: pointer;
   padding: 10px 5px;
-  margin-top:15px ; 
+  margin-top: 15px;
   margin-left: 45%;
   font-size: 20px;
-  
 }
 
-.CompteBlock2{
+.CompteBlock2 {
   width: 30%;
   height: 300px;
-  margin-top:7.5%; 
+  margin-top: 7.5%;
   margin-left: 8%;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
   display: flex;
-  padding-top:10px; 
+  padding-top: 10px;
   padding-left: 10px;
-  justify-content:center; 
+  justify-content: center;
 }
-.serviceEther{
+.serviceEther {
   margin-top: 10%;
 }
 
-.transactionBlock{
-  margin-top:2%; 
+.transactionBlock {
+  margin-top: 2%;
   width: 300px;
   height: 280px;
-  margin-left:2%;
+  margin-left: 2%;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
   display: flex;
-  padding-top:10px; 
+  padding-top: 10px;
   padding-left: 10px;
   align-items: space-around;
-  color:#f26716;
-  font-size:20px; 
+  color: #f26716;
+  font-size: 20px;
   flex-wrap: nowrap;
 }
-.transactionsbloc{
+.transactionsbloc {
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
   display: flex;
   border-radius: 8px;
   margin-top: 5%;
   margin-left: 5%;
   margin-right: 5%;
-  padding : 2%;
+  padding: 2%;
   margin-bottom: 5;
-  background-color: #a099ff; 
-  
-
+  background-color: #a099ff;
 }
-.transactions{
+.transactions {
   display: flex;
   height: 100%;
-  margin-top:2%; 
-  flex-wrap: wrap ;
+  margin-top: 2%;
+  flex-wrap: wrap;
   justify-content: space-around;
-  
-
 }
-.infoInvestement{
+.infoInvestement {
   background-image: url(../public/assets/images/info.jpg);
-  margin-top:5%; 
+  margin-top: 5%;
   width: 35%;
   height: 300px;
   margin-left: 32.5%;
@@ -920,23 +896,23 @@ justify-content: center;
   justify-items: center;
 }
 
-.investorProfileContainer{
-  margin-top : 5px;
+.investorProfileContainer {
+  margin-top: 5px;
   display: flex;
   justify-content: center;
 }
-.CompteBlock3{
+.CompteBlock3 {
   width: 30%;
   height: 300px;
-  margin-top:7.5%; 
+  margin-top: 7.5%;
   margin-left: 1%;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
   display: flex;
-  padding-top:10px; 
+  padding-top: 10px;
   padding-left: 10px;
-  justify-content:center; 
-  align-items:center;
+  justify-content: center;
+  align-items: center;
   align-content: center;
 }

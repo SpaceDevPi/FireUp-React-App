@@ -3,40 +3,39 @@ import styled from "styled-components";
 import { useApi } from "../../hooks/useApi";
 
 import Comment from "./Comments/Comment";
-import {Link as LinkS} from 'react-scroll'
+import { Link as LinkS } from "react-scroll";
 import MoreDetailPage from "./MoreDetailPage";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Comments from "./Comments/Comments";
-import { useNavigate  } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 import { FacebookIcon, TwitterIcon } from "react-share";
 import PostsPageByProject from "./PostsPageByProject";
-import ReactPlayer from "react-player"
+import ReactPlayer from "react-player";
 import Converter from "./Currency-converter/Converter";
 
-
-
-export default function ProjectDetailPage(props)  {
+export default function ProjectDetailPage(props) {
   const { id } = useParams();
-  const history = useNavigate ();
+  const history = useNavigate();
   var investorId = 1;
 
-  function investir () {
-    history("/InvestementProject/"+id);
+  function investir() {
+    history("/InvestementProject/" + id);
   }
   function BlockChain() {
-    history("/Blockchain/"+id);
-
+    history("/Blockchain/" + id);
   }
-const a = ""
-let date
-let date_modifier
-   const [toRender,err,reload] = useApi('project/project/'+id);
+  const a = "";
+  let date;
+  let date_modifier;
+  const [toRender, err, reload] = useApi("project/project/" + id);
 
-   const [projectInvestor,error,reloaded] = useApi('investement/getInvestmentsByProject/'+id);
-   // const date = new Date(toRender.end_date).toLocaleDateString();
+  const [projectInvestor, error, reloaded] = useApi(
+    "investement/getInvestmentsByProject/" + id
+  );
+  // const date = new Date(toRender.end_date).toLocaleDateString();
   // console.log(toRender.map(title => {toRender[title]}))
   // var dataArray = Object.keys(toRender).map(function(k){return toRender[0]});
 
@@ -50,137 +49,132 @@ let date_modifier
   //   return resultat;
   // }
 
-  if(projectInvestor==null){
-  var nbrINvestor = 0;
-} else {
-   nbrINvestor = projectInvestor.length;
+  if (projectInvestor == null) {
+    var nbrINvestor = 0;
+  } else {
+    nbrINvestor = projectInvestor.length;
+  }
 
-}
+  let projectid;
+  if (toRender != null) {
+    date = toRender.end_date;
+    projectid = toRender._id;
+    console.log("images " + toRender.images);
+    if (toRender.montantRestant == -1) {
+      var montantRestant = toRender.amount_to_collect;
+    } else {
+      montantRestant = toRender.montantRestant;
+    }
+  }
+  date_modifier = new Date(date).toLocaleDateString();
 
-let projectid
-if( toRender != null)
-{
-date= toRender.end_date
-projectid = toRender._id
-console.log("images "+ toRender.images)
-if (toRender.montantRestant==-1){
-  var montantRestant= toRender.amount_to_collect
-}else {
-  montantRestant= toRender.montantRestant; 
-}
-}
-date_modifier = new Date(date).toLocaleDateString()
+  const { investor } = useSelector((state) => state.auth);
+  if (investor != null) {
+    investorId = investor._id;
+  }
 
-const { investor } = useSelector((state) => state.auth);
-if (investor != null){
-  investorId= investor._id
-}
-
-// function websiteVisits(response) {
-//   document.querySelector("#visits").textContent = response.value;
-// }
+  // function websiteVisits(response) {
+  //   document.querySelector("#visits").textContent = response.value;
+  // }
 
   return (
     <div>
-
       <Converter></Converter>
-     
-          {/* <script async src="https://api.countapi.xyz/hit/projectdetail-1524/b921e75d-11d3-4eec-bbdf-ce0dac450dec?callback=websiteVisits"></script>
+
+      {/* <script async src="https://api.countapi.xyz/hit/projectdetail-1524/b921e75d-11d3-4eec-bbdf-ce0dac450dec?callback=websiteVisits"></script>
 
      <h1>This site has been visited <span id="visits"></span> times.</h1> */}
-    <Container>
-    {toRender  ? (
+      <Container>
+        {toRender ? (
+          <Wrapper>
+            <ImgContainer>
+              {/* <Image src={"../../images/"+toRender.images} /> */}
+              <Image src={`http://localhost:5000/uploads/${toRender.images}`} />
+            </ImgContainer>
+            <InfoContainer>
+              <Title>{toRender.title} </Title>
+              <Desc>{toRender.description}</Desc>
+              <Row>
+                <Text>
+                  {" "}
+                  <h1> Money to raise : $ {toRender.amount_to_collect}</h1>
+                </Text>
 
-      <Wrapper>
-        <ImgContainer>
-          {/* <Image src={"../../images/"+toRender.images} /> */}
-          <Image src={`http://localhost:5000/uploads/${toRender.images}`}/>     
+                <RowStat>
+                  <h3>Remaining amount : $ {montantRestant} </h3>
 
-        </ImgContainer>
-        <InfoContainer>
-          <Title>{toRender.title} </Title>
-          <Desc>
-          {toRender.description}
-          </Desc>
-          <Row>
-          <Text> <h1> Money to raise : $ {toRender.amount_to_collect}</h1></Text>
+                  <h3>
+                    Raised Money : ${" "}
+                    {toRender.amount_to_collect - montantRestant}{" "}
+                  </h3>
+                  <h3>Investors : {nbrINvestor} </h3>
 
-          <RowStat>
+                  <h3>Offering Type : {toRender.offering_type}</h3>
+                  <h3>Price per share : {toRender.price_per_share}</h3>
+                  <h3 name="end_date">End of collect : {date_modifier}</h3>
+                </RowStat>
 
-         
-          <h3>Remaining amount : $ {montantRestant} </h3> 
+                <br />
+                <br />
+              </Row>
+              <div>
+                <ButtonInvest onClick={investir}>Invest</ButtonInvest>
+                <ButtonBlockChain onClick={BlockChain}>
+                  {" "}
+                  Blockchain
+                </ButtonBlockChain>
+              </div>
+              <br />
+              <br />
+              <FacebookShareButton
+                url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
+                quote={
+                  "Investissez dans un projet sur FireUp et garantissez votre avenir"
+                }
+                hashtag={"#FireUp"}
+                description={"Fire Up"}
+                className="Demo__some-network__share-button"
+              >
+                <br />
+                <FacebookIcon size={52} round /> Soutenez le projet en
+                partageant sur Facebook
+              </FacebookShareButton>
 
-          <h3>Raised Money : $ {toRender.amount_to_collect - montantRestant } </h3> 
-          <h3>Investors : {nbrINvestor} </h3>
+              <br />
+              <TwitterShareButton
+                title={"test"}
+                url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
+                hashtags={["FireUp"]}
+              >
+                <TwitterIcon size={52} round />
+                Soutenez le projet en partageant sur Twitter
+              </TwitterShareButton>
+            </InfoContainer>
+          </Wrapper>
+        ) : (
+          <p>Product not found</p>
+        )}
+      </Container>
+      <MoreDetailPage />
 
-         
+      <PostsPageByProject projectid={projectid} />
 
-          <h3>Offering Type :  {toRender.offering_type}</h3>
-          <h3>Price per share :  {toRender.price_per_share}</h3>
-          <h3 name="end_date" >End of collect : {date_modifier}</h3>
-
-          
-          </RowStat>
-
-          <br/><br/>
-          </Row>
-          <div >
-          <ButtonInvest onClick={investir}>Invest</ButtonInvest>
-          <ButtonBlockChain onClick={BlockChain}> Blockchain</ButtonBlockChain>
-          </div>
-          <br/><br/>
-          <FacebookShareButton
-        url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
-        quote={"Investissez dans un projet sur FireUp et garantissez votre avenir"}
-        hashtag={"#FireUp"}
-        description={"Fire Up"}
-        className="Demo__some-network__share-button"
-      >
-        <br/>
-        <FacebookIcon size={52} round /> Soutenez le projet en partageant sur Facebook 
-      </FacebookShareButton>
-
-      <br />
-      <TwitterShareButton
-        title={"test"}
-        url={`https://bpifrance-creation.fr/encyclopedie/financements/financement-participatif/crowdfunding-ou-financement-participatif-outil#:~:text=Le%20crowdfunding%20vous%20permet%20d,pour%20en%20retirer%20un%20revenu.`}
-        hashtags={["FireUp"]}
-      >
-        <TwitterIcon size={52} round />
-        Soutenez le projet en partageant sur Twitter
-      </TwitterShareButton>
-
-        </InfoContainer>
-
-
-      </Wrapper>
- ) : (
-  <p>Product not found</p>
-)}
-    </Container>
-    <MoreDetailPage/>
-    
-
-    <PostsPageByProject projectid={projectid}/>
-
-    <Comments currentUserId={investorId} projectid={projectid} />
-    <div className="container">
-    <div className="player-wrapper">
-
-    <ReactPlayer
-    className="react-player"
-    playing
-    width="100%"
-    height="100%"
-              url="https://www.twitch.tv/videos/1458515587"
-              controls
-              />
-
-            </div></div>
+      <Comments currentUserId={investorId} projectid={projectid} />
+      <div className="container">
+        <div className="player-wrapper">
+          <ReactPlayer
+            className="react-player"
+            playing
+            width="100%"
+            height="100%"
+            url="https://www.twitch.tv/tchizzz8"
+            controls
+          />
+        </div>
+      </div>
     </div>
   );
-};
-
+}
 
 const Container = styled.div``;
 
@@ -280,109 +274,112 @@ const Button = styled.button`
   background-color: white;
   cursor: pointer;
   font-weight: 500;
-  &:hover{
-      background-color: #f8f4f4;
+  &:hover {
+    background-color: #f8f4f4;
   }
 `;
-const Stats = styled.div `
-{
-  padding: 0 13.5px;
-  padding-top: 0px;
-  padding-right: 13.5px;
-  padding-bottom: 0px;
-  padding-left: 13.5px;
-  max-width: 375px;
-  margin: 0 auto;
-  margin-top: 0px;
-  margin-right: auto;
-  margin-bottom: 0px;
-  margin-left: auto;
-}`;
-export const ButtonBlockChain= styled(LinkS)`
-color:#fff;
-background:#F57C00;
-font-size:1.2rem;
-font-weigth:600;
-padding:.7rem 3rem;
-border-radius:.5rem;
-border:none;
-cursor:pointer;
+const Stats = styled.div`
+   {
+    padding: 0 13.5px;
+    padding-top: 0px;
+    padding-right: 13.5px;
+    padding-bottom: 0px;
+    padding-left: 13.5px;
+    max-width: 375px;
+    margin: 0 auto;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+  }
+`;
+export const ButtonBlockChain = styled(LinkS)`
+  color: #fff;
+  background: #f57c00;
+  font-size: 1.2rem;
+  font-weigth: 600;
+  padding: 0.7rem 3rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
 
-left:60%;
+  left: 60%;
 
-position: absolute;
+  position: absolute;
 
-&:hover{background:#000;color:#fff}
-`
+  &:hover {
+    background: #000;
+    color: #fff;
+  }
+`;
 export const ButtonInvest = styled(LinkS)`
-    color:#fff;
-    background:#F57C00;
-    font-size:1.2rem;
-    font-weigth:600;
-    padding:.7rem 3rem;
-    border-radius:.5rem;
-    border:none;
-    cursor:pointer;
+  color: #fff;
+  background: #f57c00;
+  font-size: 1.2rem;
+  font-weigth: 600;
+  padding: 0.7rem 3rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
 
-    left:80%;
+  left: 80%;
 
-    position: absolute;
+  position: absolute;
 
-    &:hover{background:#000;color:#fff}
-`
-
+  &:hover {
+    background: #000;
+    color: #fff;
+  }
+`;
 
 export const Row = styled.div`
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:2rem;
-    margin-top:2rem;
-    border-top:.1rem solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+  border-top: 0.1rem solid #000;
 
-    @media (max-width:768px){
-        flex-direction:column;
-        align-items:center;
-        text-align:center;
-        margin-bottom:6rem;
-    }
-`
-export const statText=styled.h3`
-color:#F57C00;
-
-`
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 6rem;
+  }
+`;
+export const statText = styled.h3`
+  color: #f57c00;
+`;
 export const RowStat = styled.div`
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:2rem;
-    margin-top:2rem;
- 
-    @media (max-width:768px){
-        flex-direction:column;
-        align-items:center;
-        text-align:center;
-        margin-bottom:6rem;
-    }
-`
-export const Col =styled.div`
-    flex 1 1 50%;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 6rem;
+  }
+`;
+export const Col = styled.div`
+    flex 1 1 50%;
+`;
 
 export const Text = styled.h1`
-    color:#F57C00;
-    font-size:1.2rem;
-    font-weigth:500;
-
-`
+  color: #f57c00;
+  font-size: 1.2rem;
+  font-weigth: 500;
+`;
 export const DetailsHeading = styled.h1`
-    font-size:2rem;
-    padding:2rem 5%;
-`
+  font-size: 2rem;
+  padding: 2rem 5%;
+`;
 export const DetailWrap = styled.div`
-    padding:1rem 5%;
-    width:85%;
-`
+  padding: 1rem 5%;
+  width: 85%;
+`;
