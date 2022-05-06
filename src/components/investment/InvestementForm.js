@@ -60,7 +60,6 @@ const [formProject, setFormProject] = useState({
       idInvestisseur: "",
       monatantTotal: "",
       montantInvesti: "",
-      dateInvestissement: "",
       dateFin:"", 
       MethodeInvestissement: "",
       
