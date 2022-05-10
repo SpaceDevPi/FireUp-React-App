@@ -8,6 +8,8 @@ import { Link, useParams } from "react-router-dom";
 // import { PDF417 } from "pdf417-generator";
 import styled from "styled-components";
 import "../pages/ticket.css";
+import { useSelector } from 'react-redux';
+import { useApi } from "../../../hooks/useApi";
 
 var ReactDOM = require("react-dom");
 var Barcode = require("react-barcode");
@@ -26,7 +28,9 @@ export default function TicketBooking(props) {
   const { id } = useParams();
   const [toRender, setToRender] = useState(null);
   const [o, setO] = useState(null);
-
+  const { investor } = useSelector((state) => state.auth);
+  const [investorcon,err,reload] = useApi('investors/investorId/'+investor._id);
+  
   async function dodo() {
     setO(document.forms.form.x.value);
     console.time(9000);
@@ -48,7 +52,7 @@ export default function TicketBooking(props) {
       _id: res._id,
       Name_Event: res.Name_Event,
       idTicket: res.idTicket,
-      Participant_Name: res.Participant_Name,
+      Participant_Name: name,
       // Sexe: "",
       Price: res.Price,
       Date_Debut: res.Date_Debut,
@@ -146,8 +150,9 @@ export default function TicketBooking(props) {
 
     console.log(Object.keys(formErrors).length);
   };
-  console.log("dsasda");
-
+  if (investorcon!= null){
+    var name = investorcon.username
+  }
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -166,7 +171,7 @@ export default function TicketBooking(props) {
               <tr>
                 <td>
                   <div class="nameticket">
-                    <h2>{toRender.Participant_Name}</h2>
+                    <h2>{name} </h2>
                     <span>name</span>
                   </div>
                 </td>

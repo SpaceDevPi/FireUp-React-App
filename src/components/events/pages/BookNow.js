@@ -3,12 +3,12 @@ import React, { Component, useState, useEffect } from "react";
 import { Link as LinkS } from "react-scroll";
 import { Link, useParams } from "react-router-dom";
 import { useApi } from "../../../hooks/useApi";
-import moment from "moment";
+import { useSelector } from 'react-redux';
 
+import moment from "moment";
 import { queryApi } from "../../../utils/queryApi";
 import styled from "styled-components";
 import Axios from "axios";
-
 import "../booknow.css";
 
 import defaultBcg from "../images/room-3.jpeg";
@@ -16,14 +16,14 @@ import Item from "antd/lib/list/Item";
 export default function BookNow(props) {
   const { id, id2 } = useParams();
   const [toRender, setToRender] = useState(null);
-
+  const { investor } = useSelector((state) => state.auth);
+  const [investorcon,err,reload] = useApi('investors/investorId/'+investor._id);
+  
   const [Iteam, setiteam] = useState(true);
 
   async function fetchData() {
-    console.log("aaaaaaa");
 
     const [res, err] = await queryApi("events/EventId/" + id);
-    console.log(res);
     setToRender(res);
 
     console.log(id);
@@ -52,11 +52,15 @@ export default function BookNow(props) {
 
   // static contextType = EventContext;
   const [img, setImages] = useState("");
-
+if (investorcon!= null){
+  var name = investorcon.username
+}
+console.log("ism zebi : "+name)
   const [formData, setFormData] = useState({
+    
     Name_Event: "",
     idTicket: 1,
-    Participant_Name: "adam",
+    Participant_Name: name,
     // Sexe: "",
     Price: 0,
     Date_Debut: "",
@@ -141,10 +145,10 @@ export default function BookNow(props) {
     formData.img = "mmm";
   }
   {
-    formData.idTicket = 1;
+    formData.idTicket = 5;
   }
   {
-    formData.Participant_Name = "adam";
+    formData.Participant_Name = name;
   }
   {
     formData.Price = 90;
