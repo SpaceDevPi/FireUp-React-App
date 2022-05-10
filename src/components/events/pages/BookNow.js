@@ -59,7 +59,7 @@ console.log("ism zebi : "+name)
   const [formData, setFormData] = useState({
     
     Name_Event: "",
-    idTicket: 1,
+    idTicket: 8,
     Participant_Name: name,
     // Sexe: "",
     Price: 0,
@@ -145,7 +145,7 @@ console.log("ism zebi : "+name)
     formData.img = "mmm";
   }
   {
-    formData.idTicket = 5;
+    formData.idTicket = 8;
   }
   {
     formData.Participant_Name = name;
