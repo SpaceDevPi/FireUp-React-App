@@ -157,7 +157,7 @@ export default function CreateProject(props) {
     formData.append("file", files[0]);
     //save the Image we chose inside the Node Server
     Axios.post(
-      "http://localhost:5000/api/project/uploadImage",
+      "https://spacedevfireupbackend.herokuapp.com/api/project/uploadImage",
       formData,
       config
     ).then((response) => {
@@ -430,7 +430,7 @@ export default function CreateProject(props) {
                       width: "300px",
                       height: "240px",
                     }}
-                    src={`http://localhost:5000/uploads/${Images}`}
+                    src={`https://spacedevfireupbackend.herokuapp.com/uploads/${Images}`}
                   />
                 </div>
               </div>

@@ -82,7 +82,7 @@ trigger the hook. */
       <Container  onClick={routeChange}> 
      
       {/* <img src={`${process.env.REACT_APP_API_URL_UPLOADS}/${project.images}`}/>      */}
-      <img src={`http://localhost:5000/uploads/${project.images}`}/>     
+      <img src={`https://spacedevfireupbackend.herokuapp.com/uploads/${project.images}`}/>     
 
       <Info>
      

@@ -153,7 +153,7 @@ const onDrop = (files) => {
   let f= files[0]
   formData.append("file", f)
   //save the Image we chose inside the Node Server 
-  Axios.post('http://localhost:5000/api/articles/uploadImage', formData, config)
+  Axios.post('https://spacedevfireupbackend.herokuapp.com/api/articles/uploadImage', formData, config)
       .then(response => {
           if (response.data.success) {
             setImages(response.data.fileName)

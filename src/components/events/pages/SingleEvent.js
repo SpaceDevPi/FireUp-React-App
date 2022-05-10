@@ -80,14 +80,14 @@ export default function SingleEvent(props) {
             <Banner
               id="bannerImage"
               title={toRender.Title}
-              // background-image={`http://localhost:5000/uploads/${toRender.img}`}
+              // background-image={`https://spacedevfireupbackend.herokuapp.com/uploads/${toRender.img}`}
             >
               <div
                 style={{
-                  backgroundImage: `url("http://localhost:5000/uploads/${toRender.img}")`,
+                  backgroundImage: `url("https://spacedevfireupbackend.herokuapp.com/uploads/${toRender.img}")`,
                 }}
               >
-                {/* <Image src={`http://localhost:5000/uploads/${toRender.img}`} /> */}
+                {/* <Image src={`https://spacedevfireupbackend.herokuapp.com/uploads/${toRender.img}`} /> */}
 
                 <Link to="/events" className="Btn-primary">
                   back to events

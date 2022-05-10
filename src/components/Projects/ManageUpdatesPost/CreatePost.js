@@ -51,7 +51,7 @@ const onDrop = (files) => {
   }
   formData.append("file", files[0])
   //save the Image we chose inside the Node Server 
-  Axios.post('http://localhost:5000/api/project/uploadImage', formData, config)
+  Axios.post('https://spacedevfireupbackend.herokuapp.com/api/project/uploadImage', formData, config)
       .then(response => {
           if (response.data.success) {
 
@@ -142,7 +142,7 @@ const onDrop = (files) => {
 
                         <div class="mb-3 col-lg-6 col-md-6 col-12">
 
-    <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`http://localhost:5000/uploads/${Images}`} />
+    <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`https://spacedevfireupbackend.herokuapp.com/uploads/${Images}`} />
 
 </div>
 </div>

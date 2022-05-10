@@ -51,7 +51,7 @@ const [article, setArticle] = useState(articlelist);
               ))}
             </div> */}
           </header>
-          <img src={`http://localhost:5000/uploads/`+article.Image} alt='cover' />
+          <img src={`https://spacedevfireupbackend.herokuapp.com/uploads/`+article.Image} alt='cover' />
           <p className='blog-desc'>{article.Description}</p>
         </div>
       ) : (

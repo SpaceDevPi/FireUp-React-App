@@ -31,7 +31,7 @@ export default function Projects() {
       }
       useEffect( () => {
         fetchData()
-        axios.get(`http://localhost:5000/uploads/scraping_data.json`)
+        axios.get(`https://spacedevfireupbackend.herokuapp.com/uploads/scraping_data.json`)
         .then(res => {
           const project_scraping = res.data;
           // console.log("project_scraping" +project_scraping)

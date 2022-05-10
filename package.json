@@ -1,7 +1,7 @@
 {
   "name": "fire-up-react",
   "version": "0.1.0",
-  "proxy": "http://localhost:5000/",
+  "proxy": "https://spacedevfireupbackend.herokuapp.com/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -81,8 +81,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts --max_old_space_size=4096 start",
-    "build": "react-scripts --max_old_space_size=4096 build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

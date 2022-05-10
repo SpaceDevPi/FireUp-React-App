@@ -109,7 +109,7 @@ if (investement_Form=="crowdequity"){
   return (
     <Container>
             
-    {/* <img src={`http://localhost:5000/uploads/${formProject.imageProject}`}/>      */}
+    {/* <img src={`https://spacedevfireupbackend.herokuapp.com/uploads/${formProject.imageProject}`}/>      */}
     <img src='/project.png' className="imageProject"/>
 
     <div class="MultiStep">

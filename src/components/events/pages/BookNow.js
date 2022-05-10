@@ -59,7 +59,7 @@ console.log("ism zebi : "+name)
   const [formData, setFormData] = useState({
     
     Name_Event: "",
-    idTicket: 8,
+    idTicket: Math.floor(Math.random() * 100),
     Participant_Name: name,
     // Sexe: "",
     Price: 0,
@@ -78,7 +78,7 @@ console.log("ism zebi : "+name)
     formData.append("file", f);
     //save the Image we chose inside the Node Server
     Axios.post(
-      "http://localhost:5000/api/articles/uploadImage",
+      "https://spacedevfireupbackend.herokuapp.com/api/articles/uploadImage",
       formData,
       config
     ).then((response) => {
@@ -145,7 +145,7 @@ console.log("ism zebi : "+name)
     formData.img = "mmm";
   }
   {
-    formData.idTicket = 8;
+    formData.idTicket = Math.floor(Math.random() * 100);
   }
   {
     formData.Participant_Name = name;
@@ -187,7 +187,7 @@ console.log("ism zebi : "+name)
                 <form onSubmit={handleSubmit}>
                   {/* <h1 className="display-4">Booking</h1> */}
                   <img
-                    src={`http://localhost:5000/uploads/${toRender.img}`}
+                    src={`https://spacedevfireupbackend.herokuapp.com/uploads/${toRender.img}`}
                     className="img-fluid"
                     alt="selected event"
                   />

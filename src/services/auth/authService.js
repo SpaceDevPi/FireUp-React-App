@@ -15,7 +15,7 @@ const register = async (userData) => {
 
 // login user
 const login = async (userData) => {
-    const response = await axios.post('http://localhost:5000/api/entrepreneurs/login', userData);
+    const response = await axios.post('https://spacedevfireupbackend.herokuapp.com/api/entrepreneurs/login', userData);
     
     if(response.data){
         localStorage.setItem('entrepreneur', JSON.stringify(response.data));
@@ -30,13 +30,13 @@ const login = async (userData) => {
 const logout = async () => {
     let user = JSON.parse(localStorage.getItem('entrepreneur'));
     console.log(user);
-    await axios.put('http://localhost:5000/api/entrepreneurs/logout/'+user._id);
+    await axios.put('https://spacedevfireupbackend.herokuapp.com/api/entrepreneurs/logout/'+user._id);
     localStorage.removeItem('entrepreneur');
 }
 
 // login investors
 const loginInvestor = async (investorData) => {
-    const response = await axios.post(API_URL+'investors/loginInvestor', investorData);
+    const response = await axios.post('https://spacedevfireupbackend.herokuapp.com'+ API_URL+'investors/loginInvestor', investorData);
     
     if(response.data){
         localStorage.setItem('investor', JSON.stringify(response.data));

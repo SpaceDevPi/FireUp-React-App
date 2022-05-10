@@ -122,7 +122,7 @@ function MultiStep(){
             companyService
         }
         console.log(entrepreneurData);
-        axios.post('http://localhost:5000/api/entrepreneurs', entrepreneurData)
+        axios.post('https://spacedevfireupbackend.herokuapp.com/api/entrepreneurs', entrepreneurData)
         .then(res => {
             console.log(res.data);
             navigate('/signInContractor');

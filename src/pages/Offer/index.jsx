@@ -358,7 +358,7 @@ const onChange = (e) => {
             <h2>Offer available </h2>
             <h2>{article.datestart}- {article.dateend}</h2>
           </header>
-          <img class="blogItem-cover2" src={`http://localhost:5000/uploads/`+article.image} alt='cover' />
+          <img class="blogItem-cover2" src={`https://spacedevfireupbackend.herokuapp.com/uploads/`+article.image} alt='cover' />
 
           <h1 className="testcoachname">Coach : {article.coachfullname}</h1>
 

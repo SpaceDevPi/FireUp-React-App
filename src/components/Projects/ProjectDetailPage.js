@@ -116,7 +116,7 @@ else if(entrepreneur!=null)
       <Wrapper>
         <ImgContainer>
           {/* <Image src={"../../images/"+toRender.images} /> */}
-          <Image src={`http://localhost:5000/uploads/${toRender.images}`}/>     
+          <Image src={`https://spacedevfireupbackend.herokuapp.com/uploads/${toRender.images}`}/>     
 
         </ImgContainer>
         <InfoContainer>

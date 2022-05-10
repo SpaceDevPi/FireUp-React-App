@@ -42,7 +42,7 @@ async function fetchData() {
        console.log("company: "+company)
 
 // const getCompany = () => {
-//         axios.get(`http://localhost:5000/api/companies/entrepreneur/${idEntrepreneur}`)
+//         axios.get(`https://spacedevfireupbackend.herokuapp.com/api/companies/entrepreneur/${idEntrepreneur}`)
 //         .then(res => {
 //             console.log(res.data)
 //             setCompany(res.data)

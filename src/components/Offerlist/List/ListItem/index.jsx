@@ -55,7 +55,7 @@ return (
     {type==="Contractor" ?     <div class="corner-ribbon top-left sticky turquoise shadow">{type}</div>
 : <div class="corner-ribbon top-left sticky blue shadow">{type}</div>}
 
-    <img className="lool" src={`http://localhost:5000/uploads/`+image}  alt='' />
+    <img className="lool" src={`https://spacedevfireupbackend.herokuapp.com/uploads/`+image}  alt='' />
 
     <footer>
 

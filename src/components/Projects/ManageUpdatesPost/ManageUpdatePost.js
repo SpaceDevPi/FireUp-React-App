@@ -74,7 +74,7 @@ export default function ManageUpdatePost() {
     <div className="posts_card">
       <h3>{posts.title} </h3>
       <Container  > 
-      <img  src={`http://localhost:5000/uploads/${posts.images}`}/>     
+      <img  src={`https://spacedevfireupbackend.herokuapp.com/uploads/${posts.images}`}/>     
 
       <Info>
 

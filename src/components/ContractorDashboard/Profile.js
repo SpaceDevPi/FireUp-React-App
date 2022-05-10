@@ -15,7 +15,7 @@ import { useApi } from "../../hooks/useApi";
 import axios from "axios";
 import CompanySection from "./companySection";
 
-const url = "http://localhost:5000/api/entrepreneurs/";
+const url = "https://spacedevfireupbackend.herokuapp.com/api/entrepreneurs/";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -88,7 +88,7 @@ export default function Profile() {
     const body = JSON.stringify(formData);
     console.log(body);
     try {
-      const res = await axios.put(`http://localhost:5000/api/entrepreneurs/${id}`, body, config);
+      const res = await axios.put(`https://spacedevfireupbackend.herokuapp.com/api/entrepreneurs/${id}`, body, config);
       console.log(res);
       window.location.href = "/profile";
       

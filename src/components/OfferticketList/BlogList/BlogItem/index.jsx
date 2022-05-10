@@ -114,7 +114,7 @@ console.log(rating)
   return (
     <div className='blogItem-wrap'>
           {expired ? <div class="corner-ribbon2 top-left sticky red shadow">Finished</div> :''}
-      <img className='blogItem-cover3' src={`http://localhost:5000/uploads/`+image} alt='cover' />
+      <img className='blogItem-cover3' src={`https://spacedevfireupbackend.herokuapp.com/uploads/`+image} alt='cover' />
       <Chip label={coachfullname} />
       <h2>ROOM NUMBER : {numroom}</h2>
       <h3>{dateoffer}</h3>

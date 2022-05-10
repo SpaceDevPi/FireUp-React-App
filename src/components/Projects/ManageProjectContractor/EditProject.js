@@ -165,7 +165,7 @@ console.log("modifie "+date_modified)
 
     
 <div >
-    <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`http://localhost:5000/uploads/${images}`} />
+    <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`https://spacedevfireupbackend.herokuapp.com/uploads/${images}`} />
 </div>
 
 
