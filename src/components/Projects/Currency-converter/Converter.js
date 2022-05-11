@@ -13,7 +13,7 @@ function Converter() {
   const [rates, setRates] = useState([]);
 
   useEffect(() => {
-    axios.get('http://data.fixer.io/api/latest?access_key=07de412a1fa1d890bbbb047166f18f69')
+    axios.get('http://data.fixer.io/api/latest?access_key=825a4bbdbbb7525424a5f4eb6f18539f')
       .then(response => {
         setRates(response.data.rates);
       })

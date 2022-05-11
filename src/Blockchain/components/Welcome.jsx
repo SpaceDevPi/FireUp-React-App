@@ -52,7 +52,6 @@ const Welcome = () => {
     idInvestisseur: "",
     monatantTotal: "",
     montantInvesti: "",
-    dateInvestissement: "",
     dateFin:"", 
     MethodeInvestissement: "",
   })
@@ -119,8 +118,8 @@ const Welcome = () => {
           <h1>Investement Infomations : </h1>
         
      <h3>Project Title : {formDataProject.title}</h3> 
-     <h3>Total amount  : {formDataProject.monatantTotal} </h3>
-     <h3>Remaining amount : {formInvestinfo.montantRestant -  formData.amount * 3096} </h3>
+     <h3>Total amount  : {formDataProject.monatantTotal} $</h3>
+     <h3>Remaining amount : {formInvestinfo.montantRestant -  formData.amount * 3096} $ </h3>
      <h3>End Of Investement : {new Date (formDataProject.dateFin).toLocaleDateString()} </h3>
    
           </div>

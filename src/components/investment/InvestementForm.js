@@ -60,7 +60,6 @@ const [formProject, setFormProject] = useState({
       idInvestisseur: "",
       monatantTotal: "",
       montantInvesti: "",
-      dateInvestissement: "",
       dateFin:"", 
       MethodeInvestissement: "",
       
@@ -132,7 +131,7 @@ if (investement_Form=="crowdequity"){
      </div>
     <Form className="personal-info-container"  >
       <div className='personal-info-container'>
-    <label><h3>Monatant</h3> </label>
+    <label><h3>Montant</h3> </label>
 
         <input type="number" min="0" max= {formProject.montantRestant} className='input' onChange={(e) => {
       setFormData({ ...formData, montantInvesti: e.target.value });

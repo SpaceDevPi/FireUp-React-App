@@ -103,7 +103,7 @@ return "I have individual net worth $200,000 and I have sufficient knowledge to 
                     
                     <div class="card-body pt-5">
                       <img
-                         src={`${process.env.REACT_APP_API_URL_UPLOADS + '/' + toRender.image}`}  
+                        src={toRender.image}   
                         alt="profile-image"
                         class="profile"
                       />

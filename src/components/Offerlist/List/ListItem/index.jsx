@@ -82,10 +82,10 @@ return (
       </p>
     </footer>
     {/* {state!=="Booked" &&  */}
-
+    {!expired? 
     <Link className='blogItem-link'   to={`/offer/${_id}`} onClick={() => window.location.href=`/offer/${_id}`}>
           ➝
-        </Link>
+        </Link> :''}
         {/* } */}
   </div>
 );

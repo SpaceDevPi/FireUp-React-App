@@ -342,7 +342,7 @@ const onDrop = (files) => {
                 <div className="userUpdateUpload">
                 {Images ? ( <img
                   className="userUpdateImg"
-                  src={`${process.env.REACT_APP_API_URL_UPLOADS + '/' + Images}`}                    alt=""
+                  src={toRender.image}                   alt=""
                 />) :('') }
                   {/* <label htmlFor="file">
                     <Publish className="userUpdateIcon" />
